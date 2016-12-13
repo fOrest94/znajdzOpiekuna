@@ -1,0 +1,262 @@
+@CHARSET "UTF-8";
+body{
+	background-color: #E1E1E1;
+}
+
+h1,h2,h3,p{
+	font-family: 'Open Sans', sans-serif;
+	color: #52452e;
+	text-align: center;
+}
+
+ul > li > a{
+	font-family: 'Itim', cursive;
+	color: #52452e;
+	font-size: 24px;
+}
+
+ul > li > a:hover{
+text-decoration: none;
+}
+
+ol {
+	margin-top: 8px;
+	font-family: 'Itim', cursive;
+	color: #52452e;
+	font-size: 22px;
+}
+
+ul > li{
+	font-size: 20px;
+
+}
+
+
+a:hover{
+	text-decoration: none;
+	color: #CE5B3F;
+}
+
+a:visited{
+	text-decoration: none;
+	color: #CE5B3F;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.navbar-default{
+
+    border-color: #E7E7E7;
+    color: #ad9f7f;
+    height: 80px;
+}
+
+.navbar-nav  {
+ line-height: 50px;
+}
+.navbar-nav li a {
+ line-height: 50px;
+}
+
+#headerSection{
+	height: auto;
+	background-image: url("../images/main-wallpaper0.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	text-align:center;
+	background-position: center center;
+	min-height: 853px;
+	width: 100%;	
+}
+
+#mainSectionService{
+	height: auto;
+	background-color: white;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	text-align:center;
+	background-position: center center;
+	min-height: 853px;
+	width: 100%;	
+}
+
+#howItWorks{
+	background-color: #E1E1E1;
+}
+
+.navbar-inverse{
+
+	border-color: #E7E7E7;
+    background-color: #363434;
+    height: 70px;
+    border-radius: 0px;
+    padding-left: 0px;
+    margin-left: 0px;
+
+}
+
+.profile-navbar{
+
+	color: white;
+    background-color: #363434;
+    height: 70px;
+}
+
+.search-navbar{
+
+    background-color: #E7E7E7;;
+    height: 100px;
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: #cfcfcf;
+    font-family: 'Itim', cursive;
+    color: black;
+}
+
+.logo{
+	font-family: 'Aclonica', sans-serif;
+	font-size: 35px; 
+	color: #FF4F4F;
+}
+
+.logo:hover{
+	color: #CE5B3F;
+}
+
+.simpleSearch
+{
+	color: #FF4F4F;
+}
+
+.btn{
+	width: 120px;
+	font-size: 18px;
+}
+
+.btn-danger{
+    background-color: #f14d4c;
+}
+
+.forgotPasswd{
+	float:right;
+	color: inherit;
+	position: relative;
+	top:-10px
+
+}
+
+.error {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+.msg {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+
+option{
+	font: 20px;
+}
+
+.form-control{
+	height: 39px;
+}
+.selectpicker{
+	color: black;
+	background-color: white;
+}
+
+.selectpicker:hover{
+	color: black;
+	background-color: white;
+}
+
+
+
+.checkbox label:after, 
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+

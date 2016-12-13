@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="znajdzOpiekuna:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="znOpk-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="znajdzOpiekuna:war exploded" />
+    </root>
+  </artifact>
+</component>
