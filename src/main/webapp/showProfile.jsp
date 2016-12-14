@@ -82,7 +82,7 @@
         <div class="col-lg-12" style=" text-align: center;">
             <div class="col-lg-9 col-lg-offset-1" style="height: 500px;">
 
-                <img src="${pageContext.request.contextPath}/resources/pictures/profileImages/${user.id}.jpg"
+                <img src="resources/pictures/profileImages/${user.id}.jpg"
                      width="300" height="300">
                 <form:form method="POST" modelAttribute="fileBucket"
                            enctype="multipart/form-data" class="form-horizontal">

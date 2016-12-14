@@ -25,10 +25,10 @@ import java.io.IOException;
 public class UserController {
 
     @Autowired
-    private AgeValidator ageValidator;
+    FileValidator fileValidator;
 
     @Autowired
-    FileValidator fileValidator;
+    private AgeValidator ageValidator;
 
     @Autowired
     private SessionService sessionService;
@@ -62,12 +62,13 @@ public class UserController {
 
         User user = sessionService.getUser(request.getUserPrincipal().getName());
         FileUpload fileModel = new FileUpload();
-
+        System.out.println(user.getFirstName()+"   "+user.getLastName()+"   "+user.getZipCode());
         if(user.getUserType().equals("sister")){
             Nanny nanny = sessionService.getCareUser(user.getId());
             nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
             model.addAttribute("userNanny", nanny);
         }
+
 
         model.addAttribute("fileBucket", fileModel);
         model.addAttribute("user", user);

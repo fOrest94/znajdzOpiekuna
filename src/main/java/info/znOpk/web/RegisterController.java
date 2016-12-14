@@ -1,17 +1,18 @@
 package info.znOpk.web;
 
-import info.znOpk.DTO.NannyDTO;
 import info.znOpk.model.User;
 import info.znOpk.service.UserService;
+import info.znOpk.authentication.EmailAuthentication;
 import info.znOpk.validator.RegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.mail.MessagingException;
 
 @Controller
 public class RegisterController {
@@ -22,45 +23,34 @@ public class RegisterController {
     @Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/registrationParent", method = RequestMethod.GET)
+	@Autowired
+	private EmailAuthentication emailAuthentication;
+
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registerParent(Model model) {
 
 		model.addAttribute("userForm", new User());
-		return "registrationParent";
+		return "registration";
 	}
 
-	@RequestMapping(value = "/registrationParent", method = RequestMethod.POST)
-	public String registerParent(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) {
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String register(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) throws MessagingException {
 
 		registerValidator.validate(user, bindingResult);
 
 		if (bindingResult.hasErrors()) {
-	    	return "registrationParent";
+	    	return "registration";
 		}
-		user.setUserType("simple");
-		user.setSex(true);
+
+		emailAuthentication.generateAndSendEmail(user);
 		userService.save(user);
 		return "redirect:/";
 	}
-	
-	@RequestMapping(value = "/registrationGuardian", method = RequestMethod.GET)
-	public String registerGuardian(ModelMap model) {
 
-		model.addAttribute("guardianForm", new NannyDTO());
-		return "registrationGuardian";
-	}
-	
-	@RequestMapping(value = "/registrationGuardian", method = RequestMethod.POST)
-	public String registerGuardian(@ModelAttribute("registrationGuardian") NannyDTO nannyDTO, BindingResult bindingResult, ModelMap model) {
-		
-		System.out.println(nannyDTO.toString());
-		//registerValidator.validate(nannyDTO, bindingResult);
+	@RequestMapping(value = "/registrationm", method = RequestMethod.POST)
+	public String registerAuthentication(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) throws MessagingException {
 
-		if (bindingResult.hasErrors()) {
-	    	return "registrationGuardian";
-		}         
 
-		//userService.save(nannyForm);
-		return "index";
+		return "redirect:/";
 	}
 }

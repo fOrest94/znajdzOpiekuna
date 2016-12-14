@@ -9,6 +9,7 @@ public class NannyDTO {
 	private String firstName;
 	private String lastName;
 	private String userType="sister";
+	private String town="Jasło";
 	private boolean sex;
 	private String zipCode;
 	private String dataOfBirth="05-06-1996";
@@ -36,6 +37,10 @@ public class NannyDTO {
 	// WYKRZTA�CENIE
 	private String education="burdel";
 	private String foreignLanguages="bułgarski";
+
+	public String getTown() {return town;}
+
+	public void setTown(String town) {this.town = town;}
 
 	public String getUsername() {
 		return username;

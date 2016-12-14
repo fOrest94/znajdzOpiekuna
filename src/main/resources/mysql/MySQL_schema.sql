@@ -10,7 +10,6 @@ DROP TABLE IF EXISTS `opiekun`;
 CREATE TABLE IF NOT EXISTS `opiekun` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_uzytkownika` bigint(20) NOT NULL,
-  `data_urodzenia` varchar(20) NOT NULL,
   `opieka_niania` int(2) NOT NULL,
   `opieka_starsi` int(2) NOT NULL,
   `umiej_sprzat` int(2) NOT NULL,
@@ -42,6 +41,9 @@ CREATE TABLE IF NOT EXISTS `uzytkownik` (
   `haslo` varchar(128) NOT NULL,
   `poziom_dostepu` varchar(128) NOT NULL,
   `typ_uzytkownika` varchar(8) NOT NULL,
+  `data_urodzenia` varchar(20) NOT NULL,
+  `aktywny` int(2) NOT NULL,
+  `miasto` varchar(25) null ,
   `imie` varchar(25) null ,
   `nazwisko` varchar(25) null,
   `plec` int(2) null,

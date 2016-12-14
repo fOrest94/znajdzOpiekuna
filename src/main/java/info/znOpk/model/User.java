@@ -37,7 +37,10 @@ public class User {
     @Column(name = "nazwisko")
     private String lastName;
 
-    @Transient
+    @Column(name = "aktywny")
+    private boolean active;
+
+    @Column(name = "miasto")
     private String town;
 
     @Column(name = "plec")
@@ -53,6 +56,10 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public boolean isActive() {return active;}
+
+    public void setActive(boolean active) {this.active = active;}
 
     public String getUsername() {
         return username;

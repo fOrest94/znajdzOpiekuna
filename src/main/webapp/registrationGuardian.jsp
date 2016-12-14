@@ -24,57 +24,88 @@
                         <div class="panel-heading">
                             <div class="panel-title">Sign Up</div>   
                         </div>  
-                        <div class="panel-body" >           
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
-                                
+                        <div class="panel-body" >
 								<div class="form-group">
 	                                <label for="firstName" class="col-md-3 control-label"  style="text-align: left">Dane</label>
 	                                <div class="col-md-4">
-	                                    <form:input path="firstName" class="form-control" placeholder="Imię"/>
+										<spring:bind path="firstName">
+											<div class="form-group ${status.error ? 'has-error' : ''}">
+												<form:input type="text" path="firstName" class="form-control" placeholder="Imię"></form:input>
+												<form:errors path="firstName"></form:errors>
+											</div>
+										</spring:bind>
 	                                </div>
 	                                <div class="col-md-4">
-	                                    <form:input path="lastName" class="form-control" placeholder="Nazwisko"/>
+										<spring:bind path="lastName">
+											<div class="form-group ${status.error ? 'has-error' : ''}">
+												<form:input type="text" path="lastName" class="form-control" placeholder="Nazwisko"></form:input>
+												<form:errors path="lastName"></form:errors>
+											</div>
+										</spring:bind>
 	                                </div>
 	                            </div>
                                 
                                 <div class="form-group">
                                     <label for="username" class="text-left col-md-3 control-label " style="text-align: left">Email</label>
                                     <div class="col-md-4">
-                                        <form:input path="username" class="form-control" placeholder="Adress Email"/>
+										<spring:bind path="username">
+											<div class="form-group ${status.error ? 'has-error' : ''}">
+												<form:input type="text" path="username" class="form-control" placeholder="Email" autofocus="true"></form:input>
+												<form:errors path="username"></form:errors>
+											</div>
+										</spring:bind>
                                     </div>
                                 </div>
+
+
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label"  style="text-align: left">Hasło</label>
                                     <div class="col-md-4">
-                                        <form:input path="password" class="form-control" placeholder="Hasło"/>
-
+										<spring:bind path="password">
+											<div class="form-group ${status.error ? 'has-error' : ''}">
+												<form:input type="password" path="password" class="form-control" placeholder="Hasło"></form:input>
+												<form:errors path="password"></form:errors>
+											</div>
+										</spring:bind>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label"  style="text-align: left">Powtórz hasło</label>
                                     <div class="col-md-4">
-                                        <form:input path="passwordConfirm" class="form-control" placeholder="Hasło"/>
+										<spring:bind path="passwordConfirm">
+											<div class="form-group ${status.error ? 'has-error' : ''}">
+												<form:input type="password" path="passwordConfirm" class="form-control"
+															placeholder="Powtórz hasło"></form:input>
+												<form:errors path="passwordConfirm"></form:errors>
+											</div>
+										</spring:bind>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="icode" class="col-md-3 control-label"  style="text-align: left">Lokalizacja</label>
+                                    <label for="zipCode" class="col-md-3 control-label"  style="text-align: left">Lokalizacja</label>
                                     <div class="col-md-4">
-
-                                        <button></button>
+										<spring:bind path="town">
+											<div class="form-group ${status.error ? 'has-error' : ''}">
+												<form:input type="text" path="town" class="form-control" placeholder="Miasto"></form:input>
+												<form:errors path="town"></form:errors>
+											</div>
+										</spring:bind>
                                     </div>
                                     <div class="col-md-4">
-                                         <ul></ul>
+										<spring:bind path="zipCode">
+											<div class="form-group ${status.error ? 'has-error' : ''}">
+												<form:input type="text" path="zipCode" class="form-control" placeholder="Kod pocztowy"></form:input>
+												<form:errors path="zipCode"></form:errors>
+											</div>
+										</spring:bind>
                                     </div>       
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="icode" class="col-md-3 control-label"  style="text-align: left">Data urodzenia</label>
+                                    <label for="dob-day" class="col-md-3 control-label"  style="text-align: left">Data urodzenia</label>
                                     <div class="col-md-5" style="padding-top: 5px;"> 
 									    <select name="dob-day" id="dob-day" style="border-radius: 3px; font-size: 18px;" form="registerParent">
 									      <option value="">Dzień</option>
@@ -219,343 +250,12 @@
 								 <hr/>
                                 <div class="form-group">                                    
                                     <div class="col-lg-offset-10 col-lg-12">
-                                    	<a href="#" onclick="slideSecond();"><img src="${pageContext.request.contextPath}/resources/images/right-arrow.png"></a>
+										<input type="submit" value="Zarejestruj się" class="btn btn-danger" style="font-size: 14px;">
                                     </div>
                                 </div>
                          </div>
                     </div>    
          </div>
-
-           <div id="signupbox1" style="margin-top:50px" class="col-lg-8 col-lg-offset-2" >
-                    <div class="panel panel-danger" style="border-color: #fcb2ab;">
-                        <div class="panel-heading">
-                            <div class="panel-title">Twój profil</div>
-                            
-                        </div>  
-                        <div class="panel-body" >
-                                
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
-                                
-								<div class="form-group"  style="border-bottom: 12px; ">
-	                                <label for="typeOfWork" class="col-md-3 control-label"  style="text-align: left">Kim chcesz się opiekować</label>
-	                                <div class="col-md-4">
-                                          <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="whoWannCareNanny" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Dzieci
-                                          </label>
-                                        </div>
-	                                </div>
-	                                <div class="col-md-4">
-                                        <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="whoWannCareNanny" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Osoby starsze
-                                          </label>
-                                        </div>
-	                                </div>
-	                            </div>
-                                <hr />
-                                <div class="form-group">
-                                    <label for="typeOfWork" class="col-md-3 control-label"  style="text-align: left">Jakie inne zajęcia jesteś w stanie wykonywać</label>
-                                    <div class="col-md-4">
-                                          <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="otherActShop" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Zakupy
-                                          </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="otherActClean" value="false"/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Sprzątanie
-                                          </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                          <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="otherActVac" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Pranie
-                                          </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="otherActCook" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Gotowanie
-                                          </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-
-                                <div class="form-group" style="margin-top: 20px;">
-									<label for="otherAbilities" class="text-left col-md-3 control-label " style="text-align: left">Inne umiejętności</label>
-                                    <div class="col-md-8">
-                                        <form:input path="otherSkills" class="form-control" style="margin-left: 20px; border-radius: 3px;" placeholder=""/>
-                                    </div>
-                                </div>
-                                <hr/>
-
-                                <div class="form-group" style="margin-top: 20px;">
-                                    <label for="icode" class="col-md-3 control-label"  style="text-align: left">Napisz coś o sobie</label>
-                                    <div class="col-md-8 ">
-                                    <textarea rows="8" cols="62" form="registerParent" name="sthAboutYou" style="margin-left: 20px; border-radius: 3px;">
-                                        At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
-                                    </textarea>
-                                    </div>
-	                                
-                                </div>
-                                 <hr/>
-                               <div class="form-group"> 
-                                    <div class="col-lg-6" style="padding-left: 50px;">
-                                        <a href="#" onclick="slideFirst();"><img src="${pageContext.request.contextPath}/resources/images/left-arrow.png"></a>
-                                    </div>                                   
-                                    <div class="col-lg-offset-4 col-lg-1">
-                                        <a href="#"><img src="${pageContext.request.contextPath}/resources/images/right-arrow.png"></a>
-                                    </div>
-                                </div>
-                         </div>
-                    </div>    
-         </div> 
-
-         <div id="signupbox2" style="margin-top:50px" class="col-lg-8 col-lg-offset-2" >
-                    <div class="panel panel-danger" style="border-color: #fcb2ab;">
-                        <div class="panel-heading">
-                            <div class="panel-title">Szczegóły profilu</div>
-                            
-                        </div>  
-                        <div class="panel-body" >
-                                
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
-                                <div class="form-group"  style="border-bottom: 12px; ">
-	                                <div class="col-md-12 ">
-                                          <h4 style="text-align: left;">Praca</h4>
-	                                </div>
-	                            </div>
-                                <hr />
-
-                                <div class="form-group">
-                                    <label for="typeOfWork" class="col-md-3 control-label"  style="text-align: left">Posiadam doświadczenie w opiece nad</label>
-                                    <div class="col-md-4">
-                                          <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="careExpKids" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Dziećmi
-                                          </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="careExpOld" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Starszymi
-                                          </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-
-								<div class="form-group"  style="border-bottom: 12px; ">
-	                                <label for="typeOfWork" class="col-md-3 control-label"  style="text-align: left">Wymiar pracy w jakim możesz pracować</label>
-	                                <div class="col-md-4">
-                                          <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="timeJobHalf" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Pół etatu
-                                          </label>
-                                        </div>
-	                                </div>
-	                                <div class="col-md-4">
-                                        <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="timeJobFull" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Pełny etat
-                                          </label>
-                                        </div>
-	                                </div>
-	                                <div class="col-md-4">
-                                        <div class="checkbox">
-                                          <label style="font-size: 1.2em">
-                                            <form:checkbox path="timeJobCasual" value=""/>
-                                            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                           Dorywczo
-                                          </label>
-                                        </div>
-	                                </div>
-	                            </div>
-                                <hr />
-
-                                <div class="form-group" style="margin-top: 20px;">
-									<label for="nanny-experience" class="text-left col-md-3 control-label " style="text-align: left">Doświadczenie przy pracy z dziećmi</label>
-                                    <div class="col-md-5" style="padding-top: 5px;"> 
-									    <select name="nanny-experience" id="nanny-experience" style=" margin-left: 20px;  margin-top: 5px; border-radius: 3px; font-size: 18px;" form="registerParent">
-									      <option value="">brak</option>
-									      <option value="">---</option>
-									      <option value="01">pół roku</option>
-									      <option value="02">rok</option>
-									      <option value="03">dwa lata</option>
-									      <option value="04">więcej niż 2 lata</option>
-									    </select>
-                                    </div>  
-                                </div>
-                                <hr/>
-
-                                <div class="form-group" style="margin-top: 20px;">
-									<label for="nanny-experience" class="text-left col-md-3 control-label " style="text-align: left">Doświadczenie przy pracy ze starszymi</label>
-                                    <div class="col-md-5" style="padding-top: 5px;"> 
-									    <select name="nanny-experience" id="nanny-experience" style=" margin-left: 20px;  margin-top: 5px; border-radius: 3px; font-size: 18px;" form="registerParent">
-									      <option value="">brak</option>
-									      <option value="">---</option>
-									      <option value="01">pół roku</option>
-									      <option value="02">rok</option>
-									      <option value="03">dwa lata</option>
-									      <option value="04">więcej niż 2 lata</option>
-									    </select>
-                                    </div>  
-                                </div>
-                                <hr/>
-
-                                 <div class="form-group"  style="border-bottom: 12px; ">
-	                                <div class="col-md-12 ">
-                                          <h4 style="text-align: left;">Miejsce pracy</h4>
-	                                </div>
-	                            </div>
-                                <hr />
-
-                                <div class="form-group" style="margin-top: 20px;">
-                                    <label for="icode" class="col-md-3 control-label"  style="text-align: left">Miejsce opieki nad dzieckiem</label>
-                                    <div class="col-md-8 ">
-	                                    <div class="col-md-5 ">
-		                                    <div class="radio">
-									            <label style="font-size: 1.2em">
-									                <form:radiobutton path="placeOfTakeCare" value="1"/>Dowolne
-									                <span class="cr"><i class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
-									            </label>
-									        </div>
-									    </div>
-										<div class="col-md-5 ">
-			                                <div class="radio">
-										        <label style="font-size: 1.2em">
-										            <form:radiobutton path="placeOfTakeCare" value="2"/>U rodziców
-										            <span class="cr"><i class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
-										        </label>
-										    </div>
-										</div>
-		                                <div class="col-md-5 ">
-			                                <div class="radio">
-										        <label style="font-size: 1.2em">
-										        	<form:radiobutton path="placeOfTakeCare" value="3"/>U niani
-										            <span class="cr"><i class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
-										        </label>
-										    </div>
-										</div>
-                                	</div>
-                                </div>
-                                 <hr/>
-
-                                  <div class="form-group" style="margin-top: 20px;">
-                                    <label for="icode" class="col-md-3 control-label"  style="text-align: left">Praca z mieszkaniem</label>
-                                    <div class="col-md-8 ">
-	                                    <div class="col-md-5 ">
-		                                    <div class="radio">
-									            <label style="font-size: 1.2em">
-									                <form:radiobutton path="workWithHome" value="1"/>Tak
-									                <span class="cr"><i class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
-									            </label>
-									        </div>
-									    </div>
-										<div class="col-md-5 ">
-			                                <div class="radio">
-										        <label style="font-size: 1.2em">
-										            <form:radiobutton path="workWithHome" value="1"/>Nie
-										            <span class="cr"><i class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
-										        </label>
-										    </div>
-										</div>
-                                	</div>
-                                </div>
-                                 <hr/>
-
-                                 <div class="form-group"  style="border-bottom: 12px; ">
-	                                <div class="col-md-12 ">
-                                          <h4 style="text-align: left;">Wynagrodzenie</h4>
-	                                </div>
-	                            </div>
-
-                                  <div class="form-group" style="margin-top: 20px; ">
-                                    <label for="icode" class="col-md-3 control-label"  style="text-align: left">Cena za godzinę opieki</label>
-                                    <div class="col-md-2 " style="padding-left: 35px;">
-	                                    <form:input path="moneyPerHour" class="form-control" placeholder="zł/h"  style="margin-top: 5px; "/>
-	                                </div>
-	                                 <div class="col-md-7 "  style="margin-top: 10px; padding-right: 20px;">
-	                                   <p style="font-size: 17px;">zł/h</p>
-	                                </div>
-                                </div>
-                                 <hr/>
-
-                                 <div class="form-group"  style="border-bottom: 12px; ">
-	                                <div class="col-md-12 ">
-                                          <h4 style="text-align: left;">Informacje o wykształceniu</h4>
-	                                </div>
-	                            </div>
-
-                                  <div class="form-group" style="margin-top: 20px;">
-									<label for="nanny-experience" class="text-left col-md-3 control-label " style="text-align: left">Wykształcenie</label>
-                                    <div class="col-md-5" style="padding-top: 5px;"> 
-									    <select name="nanny-experience" id="nanny-experience" style=" margin-left: 20px;  margin-top: 5px; border-radius: 3px; font-size: 18px;" form="registerParent">
-									      <option value="">brak</option>
-									      <option value="">---</option>
-									      <option value="01">podstawowe</option>
-									      <option value="02">zawodowe</option>
-									      <option value="03">średnie</option>
-									      <option value="04">wyższe</option>
-									    </select>
-                                    </div>  
-                                </div>
-                                <hr/>
-
-                                <div class="form-group" style="margin-top: 20px;">
-                                    <label for="icode" class="col-md-3 control-label"  style="text-align: left">Języki obce jakie znasz</label>
-                                    <div class="col-md-8" style="padding-left: 35px; padding-top: 5px;">
-                                        <form:input path="foreignLanguages" class="form-control" placeholder="Języki obce"/>
-                                    </div>
-                                </div> 
-                                <hr/>
-
-                               <div class="form-group"> 
-                                    <div class="col-lg-6" style="padding-left: 50px;">
-                                        <a href=""><img src="${pageContext.request.contextPath}/resources/images/left-arrow.png"></a>
-                                    </div>                                   
-                                    <div class="col-lg-offset-3 col-lg-2">
-                                        <div style="margin-top: 5px" class="form-group">
-											<input type="submit" name="submit" value="Zarejestruj" class="btn btn-danger" style="font-size: 18px; width: 130px;">
-										</div>
-                                    </div>
-                                </div>
-                         </div>
-                    </div>    
-			</div> 
 		</form:form> 
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

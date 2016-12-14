@@ -64,6 +64,7 @@
                             </spring:bind>
                         </div>
                     </div>
+
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="form-group">
                         <label for="password" class="col-md-3 control-label"  style="text-align: left">Hasło</label>
@@ -91,6 +92,28 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="searchButton" class="col-md-3 control-label"  style="text-align: left">Szukam</label>
+                        <div class="col-md-8 ">
+                            <div class="col-md-5 ">
+                                <div class="radio">
+                                    <label style="font-size: 1.2em">
+                                        <form:radiobutton path="userType" value="sister"/>Pracy
+                                        <span class="cr"><i class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5 ">
+                                <div class="radio">
+                                    <label style="font-size: 1.2em">
+                                        <form:radiobutton path="userType" value="simple"/>Opieki
+                                        <span class="cr"><i class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="padding-top: 20px;">
                         <label for="town" class="col-md-3 control-label"  style="text-align: left">Lokalizacja</label>
                         <div class="col-md-4">
                             <spring:bind path="town">
@@ -114,7 +137,7 @@
                     <div class="form-group">
                         <div class="checkbox col-md-8  col-md-offset-3 control-label" style="text-align: left">
                             <label>
-                                <input type="checkbox">Zapoznałem się z treścią regulaminu i wyrażam na niego zgodę
+                                <input type="checkbox" id="rulesRequired" name="test" required>Zapoznałem się z treścią regulaminu i wyrażam na niego zgodę
                             </label>
                         </div>
                     </div>

@@ -37,13 +37,8 @@
                 <li><a href="#howItWorks" id="howDissapear">Jak to działa?</a></li>
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <li><a href="login">Zaloguj się</a></li>
-                    <li>
-                        <ol class="breadcrumb" style="float: left;">
-                            <li class="active" style="color: #c09e6b;">Zarejestruj się</li>
-                            <li><a href="registrationParent">Rodzic</a></li>
-                            <li><a href="registrationGuardian">Opiekunka</a></li>
-                        </ol>
-                    </li>
+                    <li><a href="registration" style="color: #c09e6b;">Zarejestruj się</a></li>
+
                 </c:if>
                 <sec:authorize access="hasRole('ROLE_USER')">
                     <c:url value="/logout" var="logoutUrl" />
