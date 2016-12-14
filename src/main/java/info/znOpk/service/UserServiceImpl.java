@@ -1,6 +1,8 @@
 package info.znOpk.service;
 
+import info.znOpk.model.Nanny;
 import info.znOpk.model.User;
+import info.znOpk.repository.CareRepository;
 import info.znOpk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +16,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private CareRepository careRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -22,6 +27,13 @@ public class UserServiceImpl implements UserService {
         user.setRole("USER");
         userRepository.save(user);
     }
+
+    @Override
+    public void save(Nanny nanny) {
+
+        careRepository.save(nanny);
+    }
+
 
     @Override
     public User findByUsername(String username) {

@@ -5,19 +5,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `znajdz_opiekuna` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `znajdz_opiekuna`;
 
-DROP TABLE IF EXISTS `uzytkownik`;
-CREATE TABLE IF NOT EXISTS `uzytkownik` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(128) NOT NULL,
-  `haslo` varchar(128) NOT NULL,
-  `poziom_dostepu` varchar(128) NOT NULL,
-  `typ_uzytkownika` varchar(8) NOT NULL,
-  `imie` varchar(25) null ,
-  `nazwisko` varchar(25) null,
-  `plec` int(2) null,
-  `kod_pocztowy` varchar(8) null,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `opiekun`;
 CREATE TABLE IF NOT EXISTS `opiekun` (
@@ -47,5 +34,19 @@ CREATE TABLE IF NOT EXISTS `opiekun` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE `opiekun`
-  ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);
+
+DROP TABLE IF EXISTS `uzytkownik`;
+CREATE TABLE IF NOT EXISTS `uzytkownik` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(128) NOT NULL,
+  `haslo` varchar(128) NOT NULL,
+  `poziom_dostepu` varchar(128) NOT NULL,
+  `typ_uzytkownika` varchar(8) NOT NULL,
+  `imie` varchar(25) null ,
+  `nazwisko` varchar(25) null,
+  `plec` int(2) null,
+  `kod_pocztowy` varchar(8) null,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `opiekun` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);

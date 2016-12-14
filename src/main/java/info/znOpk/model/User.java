@@ -37,6 +37,9 @@ public class User {
     @Column(name = "nazwisko")
     private String lastName;
 
+    @Transient
+    private String town;
+
     @Column(name = "plec")
     private boolean sex;
 
@@ -122,4 +125,8 @@ public class User {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+    public String getTown() {return town;}
+
+    public void setTown(String town) {this.town = town;}
 }

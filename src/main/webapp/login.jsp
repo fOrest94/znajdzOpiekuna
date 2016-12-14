@@ -21,7 +21,7 @@
     <script src="resources/js/custom.js"></script>
 </head>
 
-<body onload='document.loginForm.username.focus();' style="background-color: #F9F9F9;">
+<body style="background-color: #F9F9F9;">
 <div class="container" style="margin-top: 300px;">
     <div class=" col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3"
          data-scrollreveal="enter bottom and move 300px, wait 0.2s">
@@ -60,11 +60,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-12 control">
-                            <div
-                                    style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
-                                Nie masz konta! <a href="registration">
-                                Zarejestruj się tutaj! </a>
-                            </div>
+                            <div style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">Nie masz konta! <a href="registrationParent">Zarejestruj się tutaj! </a></div>
                         </div>
                     </div>
                 </form>

@@ -36,12 +36,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#howItWorks" id="howDissapear">Jak to działa?</a></li>
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
-                    <li><a href="loginform">Zaloguj się</a></li>
+                    <li><a href="login">Zaloguj się</a></li>
                     <li>
                         <ol class="breadcrumb" style="float: left;">
                             <li class="active" style="color: #c09e6b;">Zarejestruj się</li>
-                            <li><a href="registerParent">Rodzic</a></li>
-                            <li><a href="registerGuardian">Opiekunka</a></li>
+                            <li><a href="registrationParent">Rodzic</a></li>
+                            <li><a href="registrationGuardian">Opiekunka</a></li>
                         </ol>
                     </li>
                 </c:if>
@@ -80,7 +80,7 @@
             <div class="col col-md-5"></div>
             <div class="col col-md-7"  style="padding-top: 200px">
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="/indexService">
                     <div class="form-group">
                         <h1 class="text-center" style="color: #FF4F4F; font-size: 50px">Znajdź lokalną  nianię lub opiekunkę!</h1>
                         <h3 class="text-center" style="color: #FF4F4F; font-size: 30px">Szybko, prosto i bezpiecznie.</h3>
@@ -90,15 +90,14 @@
                             <input type="text" class="form-control" id="inputEmail3" placeholder="Wpisz kod lub miasto">
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-sm-10 col-md-offset-1">
                             <div class="checkbox">
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" checked="checked" value="option1">Znajdź opiekę
+                                    <input type="radio" name="userType" id="inlineRadio1" value="sister" checked="checked">Znajdź opiekę
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">Znajdź pracę
+                                    <input type="radio" name="userType" id="inlineRadio2" value="simply">Znajdź pracę
                                 </label>
                             </div>
                         </div>
@@ -106,15 +105,10 @@
 
                     <div class="form-group">
                         <div class="col-sm-10 col-md-offset-1">
-                            <button type="submit" class="btn btn-danger">Sign in</button>
+                            <input type="submit" class="btn btn-danger">Szukaj</button>
                         </div>
                     </div>
                 </form>
-
-
-
-
-
             </div>
         </div>
     </div>

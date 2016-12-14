@@ -38,7 +38,7 @@
                         <div class="col-md-4">
                             <spring:bind path="firstName">
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                                    <form:input type="text" path="firstName" class="form-control" placeholder="Miasto"></form:input>
+                                    <form:input type="text" path="firstName" class="form-control" placeholder="Imię"></form:input>
                                     <form:errors path="firstName"></form:errors>
                                 </div>
                             </spring:bind>
@@ -46,7 +46,7 @@
                         <div class="col-md-4">
                             <spring:bind path="lastName">
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                                    <form:input type="text" path="lastName" class="form-control" placeholder="Miasto"></form:input>
+                                    <form:input type="text" path="lastName" class="form-control" placeholder="Nazwisko"></form:input>
                                     <form:errors path="lastName"></form:errors>
                                 </div>
                             </spring:bind>
@@ -54,12 +54,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="text-left col-md-3 control-label " style="text-align: left">Email</label>
+                        <label for="username" class="text-left col-md-3 control-label " style="text-align: left">Email</label>
                         <div class="col-md-4">
-                            <spring:bind path="email">
+                            <spring:bind path="username">
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                                    <form:input type="text" path="email" class="form-control" placeholder="Email" autofocus="true"></form:input>
-                                    <form:errors path="email"></form:errors>
+                                    <form:input type="text" path="username" class="form-control" placeholder="Email" autofocus="true"></form:input>
+                                    <form:errors path="username"></form:errors>
                                 </div>
                             </spring:bind>
                         </div>
@@ -101,10 +101,10 @@
                             </spring:bind>
                         </div>
                         <div class="col-md-4">
-                            <spring:bind path="postKey">
+                            <spring:bind path="zipCode">
                                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                                    <form:input type="text" path="postKey" class="form-control" placeholder="Kod pocztowy"></form:input>
-                                    <form:errors path="postKey"></form:errors>
+                                    <form:input type="text" path="zipCode" class="form-control" placeholder="Kod pocztowy"></form:input>
+                                    <form:errors path="zipCode"></form:errors>
                                 </div>
                             </spring:bind>
                         </div>

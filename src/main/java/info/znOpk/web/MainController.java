@@ -1,47 +1,26 @@
 package info.znOpk.web;
 
 import info.znOpk.model.User;
-import info.znOpk.service.SecurityService;
-import info.znOpk.service.UserService;
-import info.znOpk.validator.UserValidator;
+import info.znOpk.service.BrowseService;
+import info.znOpk.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class MainController {
-    @Autowired
-    private UserService userService;
 
     @Autowired
-    private SecurityService securityService;
+    private SessionService sessionService;
 
     @Autowired
-    private UserValidator userValidator;
-
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-
-        return "registration";
-    }
-
-    @RequestMapping(value = "/registrationParent", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) {
-        userValidator.validate(user, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-
-        userService.save(user);
-
-        return "redirect:/welcome";
-    }
+    private BrowseService browseService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
@@ -54,8 +33,23 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String welcome() {
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    public String welcome(Model model) {
         return "index";
+    }
+
+    @RequestMapping(value = "/indexService", method = RequestMethod.GET)
+    public String indexService(@RequestParam("userType")String userType, HttpServletRequest request, Model model) {
+
+        if((request.getUserPrincipal().getName() != null)){
+            User user = sessionService.getUser(request.getUserPrincipal().getName());
+            model.addAttribute("user",user);
+        }
+        System.out.println(userType+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        List<User> browseList = browseService.browseResults(userType);
+
+        model.addAttribute("browseList", browseList);
+
+        return "indexService";
     }
 }

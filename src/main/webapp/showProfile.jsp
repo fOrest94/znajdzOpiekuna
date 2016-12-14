@@ -10,7 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/img/bookmark.png">
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="resources/css/style.css" rel="stylesheet"/>
-    <link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
+    <link href="resources/css/font-awesome.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Itim" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Aclonica|Open+Sans" rel="stylesheet">
     <title>znajdźOpiekuna</title>
@@ -82,7 +82,7 @@
         <div class="col-lg-12" style=" text-align: center;">
             <div class="col-lg-9 col-lg-offset-1" style="height: 500px;">
 
-                <img src="${pageContext.request.contextPath}/resources/pictures/profileImages/${pageContext.request.userPrincipal.name}.jpg"
+                <img src="${pageContext.request.contextPath}/resources/pictures/profileImages/${user.id}.jpg"
                      width="300" height="300">
                 <form:form method="POST" modelAttribute="fileBucket"
                            enctype="multipart/form-data" class="form-horizontal">
@@ -142,9 +142,9 @@
             <h3 style="text-align: left;">Prace których się podejmę:</h3>
         </div>
         <br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.whoWannCareNanny}.png"> Opieka nad
+        <img src="resources/images/${userNanny.whoWannCareNanny}.png"> Opieka nad
         dziećmi<br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.whoWannCareOld }.png"> Opieka nad
+        <img src="resources/images/${userNanny.whoWannCareOld }.png"> Opieka nad
         starszymi<br>
         <br>
         <div class="panel">
@@ -153,29 +153,29 @@
         <br>
         <c:choose>
             <c:when test="${userNanny.placeOfTakeCare == 1}">
-                <img src="${pageContext.request.contextPath}/resources/images/1.png"> Dowolne<br>
-                <img src="${pageContext.request.contextPath}/resources/images/0.png"> U rodziców<br>
-                <img src="${pageContext.request.contextPath}/resources/images/0.png"> U niani <br>
+                <img src="resources/images/1.png"> Dowolne<br>
+                <img src="resources/images/0.png"> U rodziców<br>
+                <img src="resources/images/0.png"> U niani <br>
             </c:when>
             <c:when test="${userNanny.placeOfTakeCare == 2}">
-                <img src="${pageContext.request.contextPath}/resources/images/0.png"> Dowolne<br>
-                <img src="${pageContext.request.contextPath}/resources/images/1.png"> U rodziców<br>
-                <img src="${pageContext.request.contextPath}/resources/images/0.png"> U niani <br>
+                <img src="resources/images/0.png"> Dowolne<br>
+                <img src="resources/images/1.png"> U rodziców<br>
+                <img src="resources/images/0.png"> U niani <br>
             </c:when>
             <c:otherwise>
-                <img src="${pageContext.request.contextPath}/resources/images/0.png"> Dowolne<br>
-                <img src="${pageContext.request.contextPath}/resources/images/0.png"> U rodziców<br>
-                <img src="${pageContext.request.contextPath}/resources/images/1.png"> U niani <br>
+                <img src="resources/images/0.png"> Dowolne<br>
+                <img src="resources/images/0.png"> U rodziców<br>
+                <img src="resources/images/1.png"> U niani <br>
             </c:otherwise>
         </c:choose><br>
         <div class="panel">
             <h3 style="text-align: left;">Zajęcia z podopiecznymi:</h3>
         </div>
         <br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.otherActClean}.png"> Dowolne<br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.otherActCook}.png"> U rodziców<br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.otherActShop}.png"> U niani <br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.otherActVac}.png"> U niani <br>
+        <img src="resources/images/${userNanny.otherActClean}.png"> Dowolne<br>
+        <img src="resources/images/${userNanny.otherActCook}.png"> U rodziców<br>
+        <img src="resources/images/${userNanny.otherActShop}.png"> U niani <br>
+        <img src="resources/images/${userNanny.otherActVac}.png"> U niani <br>
         <div class="panel">
             <h3 style="text-align: left;">Inne umiejętności:</h3>
         </div>
@@ -183,7 +183,7 @@
         <div class="panel">
             <h3 style="text-align: left;">Doświadczenie w pracy z dziećmi:</h3>
         </div>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.careExpKids}.png">
+        <img src="resources/images/${userNanny.careExpKids}.png">
         <c:choose>
             <c:when test="${userNanny.careExpKids == true}">
                 Tak<br>Staż: ${userNanny.experienceKidsTime}<br>
@@ -195,7 +195,7 @@
         <div class="panel">
             <h3 style="text-align: left;">Doświadczenie w pracy ze starszymi:</h3>
         </div>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.careExpOld}.png">
+        <img src="resources/images/${userNanny.careExpOld}.png">
         <c:choose>
             <c:when test="${userNanny.careExpOld == true}">
                 Tak<br>Staż: ${userNanny.experienceOldTime}<br>
@@ -208,9 +208,9 @@
             <h3 style="text-align: left;">Wymiar etatu:</h3>
         </div>
         <br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.timeJobHalf}.png"> Pół etatu<br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.timeJobFull}.png"> Pełny etat<br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.timeJobCasual}.png"> Dorywczo <br>
+        <img src="resources/images/${userNanny.timeJobHalf}.png"> Pół etatu<br>
+        <img src="resources/images/${userNanny.timeJobFull}.png"> Pełny etat<br>
+        <img src="resources/images/${userNanny.timeJobCasual}.png"> Dorywczo <br>
         <br>
         <div class="panel">
             <h3 style="text-align: left;">Praca z domem:</h3>
@@ -236,13 +236,11 @@
     </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
-<script
-        src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script
-        src="${pageContext.request.contextPath}/resources/js/scrollReveal.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/custom.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
+<script src="resources/js/jquery.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/scrollReveal.js"></script>
+<script src="resources/js/custom.js"></script>
+<script src="resources/js/script.js"></script>
 
 </body>
 </html>

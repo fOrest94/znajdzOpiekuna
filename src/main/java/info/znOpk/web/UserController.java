@@ -2,17 +2,13 @@ package info.znOpk.web;
 
 import info.znOpk.model.FileUpload;
 import info.znOpk.model.Nanny;
+import info.znOpk.model.User;
 import info.znOpk.service.SessionService;
 import info.znOpk.validator.AgeValidator;
 import info.znOpk.validator.FileValidator;
-import info.znOpk.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import info.znOpk.model.User;
-
 import org.springframework.ui.Model;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -37,14 +33,6 @@ public class UserController {
     @Autowired
     private SessionService sessionService;
 
-    @RequestMapping(value = "/indexService", method = RequestMethod.GET)
-    public String indexService(HttpServletRequest request, Model model) {
-
-        User user = sessionService.getUser(request.getUserPrincipal().getName());
-        model.addAttribute("user",user);
-
-        return "indexService";
-    }
 
     @RequestMapping(value = "/writeToMe", method = RequestMethod.GET)
     public String writeToMe(HttpServletRequest request, Model model) {
@@ -100,15 +88,13 @@ public class UserController {
         }
 
         String uploadLocation = request.getSession().getServletContext().getRealPath("/") + "resources\\pictures\\profileImages\\";
-
+        String fileName = user.getId() + ".jpg";
         if (result.hasErrors()) {
-            System.out.println("validation errors");
             return "singleFileUploader";
         } else {
 
             MultipartFile multipartFile = fileBucket.getFile();
-            multipartFile.transferTo(new File(uploadLocation + user.getUsername() + ".jpg"));
-            String fileName = user.getUsername() + ".jpg";
+            multipartFile.transferTo(new File(uploadLocation + fileName));
             FileUpload fileModel = new FileUpload();
 
             model.addAttribute("fileBucket", fileModel);

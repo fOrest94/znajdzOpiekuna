@@ -94,7 +94,15 @@
 		<div class="col-lg-3">
 		</div>
 		<div class="col-lg-9" style="background-color: grey;">
-		fgfghgffffffffffffff<br>fgdgdgd<br>
+			<c:if test="${not empty browseList}">
+
+				<ul>
+					<c:forEach var="listValue" items="${browseList}">
+						<li>${listValue.userType}</li>
+					</c:forEach>
+				</ul>
+
+			</c:if>
 		</div>
 	</div>
 </div>
