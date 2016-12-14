@@ -1,5 +1,6 @@
 package info.znOpk.web;
 
+import info.znOpk.authentication.EmailEncryption;
 import info.znOpk.model.User;
 import info.znOpk.service.UserService;
 import info.znOpk.authentication.EmailAuthentication;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,6 +28,9 @@ public class RegisterController {
 	@Autowired
 	private EmailAuthentication emailAuthentication;
 
+	@Autowired
+	private EmailEncryption emailEncryption;
+
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registerParent(Model model) {
 
@@ -42,15 +47,27 @@ public class RegisterController {
 	    	return "registration";
 		}
 
-		emailAuthentication.generateAndSendEmail(user);
 		userService.save(user);
+
+		emailAuthentication.generateAndSendEmail(user);
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/registrationm", method = RequestMethod.POST)
-	public String registerAuthentication(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) throws MessagingException {
+	@RequestMapping(value = "/registration/{email}/{id}", method = RequestMethod.GET)
+	public String registerAuthentication(@PathVariable String email, @PathVariable String id) throws Exception {
 
+		String emailDecrypted = emailEncryption.decrypt(email);
+		Long userID = Long.parseLong(id);
+		User user = userService.findByUsername(emailDecrypted);
 
-		return "redirect:/";
+		if(user.getId() == userID){
+			user.setActive(true);
+			if(user.getUserType().equals("simple")){
+				return "redirect:/";
+			}
+
+		}
+
+		return "errorWChuj/";
 	}
 }

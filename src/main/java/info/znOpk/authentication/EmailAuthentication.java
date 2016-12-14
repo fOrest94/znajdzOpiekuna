@@ -1,6 +1,7 @@
 package info.znOpk.authentication;
 
 import info.znOpk.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,6 +11,9 @@ import javax.mail.internet.*;
 
 @Component
 public class EmailAuthentication {
+
+    @Autowired
+    EmailEncryption emailEncryption;
 
     public void generateAndSendEmail(User user) throws AddressException, MessagingException {
 
@@ -37,8 +41,12 @@ public class EmailAuthentication {
                     });
 
             Message msg = new MimeMessage(session);
+
+            String encryptedData = emailEncryption.encrypt(user.getUsername());
+            String link = "http://localhost:8080/registration/"+encryptedData+"/"+user.getId();
+            System.out.println(link);
             msg.setContent("<h3>Witaj, " + user.getFirstName() + " " + user.getLastName() + "<h3>" +
-                    "<a href=\"http://localhost:8080/\">Kliknij tutaj aby aktywować swoje konto</a><br><br>Pozdrawiamy,<br>Zespół, <p style=\"color:#FF4F4F;\">znajdźOpiekuna</p>", "text/html; charset=utf-8");
+                    "<a href=\""+link+"\">Kliknij tutaj aby aktywować swoje konto</a><br><br>Pozdrawiamy,<br>Zespół, <p style=\"color:#FF4F4F;\">znajdźOpiekuna</p>", "text/html; charset=utf-8");
             msg.setFrom(new InternetAddress("aboutabreast@gmail.com"));
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(user.getUsername(), false));
@@ -48,6 +56,8 @@ public class EmailAuthentication {
             System.out.println("Message sent.");
         } catch (MessagingException e) {
             System.out.println("Wystąpił błąd: " + e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
