@@ -34,9 +34,14 @@ public class UserServiceImpl implements UserService {
         careRepository.save(nanny);
     }
 
-
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public void setActive(Integer active,Long id){userRepository.updateActive(active,id);
+        userRepository.flush();}
+
+
 }

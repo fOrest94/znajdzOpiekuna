@@ -19,28 +19,32 @@
 
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Rozwiń nawigację</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="navbar-brand navbar-nav">
-                <a href="#"><div class="logo">znajdźOpiekuna</div></a>
-            </div>
+                <a class="navbar-brand" style="padding-top: 30px;" href="#"><div class="logo">znajdźOpiekuna</div></a>
 
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#howItWorks" id="howDissapear">Jak to działa?</a></li>
+                <li><a href="#howItWorks">Jak to działa?</a></li>
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <li><a href="login">Zaloguj się</a></li>
                     <li><a href="registration" style="color: #c09e6b;">Zarejestruj się</a></li>
 
                 </c:if>
                 <sec:authorize access="hasRole('ROLE_USER')">
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+
+                        <li><a href="showProfile" style="font-size: 24px;"> Mój profil</a></li>
+                        <li><a href="javascript:formSubmit()" style="font-size: 24px;"> Wyloguj</a></li>
+                    </c:if>
                     <c:url value="/logout" var="logoutUrl" />
                     <form action="${logoutUrl}" method="post" id="logoutForm">
                         <input type="hidden" name="${_csrf.parameterName}"
@@ -52,16 +56,7 @@
                         }
                     </script>
 
-                    <c:if test="${pageContext.request.userPrincipal.name != null}">
 
-                        <li><a href="profile"> Mój profil</a></li>
-                        <li>
-                            <ol class="breadcrumb" style="float: left;">
-                                <li class="active" style="color: #c09e6b; font-size: 12px;">Witaj, ${pageContext.request.userPrincipal.name}</li>
-                                <li><a href="javascript:formSubmit()"> Wyloguj</a></li>
-                            </ol>
-                        </li>
-                    </c:if>
                 </sec:authorize>
             </ul>
         </div>
@@ -75,35 +70,64 @@
             <div class="col col-md-5"></div>
             <div class="col col-md-7"  style="padding-top: 200px">
 
-                <form class="form-horizontal" action="/indexService">
                     <div class="form-group">
                         <h1 class="text-center" style="color: #FF4F4F; font-size: 50px">Znajdź lokalną  nianię lub opiekunkę!</h1>
                         <h3 class="text-center" style="color: #FF4F4F; font-size: 30px">Szybko, prosto i bezpiecznie.</h3>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-6 col-md-offset-3">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Wpisz kod lub miasto">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-10 col-md-offset-1">
-                            <div class="checkbox">
-                                <label class="radio-inline">
-                                    <input type="radio" name="userType" id="inlineRadio1" value="sister" checked="checked">Znajdź opiekę
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="userType" id="inlineRadio2" value="simply">Znajdź pracę
-                                </label>
+                    <c:if test="${pageContext.request.userPrincipal.name == null}">
+                        <form class="form-horizontal" action="/indexServiceSimple">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-md-offset-3">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="Wpisz kod lub miasto">
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-md-offset-1">
+                                    <div class="checkbox">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userType" id="inlineRadio1" value="sister" checked="checked">Znajdź opiekę
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userType" id="inlineRadio2" value="simply">Znajdź pracę
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-10 col-md-offset-1">
-                            <input type="submit" class="btn btn-danger">Szukaj</button>
-                        </div>
-                    </div>
-                </form>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-md-offset-1">
+                                    <input type="submit" class="btn btn-danger">Szukaj</button>
+                                </div>
+                            </div>
+                        </form>
+                    </c:if>
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                        <form class="form-horizontal" action="/indexService">
+                            <div class="form-group">
+                                <div class="col-sm-6 col-md-offset-3">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="Wpisz kod lub miasto">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-md-offset-1">
+                                    <div class="checkbox">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userType" id="inlineRadio1" value="sister" checked="checked">Znajdź opiekę
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="userType" id="inlineRadio2" value="simply">Znajdź pracę
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10 col-md-offset-1">
+                                    <input type="submit" class="btn btn-danger">Szukaj</button>
+                                </div>
+                            </div>
+                        </form>
+                    </c:if>
             </div>
         </div>
     </div>

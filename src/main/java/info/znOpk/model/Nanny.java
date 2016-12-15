@@ -23,6 +23,12 @@ public class Nanny {
 	@Transient
 	private int age;
 
+	@Transient
+	private String username;
+
+	@Transient
+	private String password;
+
 	@NotNull
 	@Column(name = "opieka_niania")
 	private boolean whoWannCareNanny;
@@ -87,6 +93,12 @@ public class Nanny {
 	@Column(name = "jezyki_obce")
 	private String foreignLanguages;
 
+	public Nanny(Long userId, String username, String password) {
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -118,6 +130,14 @@ public class Nanny {
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+	public String getUsername() {return username;}
+
+	public void setUsername(String username) {this.username = username;}
+
+	public String getPassword() {return password;}
+
+	public void setPassword(String password) {this.password = password;}
 
 	public boolean isWhoWannCareNanny() {
 		return whoWannCareNanny;

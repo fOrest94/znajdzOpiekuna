@@ -34,6 +34,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+					<c:if test="${pageContext.request.userPrincipal.name != null}">
 					<sec:authorize access="hasRole('ROLE_USER')">
 					<c:url value="/logout" var="logoutUrl" />
 					<form action="${logoutUrl}" method="post" id="logoutForm">
@@ -47,17 +48,25 @@
 							</ol>
 						</li>
 					</sec:authorize>
+					</c:if>
+					<c:if test="${pageContext.request.userPrincipal.name == null}">
+						<li><a href="login">Zaloguj się</a></li>
+						<li><a href="registration" style="color: #c09e6b;">Zarejestruj się</a></li>
+
+					</c:if>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div class="profile-navbar" >
 		<div class="container">
+			<c:if test="${pageContext.request.userPrincipal.name != null}">
 				 <div class="col-lg-3 col-lg-offset-9" style="padding-left: 50px; padding-top: 10px;">
 				 	 <a href="showProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
 					 <a href="profile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
 					 <a href="profile" style="color: white; font-size: 13px;">Wiadomości</a>
 				 </div>
+			</c:if>
 		</div>
 	</div>
 	
@@ -85,22 +94,54 @@
 				  <label for="ch2">Gdzie</label>
 				  <input id="ch2" type="text" class="form-control" placeholder="Miasto">
 			  </div>
-			  <button type="submit" class="btn btn-danger"  style="margin-top: 26px; font-size: 20px; height: 40px;">Szukaj</button>		
+			  <button type="submit" class="btn btn-danger"  style="margin-top: 24px; font-size: 19px; height: 40px;">Szukaj</button>
 		</div>
 	</div>
 
 <div id="mainSectionService">
 	<div class="container">
 		<div class="col-lg-3">
+			<table class="table" >
+				<thead >
+				<tr>
+					<th style="height: 56px; font-size: 20px;">Aktualności</th>
+				</tr>
+				</thead>
+				<tbody><c:forEach var="listValue" items="${browseList}">
+					<tr>
+						<td style="height: 30px; text-align: left;">
+							gdfgdfgdfgdf
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
 		</div>
-		<div class="col-lg-9" style="background-color: grey;">
+		<div class="col-lg-9" >
+			<h3 style="text-align: left">Lokalizacja: Kraków</h3>
 			<c:if test="${not empty browseList}">
+				<table class="table" >
+					<tbody><c:forEach var="listValue" items="${browseList}">
+					<tr>
 
-				<ul>
-					<c:forEach var="listValue" items="${browseList}">
-						<li>${listValue.userType}</li>
+						<td style="height: 140px;">
+							<div class="col-lg-3">
+								<img src="resources/pictures/profileImages/${listValue.id}.jpg" width="120" height="120" style="padding-bottom: 0px;">
+							</div>
+							<div class="col-lg-3">
+								<h3 style="">${listValue.firstName} ${listValue.lastName}</h3>
+								<p>${listValue.town} ${listValue.zipCode}</p>
+							</div>
+							<div class="col-lg-3 col-lg-offset-3">
+								<button type="submit" class="btn btn-danger"  style="margin-top: 30px; font-size: 16px; height: 35px;">Pokaż profil</button>
+
+							</div>
+
+						</td>
+
+					</tr>
 					</c:forEach>
-				</ul>
+					</tbody>
+				</table>
 
 			</c:if>
 		</div>

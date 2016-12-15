@@ -37,8 +37,8 @@
 
                 <div style="display: none" id="login-alert"
                      class="alert alert-danger col-sm-12"></div>
-
-                <form method="POST" action="${contextPath}/login" class="form-signin">
+                "${contextPath}
+                <form method="POST" action="/login" class="form-signin">
 
                     <div class="form-group ${error != null ? 'has-error' : ''}">
                         <div style="height: 30px;"> ${message}${error}</div>

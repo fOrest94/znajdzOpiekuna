@@ -22,6 +22,7 @@ public class SecurityServiceImpl implements SecurityService{
 
     @Override
     public String findLoggedInUsername() {
+        System.out.println("SecurityService SecurityService SecurityService SecurityService");
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
         if (userDetails instanceof UserDetails) {
             return ((UserDetails)userDetails).getUsername();

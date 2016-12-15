@@ -38,7 +38,7 @@ public class User {
     private String lastName;
 
     @Column(name = "aktywny")
-    private boolean active;
+    private Integer active = 0;
 
     @Column(name = "miasto")
     private String town;
@@ -57,9 +57,9 @@ public class User {
         this.id = id;
     }
 
-    public boolean isActive() {return active;}
+    public Integer isActive() {return active;}
 
-    public void setActive(boolean active) {this.active = active;}
+    public void setActive(Integer active) {this.active = active;}
 
     public String getUsername() {
         return username;
@@ -81,9 +81,7 @@ public class User {
         return passwordConfirm;
     }
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
+    public void setPasswordConfirm(String passwordConfirm) {this.passwordConfirm = passwordConfirm;}
 
     public String getRole() {
         return role;

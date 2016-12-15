@@ -1,6 +1,5 @@
 package info.znOpk.validator;
 
-import info.znOpk.DTO.NannyDTO;
 import info.znOpk.model.User;
 import info.znOpk.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,29 +37,5 @@ public class RegisterValidator {
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
         }
     }
-
-    /*public void validate(NannyDTO user, Errors errors) {
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        if (user.getUserName().length() < 9 || user.getUserName().length() > 32) {
-        	System.out.println("aaaaa");
-            errors.rejectValue("username", "Size.userForm.email");
-        }
-        if (sessionService.getUser(user.getUserName()) != null) {
-        	System.out.println("asdsasads34234343");
-            errors.rejectValue("username", "Duplicate.userForm.username");
-        }
-
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
-        	System.out.println("bbbbbb");
-            errors.rejectValue("password", "Size.userForm.password");
-        }
-
-        if (!user.getPasswordConfirm().equals(user.getPassword())) {
-        	System.out.println("cccccc");
-            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
-        }
-    }*/
     
 }

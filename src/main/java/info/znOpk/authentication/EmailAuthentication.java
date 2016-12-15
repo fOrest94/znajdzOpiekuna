@@ -41,8 +41,11 @@ public class EmailAuthentication {
                     });
 
             Message msg = new MimeMessage(session);
-
+            System.out.println(user.getUsername()+"  **********************************************************************");
+            System.out.println(user.getPassword()+"  **********************************************************************");
             String encryptedData = emailEncryption.encrypt(user.getUsername());
+            System.out.println(encryptedData+"  **********************************************************************");
+            System.out.println(user.getPassword()+"  **********************************************************************");
             String link = "http://localhost:8080/registration/"+encryptedData+"/"+user.getId();
             System.out.println(link);
             msg.setContent("<h3>Witaj, " + user.getFirstName() + " " + user.getLastName() + "<h3>" +
