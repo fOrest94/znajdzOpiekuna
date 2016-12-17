@@ -16,17 +16,22 @@ import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         User user = userRepository.findByUsername(username);
         if(user.isActive() == 0){
             return null;
         }
-        System.out.println(" UserDetailsService UserDetailsService UserDetailsService UserDetailsService");
+
+        if (user == null)
+            throw new UsernameNotFoundException(username);
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
 

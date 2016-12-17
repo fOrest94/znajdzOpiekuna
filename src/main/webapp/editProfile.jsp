@@ -9,13 +9,10 @@
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/img/bookmark.png">
 <link
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	href="/resources/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/style.css"
+<link href="/resources/css/style.css"
 	rel="stylesheet" />
-<link
-	href="${pageContext.request.contextPath}/resources/css/font-awesome.css"
-	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Itim"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Aclonica|Open+Sans"
@@ -34,7 +31,7 @@
 						class="icon-bar"></span>
 				</button>
 				<div class="navbar-brand navbar-nav">
-					<a href="#"><div class="logo">znajdźOpiekuna</div></a>
+					<a href="/index"><div class="logo">znajdźOpiekuna</div></a>
 				</div>
 
 			</div>

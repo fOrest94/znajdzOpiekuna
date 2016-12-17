@@ -9,7 +9,7 @@ import org.springframework.validation.ValidationUtils;
 
 
 @Component
-public class RegisterValidator {
+public class RegisterValidator{
 	
     @Autowired
     private SessionService sessionService;

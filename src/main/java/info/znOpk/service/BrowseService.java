@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface BrowseService {
 
-    List<User> browseResults(String userType);
+    List<User> browseZipCode(String userType, String zipCode);
+    List<User> browseTown(String userType, String town);
+
 }

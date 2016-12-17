@@ -34,7 +34,7 @@
 						class="icon-bar"></span>
 				</button>
 				<div class="navbar-brand navbar-nav">
-					<a href="#"><div class="logo">znajdźOpiekuna</div></a>
+					<a href="/index"><div class="logo">znajdźOpiekuna</div></a>
 				</div>
 
 			</div>

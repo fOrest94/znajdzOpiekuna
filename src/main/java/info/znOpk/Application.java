@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"info.znOpk"})
 public class Application extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -13,6 +13,6 @@ public class Application extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(Application.class, args);
+       SpringApplication.run(Application.class, args);
     }
 }

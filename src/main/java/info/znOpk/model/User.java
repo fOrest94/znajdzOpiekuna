@@ -49,6 +49,23 @@ public class User {
     @Column(name = "kod_pocztowy")
     private String zipCode;
 
+    public User(){}
+
+    public User(String username, String password, String passwordConfirm, String role, String userType,
+                String firstName, String lastName, Integer active, String town, boolean sex, String zipCode) {
+        this.username = username;
+        this.password = password;
+        this.passwordConfirm = passwordConfirm;
+        this.role = role;
+        this.userType = userType;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.active = active;
+        this.town = town;
+        this.sex = sex;
+        this.zipCode = zipCode;
+    }
+
     public Long getId() {
         return id;
     }

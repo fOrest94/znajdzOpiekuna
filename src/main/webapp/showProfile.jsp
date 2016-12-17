@@ -10,7 +10,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="/img/bookmark.png">
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="resources/css/style.css" rel="stylesheet"/>
-    <link href="resources/css/font-awesome.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Itim" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Aclonica|Open+Sans" rel="stylesheet">
     <title>znajdźOpiekuna</title>
@@ -27,7 +26,7 @@
                     class="icon-bar"></span>
             </button>
             <div class="navbar-brand navbar-nav">
-                <a href="#">
+                <a href="/index">
                     <div class="logo">znajdźOpiekuna</div>
                 </a>
             </div>
@@ -35,6 +34,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" style="padding-right: 0px;">
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <sec:authorize access="hasRole('ROLE_USER')">
                     <c:url value="/logout" var="logoutUrl"/>
                     <form action="${logoutUrl}" method="post" id="logoutForm">
@@ -49,6 +49,12 @@
                         </ol>
                     </li>
                 </sec:authorize>
+                </c:if>
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
+                    <li><a href="login">Zaloguj się</a></li>
+                    <li><a href="registration" style="color: #c09e6b;">Zarejestruj się</a></li>
+
+                </c:if>
             </ul>
         </div>
     </div>
@@ -56,14 +62,13 @@
 
 <div class="profile-navbar">
     <div class="container">
-        <div class="col-lg-3 col-lg-offset-9"
-             style="padding-left: 50px; padding-top: 10px;">
-            <a href="/showProfile"
-               style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
-            <a href="profile"
-               style="color: white; font-size: 13px; padding-right: 20px;">Ustawienia</a>
-            <a href="profile" style="color: white; font-size: 13px;">Wiadomości</a>
-        </div>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <div class="col-lg-3 col-lg-offset-9" style="padding-left: 50px; padding-top: 10px;">
+                <a href="showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
+                <a href="profile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
+                <a href="profile" style="color: white; font-size: 13px;">Wiadomości</a>
+            </div>
+        </c:if>
     </div>
 </div>
 <c:if test="${pageContext.request.userPrincipal.name != null}">

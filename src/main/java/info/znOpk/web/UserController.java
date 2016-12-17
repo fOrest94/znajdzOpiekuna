@@ -14,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,6 @@ public class UserController {
 
     @Autowired
     private SessionService sessionService;
-
 
     @RequestMapping(value = "/writeToMe", method = RequestMethod.GET)
     public String writeToMe(HttpServletRequest request, Model model) {
@@ -57,18 +57,59 @@ public class UserController {
         return "editProfile";
     }
 
-    @RequestMapping(value = "/showProfile", method = RequestMethod.GET)
-    public String showProfile(HttpServletRequest request, Model model) {
+    @RequestMapping(value = "/showProfile/simple", method = RequestMethod.GET)
+    public String showProfile(@RequestParam("userId") String userId, Model model) {
 
-        User user = sessionService.getUser(request.getUserPrincipal().getName());
+        Long lookId = Long.valueOf(userId).longValue();
+        User user = sessionService.getUser(lookId);
         FileUpload fileModel = new FileUpload();
-        System.out.println(user.getFirstName()+"   "+user.getLastName()+"   "+user.getZipCode());
+
         if(user.getUserType().equals("sister")){
             Nanny nanny = sessionService.getCareUser(user.getId());
             nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
             model.addAttribute("userNanny", nanny);
         }
 
+        model.addAttribute("fileBucket", fileModel);
+        model.addAttribute("userToShow", user);
+
+        return "showProfile";
+    }
+
+    @RequestMapping(value = "/showProfile", method = RequestMethod.GET)
+    public String showProfile(@RequestParam("userId") String userId, Model model,HttpServletRequest request) {
+
+        Long lookId = Long.valueOf(userId).longValue();
+        User user = sessionService.getUser(lookId);
+        FileUpload fileModel = new FileUpload();
+        if(request.getUserPrincipal().getName() != null){
+
+            User userLogged = sessionService.getUser(request.getUserPrincipal().getName());
+            model.addAttribute("user", userLogged);
+        }
+
+        if(user.getUserType().equals("sister")){
+            Nanny nanny = sessionService.getCareUser(user.getId());
+            nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
+            model.addAttribute("userNanny", nanny);
+        }
+
+        model.addAttribute("fileBucket", fileModel);
+        model.addAttribute("userToShow", user);
+
+        return "showProfile";
+    }
+
+    @RequestMapping(value = "/showMyProfile", method = RequestMethod.GET)
+    public String showMyProfile(HttpServletRequest request, Model model) {
+
+        User user = sessionService.getUser(request.getUserPrincipal().getName());
+        FileUpload fileModel = new FileUpload();
+        if(user.getUserType().equals("sister")){
+            Nanny nanny = sessionService.getCareUser(user.getId());
+            nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
+            model.addAttribute("userNanny", nanny);
+        }
 
         model.addAttribute("fileBucket", fileModel);
         model.addAttribute("user", user);

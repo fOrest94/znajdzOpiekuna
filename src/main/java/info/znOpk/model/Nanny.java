@@ -93,6 +93,8 @@ public class Nanny {
 	@Column(name = "jezyki_obce")
 	private String foreignLanguages;
 
+	public Nanny(){}
+
 	public Nanny(Long userId, String username, String password) {
 		this.userId = userId;
 		this.username = username;

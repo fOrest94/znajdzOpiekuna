@@ -25,7 +25,13 @@ public class SessionServiceImpl implements SessionService{
     }
 
     @Override
+    public User getUser(Long id) {
+        return userRepository.findOne(id);
+    }
+
+    @Override
     public Nanny getCareUser(Long id) {
-        return careRepository.findById(id);
+
+        return careRepository.findByUserId(id);
     }
 }

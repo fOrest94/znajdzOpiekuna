@@ -9,4 +9,5 @@ import info.znOpk.model.User;
 public interface SessionService {
     User getUser(String userName);
     Nanny getCareUser(Long id);
+    User getUser(Long id);
 }

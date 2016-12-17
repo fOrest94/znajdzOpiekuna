@@ -2,6 +2,11 @@ function formSubmit() {
 	document.getElementById("logoutForm").submit();
 }
 
+function showCertainProfile() {
+    document.getElementById("showCertainProfile").submit();
+}
+
+
 $("button").click(function(){
 	
 	$.getJSON("http://kodypocztoweapi.pl/01-234", function(obj) {

@@ -12,9 +12,7 @@
     <meta charset="utf-8">
     <title>Logowanie</title>
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/font-awesome.css" rel="stylesheet">
     <link href="resources/css/style.css" rel="stylesheet">
-
     <script src="resources/js/jquery.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
     <script src="resources/js/scrollReveal.js"></script>

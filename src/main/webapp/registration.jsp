@@ -8,9 +8,8 @@
 <html lang="pl_PL">
 <head>
 
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/font-awesome.css" rel="stylesheet">
-    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/style.css" rel="stylesheet">
 
     <title>Rejestracja</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -26,7 +25,7 @@
 
             </div>
             <div class="panel-body" >
-                <form:form method="POST" modelAttribute="userForm" id="registerParent" class="form-horizontal">
+                <form:form method="POST" modelAttribute="userForm" class="form-horizontal">
 
                     <div id="signupalert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
@@ -65,7 +64,7 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                     <div class="form-group">
                         <label for="password" class="col-md-3 control-label"  style="text-align: left">Hasło</label>
                         <div class="col-md-4">

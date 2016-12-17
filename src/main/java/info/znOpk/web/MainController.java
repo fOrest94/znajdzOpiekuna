@@ -1,18 +1,20 @@
 package info.znOpk.web;
 
+import info.znOpk.DTO.DTOSearch.SearchForm;
 import info.znOpk.model.User;
 import info.znOpk.service.BrowseService;
 import info.znOpk.service.SessionService;
-import info.znOpk.validator.UserValidator;
+import info.znOpk.validator.SearchValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class MainController {
@@ -24,10 +26,11 @@ public class MainController {
     private BrowseService browseService;
 
     @Autowired
-    private UserValidator userValidator;
+    private SearchValidator searchValidator;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String welcome(Model model) {
+
         return "index";
     }
 
@@ -42,26 +45,46 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value = "/indexServiceSimple", method = RequestMethod.GET)
-    public String indexService(@RequestParam("userType")String userType, Model model) {
+    @RequestMapping(value = "/indexServiceAll", method = RequestMethod.GET)
+    public String indexServiceAll(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult result, Model model) {
 
-        List<User> browseList = browseService.browseResults(userType);
-        model.addAttribute("browseList", browseList);
-
-        return "indexService";
+        searchValidator.validate(searchForm, result);
+        if (result.hasErrors()) {
+            return "index";
+        } else {
+            if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
+                model.addAttribute("browseList", browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()));
+            } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
+                model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
+            }
+            return "indexService";
+        }
     }
 
     @RequestMapping(value = "/indexService", method = RequestMethod.GET)
-    public String indexService(@RequestParam("userType")String userType, HttpServletRequest request, Model model) {
+    public String indexService(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult result, Principal principal, Model model) {
 
-            if((request.getUserPrincipal().getName() != null)){
-                User user = sessionService.getUser(request.getUserPrincipal().getName());
-                model.addAttribute("user",user);
+        searchValidator.validate(searchForm, result);
+        if (result.hasErrors()) {
+            return "index";
+        } else {
+
+            if(principal.getName() != null){
+                User user = sessionService.getUser(principal.getName());
+                model.addAttribute("user", user);
             }
 
-        List<User> browseList = browseService.browseResults(userType);
-        model.addAttribute("browseList", browseList);
+            if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
+                model.addAttribute("browseList", browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()));
+            } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
+                model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
+            }
+            return "indexService";
+        }
+    }
 
-        return "indexService";
+    @ModelAttribute("searchForm")
+    public SearchForm createModel() {
+        return new SearchForm();
     }
 }

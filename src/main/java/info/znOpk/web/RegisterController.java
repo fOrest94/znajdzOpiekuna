@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class RegisterController {
@@ -53,10 +52,16 @@ public class RegisterController {
             return "registration";
         }
         userService.save(user);
-        User user2 = userService.findByUsername(user.getUsername());
-        emailAuthentication.generateAndSendEmail(user2);
+        emailAuthentication.generateAndSendEmail(user);
 
-        return "index";
+        return "redirect:/index";
+    }
+
+    @RequestMapping(value = "/registrationExtends", method = RequestMethod.GET)
+    public String registerAuthentication(@ModelAttribute("nannyForm") Nanny nanny, Model model) {
+
+        userService.save(nanny);
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/registration/{email}/{id}", method = RequestMethod.GET)
@@ -65,35 +70,23 @@ public class RegisterController {
         String emailDecrypted = emailEncryption.decrypt(email);
         Long userID = Long.parseLong(id);
         User user = userService.findByUsername(emailDecrypted);
-        System.out.println(emailDecrypted + "  **********************************************************************");
-        System.out.println(user.getPassword() + "  **********************************************************************"+user.getPasswordConfirm());
+
         if (user.getId() == userID) {
 
             user.setActive(1);
+            userService.setActive(user.isActive(), user.getId());
 
             if (user.getUserType().equals("simple")) {
 
-                userService.setActive(user.isActive(), user.getId());
-                System.out.println(user.getPassword() + "  **********************************************************************");
-                //securityService.autologin(user.getUsername(), user.getPasswordConfirm());
-                System.out.println("***********" + user.getUsername() + " " + user.getPassword() + "*******");
                 return "redirect:/";
             } else {
 
                 model.addAttribute("nannyForm", new Nanny(user.getId(), user.getUsername(), user.getPasswordConfirm()));
                 model.addAttribute("user", user);
 
-                return "registrationExtends";
+                return "redirect:/registrationExtends";
             }
         } else
-            return "404";
-    }
-
-    @RequestMapping(value = "/registrationExtends", method = RequestMethod.POST)
-    public String registerExtends(@ModelAttribute("nannyForm") Nanny nanny, HttpServletRequest request) {
-
-        userService.save(nanny);
-        securityService.autologin(nanny.getUsername(), nanny.getPassword());
-        return "/";
+            return "redirect:/404";
     }
 }

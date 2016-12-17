@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     int updateActive(@Param("active") Integer active, @Param("id") Long id);
 
     User findByUsername(String username);
+
+    User findOne(Long id);
 }

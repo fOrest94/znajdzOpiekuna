@@ -1,8 +1,8 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+SET collation_connection = 'utf8_general_ci';
 
-
-CREATE DATABASE IF NOT EXISTS `znajdz_opiekuna` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `znajdz_opiekuna` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `znajdz_opiekuna`;
 
 
@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS `opiekun`;
 CREATE TABLE IF NOT EXISTS `opiekun` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_uzytkownika` bigint(20) NOT NULL,
+  `data_urodzenia` varchar(30) NULL,
   `opieka_niania` int(2) NULL,
   `opieka_starsi` int(2) NULL,
   `umiej_sprzat` int(2) NULL,
@@ -22,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `opiekun` (
   `doswiadczenie_starsi` int(2) NULL,
   `lat_dosw_dzieci` varchar(30) NULL,
   `lat_dosw_starsi` varchar(30) NULL,
-  `wymiar_pol_etatu` varchar(30) NULL,
+  `wymiar_pol_etatu`int(2) NULL,
   `wymiar_pelny_etat` int(2) NULL,
   `wymiar_dorywczo` int(2) NULL,
   `miejsce_opieki` int(5) NOT NULL,
@@ -31,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `opiekun` (
   `wyksztalcenie` varchar(120) NULL,
   `jezyki_obce` varchar(120) NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 DROP TABLE IF EXISTS `uzytkownik`;
@@ -47,8 +48,9 @@ CREATE TABLE IF NOT EXISTS `uzytkownik` (
   `imie` varchar(25) null ,
   `nazwisko` varchar(25) null,
   `plec` int(2) null,
-  `kod_pocztowy` varchar(8) null,
+  `kod_pocztowy` varchar(6) null,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 ALTER TABLE `opiekun` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);
