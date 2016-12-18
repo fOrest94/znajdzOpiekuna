@@ -1,14 +1,13 @@
 package info.znOpk.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by DuduŚ on 2016-12-18.
  */
+@Entity
+@Table(name = "szukajacy_opieki")
 public class SearchCare {
 
     @Id
@@ -20,21 +19,35 @@ public class SearchCare {
     @Column(name = "id_uzytkownika")
     private Long userId;
 
-    @Column(name = "miasto")
-    private String town;
+    @Column(name = "opieka_niania")
+    private String whoWannCareNanny;
 
-    @Column(name = "kod_pocztowy")
-    private String zipCode;
-    @Transient
-    private String username;
+    @Column(name = "opieka_starsi")
+    private String whoWannCareOld;
 
-    @Transient
-    private String password;
+    @NotNull
+    @Column(name = "cos_o_sobie")
+    private String writeSthAboutYou;
 
-    public SearchCare(Long userId, String username, String password) {
+    @Column(name = "praca_z_domem")
+    private String workWithHome;
+
+    @NotNull
+    @Column(name = "wynagrodzenie")
+    private String moneyPerHour;
+
+    public SearchCare() {
+
+    }
+
+    public SearchCare(Long userId) {
         this.userId = userId;
-        this.username = username;
-        this.password = password;
+    }
+
+    public SearchCare(Long userId, String writeSthAboutYou, String moneyPerHour) {
+        this.userId = userId;
+        this.writeSthAboutYou = writeSthAboutYou;
+        this.moneyPerHour = moneyPerHour;
     }
 
     public Long getId() {
@@ -53,35 +66,44 @@ public class SearchCare {
         this.userId = userId;
     }
 
-    public String getTown() {
-        return town;
+    public String getWhoWannCareNanny() {
+        return whoWannCareNanny;
     }
 
-    public void setTown(String town) {
-        this.town = town;
+    public void setWhoWannCareNanny(String whoWannCareNanny) {
+        this.whoWannCareNanny = whoWannCareNanny;
     }
 
-    public String getZipCode() {
-        return zipCode;
+    public String getWhoWannCareOld() {
+        return whoWannCareOld;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setWhoWannCareOld(String whoWannCareOld) {
+        this.whoWannCareOld = whoWannCareOld;
     }
 
-    public String getUsername() {
-        return username;
+    public String getWriteSthAboutYou() {
+        return writeSthAboutYou;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setWriteSthAboutYou(String writeSthAboutYou) {
+        this.writeSthAboutYou = writeSthAboutYou;
     }
 
-    public String getPassword() {
-        return password;
+    public String getWorkWithHome() {
+        return workWithHome;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setWorkWithHome(String workWithHome) {
+        this.workWithHome = workWithHome;
     }
+
+    public String getMoneyPerHour() {
+        return moneyPerHour;
+    }
+
+    public void setMoneyPerHour(String moneyPerHour) {
+        this.moneyPerHour = moneyPerHour;
+    }
+
 }

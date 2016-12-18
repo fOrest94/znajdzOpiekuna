@@ -7,297 +7,289 @@ import javax.validation.constraints.NotNull;
 @Table(name = "opiekun")
 public class OfferCare {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Long id;
 
-	@NotNull
-	@Column(name = "id_uzytkownika")
-	private Long userId;
+    @NotNull
+    @Column(name = "id_uzytkownika")
+    private Long userId;
 
-	@NotNull
-	@Column(name = "data_urodzenia")
-	private String dataOfBirth;
+    @NotNull
+    @Column(name = "data_urodzenia")
+    private String dataOfBirth;
 
-	@Transient
-	private int age;
+    @Transient
+    private int age;
 
-	@Transient
-	private String username;
+    @Column(name = "opieka_niania")
+    private String whoWannCareNanny;
 
-	@Transient
-	private String password;
+    @Column(name = "opieka_starsi")
+    private String whoWannCareOld;
 
-	@NotNull
-	@Column(name = "opieka_niania")
-	private boolean whoWannCareNanny;
+    @Column(name = "umiej_sprzat")
+    private String otherActClean;
 
-	@NotNull
-	@Column(name = "opieka_starsi")
-	private boolean whoWannCareOld;
+    @Column(name = "umiej_gotowa")
+    private String otherActCook;
 
-	@NotNull
-	@Column(name = "umiej_sprzat")
-	private boolean otherActClean;
+    @Column(name = "umiej_zakup")
+    private String otherActShop;
 
-	@NotNull
-	@Column(name = "umiej_gotowa")
-	private boolean otherActCook;
-	@NotNull
-	@Column(name = "umiej_zakup")
-	private boolean otherActShop;
-	@NotNull
-	@Column(name = "umiej_prac")
-	private boolean otherActVac;
-	@NotNull
-	@Column(name = "inne_umiejetnosci")
-	private String otherSkills;
-	@NotNull
-	@Column(name = "cos_o_sobie")
-	private String writeSthAboutYou;
-	@NotNull
-	@Column(name = "doswiadczenie_dzieci")
-	private boolean careExpKids;
-	@NotNull
-	@Column(name = "doswiadczenie_starsi")
-	private boolean careExpOld;
-	@NotNull
-	@Column(name = "lat_dosw_dzieci")
-	private String experienceKidsTime;
-	@NotNull
-	@Column(name = "lat_dosw_starsi")
-	private String experienceOldTime;
-	@NotNull
-	@Column(name = "wymiar_pol_etatu")
-	private boolean timeJobHalf;
-	@NotNull
-	@Column(name = "wymiar_pelny_etat")
-	private boolean timeJobFull;
-	@NotNull
-	@Column(name = "wymiar_dorywczo")
-	private boolean timeJobCasual;
-	@NotNull
-	@Column(name = "miejsce_opieki")
-	private Integer placeOfTakeCare;
-	@NotNull
-	@Column(name = "praca_z_domem")
-	private boolean workWithHome;
-	@NotNull
-	@Column(name = "wynagrodzenie")
-	private String moneyPerHour;
-	@NotNull
-	@Column(name = "wyksztalcenie")
-	private String education;
-	@NotNull
-	@Column(name = "jezyki_obce")
-	private String foreignLanguages;
+    @Column(name = "umiej_prac")
+    private String otherActVac;
 
-	public OfferCare(){}
+    @Column(name = "inne_umiejetnosci")
+    private String otherSkills;
+    @NotNull
+    @Column(name = "cos_o_sobie")
+    private String writeSthAboutYou;
 
-	public OfferCare(Long userId, String username, String password) {
-		this.userId = userId;
-		this.username = username;
-		this.password = password;
-	}
+    @Column(name = "doswiadczenie_dzieci")
+    private String careExpKids;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "doswiadczenie_starsi")
+    private String careExpOld;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "lat_dosw_dzieci")
+    private String experienceKidsTime;
 
-	public Long getUserId() {
-		return userId;
-	}
+    @Column(name = "lat_dosw_starsi")
+    private String experienceOldTime;
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    @Column(name = "wymiar_pol_etatu")
+    private String timeJobHalf;
 
-	public String getDataOfBirth() {
-		return dataOfBirth;
-	}
+    @Column(name = "wymiar_pelny_etat")
+    private String timeJobFull;
 
-	public void setDataOfBirth(String dataOfBirth) {
-		this.dataOfBirth = dataOfBirth;
-	}
+    @Column(name = "wymiar_dorywczo")
+    private String timeJobCasual;
+    @NotNull
+    @Column(name = "miejsce_opieki")
+    private String placeOfTakeCare;
+    @NotNull
+    @Column(name = "praca_z_domem")
+    private String workWithHome;
+    @NotNull
+    @Column(name = "wynagrodzenie")
+    private String moneyPerHour;
+    @NotNull
+    @Column(name = "wyksztalcenie")
+    private String education;
 
-	public int getAge() {
-		return age;
-	}
+    @Column(name = "jezyki_obce")
+    private String foreignLanguages;
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public OfferCare() {
+    }
 
-	public String getUsername() {return username;}
+    public OfferCare(Long userId, String dataOfBirth, String otherSkills, String writeSthAboutYou, String experienceKidsTime, String experienceOldTime,
+                     String placeOfTakeCare, String workWithHome, String moneyPerHour, String education, String foreignLanguages) {
+        this.userId = userId;
+        this.dataOfBirth = dataOfBirth;
+        this.otherSkills = otherSkills;
+        this.writeSthAboutYou = writeSthAboutYou;
+        this.experienceKidsTime = experienceKidsTime;
+        this.experienceOldTime = experienceOldTime;
+        this.placeOfTakeCare = placeOfTakeCare;
+        this.workWithHome = workWithHome;
+        this.moneyPerHour = moneyPerHour;
+        this.education = education;
+        this.foreignLanguages = foreignLanguages;
+    }
 
-	public void setUsername(String username) {this.username = username;}
+    public Long getId() {
+        return id;
+    }
 
-	public String getPassword() {return password;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setPassword(String password) {this.password = password;}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public boolean isWhoWannCareNanny() {
-		return whoWannCareNanny;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public void setWhoWannCareNanny(boolean whoWannCareNanny) {
-		this.whoWannCareNanny = whoWannCareNanny;
-	}
+    public String getDataOfBirth() {
+        return dataOfBirth;
+    }
 
-	public boolean isWhoWannCareOld() {
-		return whoWannCareOld;
-	}
+    public void setDataOfBirth(String dataOfBirth) {
+        this.dataOfBirth = dataOfBirth;
+    }
 
-	public void setWhoWannCareOld(boolean whoWannCareOld) {
-		this.whoWannCareOld = whoWannCareOld;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	public boolean isOtherActClean() {
-		return otherActClean;
-	}
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-	public void setOtherActClean(boolean otherActClean) {
-		this.otherActClean = otherActClean;
-	}
+    public String getWhoWannCareNanny() {
+        return whoWannCareNanny;
+    }
 
-	public boolean isOtherActCook() {
-		return otherActCook;
-	}
+    public void setWhoWannCareNanny(String whoWannCareNanny) {
+        this.whoWannCareNanny = whoWannCareNanny;
+    }
 
-	public void setOtherActCook(boolean otherActCook) {
-		this.otherActCook = otherActCook;
-	}
+    public String getWhoWannCareOld() {
+        return whoWannCareOld;
+    }
 
-	public boolean isOtherActShop() {
-		return otherActShop;
-	}
+    public void setWhoWannCareOld(String whoWannCareOld) {
+        this.whoWannCareOld = whoWannCareOld;
+    }
 
-	public void setOtherActShop(boolean otherActShop) {
-		this.otherActShop = otherActShop;
-	}
+    public String getOtherActClean() {
+        return otherActClean;
+    }
 
-	public boolean isOtherActVac() {
-		return otherActVac;
-	}
+    public void setOtherActClean(String otherActClean) {
+        this.otherActClean = otherActClean;
+    }
 
-	public void setOtherActVac(boolean otherActVac) {
-		this.otherActVac = otherActVac;
-	}
+    public String getOtherActCook() {
+        return otherActCook;
+    }
 
-	public String getOtherSkills() {
-		return otherSkills;
-	}
+    public void setOtherActCook(String otherActCook) {
+        this.otherActCook = otherActCook;
+    }
 
-	public void setOtherSkills(String otherSkills) {
-		this.otherSkills = otherSkills;
-	}
+    public String getOtherActShop() {
+        return otherActShop;
+    }
 
-	public String getWriteSthAboutYou() {
-		return writeSthAboutYou;
-	}
+    public void setOtherActShop(String otherActShop) {
+        this.otherActShop = otherActShop;
+    }
 
-	public void setWriteSthAboutYou(String writeSthAboutYou) {
-		this.writeSthAboutYou = writeSthAboutYou;
-	}
+    public String getOtherActVac() {
+        return otherActVac;
+    }
 
-	public boolean isCareExpKids() {
-		return careExpKids;
-	}
+    public void setOtherActVac(String otherActVac) {
+        this.otherActVac = otherActVac;
+    }
 
-	public void setCareExpKids(boolean careExpKids) {
-		this.careExpKids = careExpKids;
-	}
+    public String getOtherSkills() {
+        return otherSkills;
+    }
 
-	public boolean isCareExpOld() {
-		return careExpOld;
-	}
+    public void setOtherSkills(String otherSkills) {
+        this.otherSkills = otherSkills;
+    }
 
-	public void setCareExpOld(boolean careExpOld) {
-		this.careExpOld = careExpOld;
-	}
+    public String getWriteSthAboutYou() {
+        return writeSthAboutYou;
+    }
 
-	public String getExperienceKidsTime() {
-		return experienceKidsTime;
-	}
+    public void setWriteSthAboutYou(String writeSthAboutYou) {
+        this.writeSthAboutYou = writeSthAboutYou;
+    }
 
-	public void setExperienceKidsTime(String experienceKidsTime) {
-		this.experienceKidsTime = experienceKidsTime;
-	}
+    public String getCareExpKids() {
+        return careExpKids;
+    }
 
-	public String getExperienceOldTime() {
-		return experienceOldTime;
-	}
+    public void setCareExpKids(String careExpKids) {
+        this.careExpKids = careExpKids;
+    }
 
-	public void setExperienceOldTime(String experienceOldTime) {
-		this.experienceOldTime = experienceOldTime;
-	}
+    public String getCareExpOld() {
+        return careExpOld;
+    }
 
-	public boolean isTimeJobHalf() {
-		return timeJobHalf;
-	}
+    public void setCareExpOld(String careExpOld) {
+        this.careExpOld = careExpOld;
+    }
 
-	public void setTimeJobHalf(boolean timeJobHalf) {
-		this.timeJobHalf = timeJobHalf;
-	}
+    public String getExperienceKidsTime() {
+        return experienceKidsTime;
+    }
 
-	public boolean isTimeJobFull() {
-		return timeJobFull;
-	}
+    public void setExperienceKidsTime(String experienceKidsTime) {
+        this.experienceKidsTime = experienceKidsTime;
+    }
 
-	public void setTimeJobFull(boolean timeJobFull) {
-		this.timeJobFull = timeJobFull;
-	}
+    public String getExperienceOldTime() {
+        return experienceOldTime;
+    }
 
-	public boolean isTimeJobCasual() {
-		return timeJobCasual;
-	}
+    public void setExperienceOldTime(String experienceOldTime) {
+        this.experienceOldTime = experienceOldTime;
+    }
 
-	public void setTimeJobCasual(boolean timeJobCasual) {
-		this.timeJobCasual = timeJobCasual;
-	}
+    public String getTimeJobHalf() {
+        return timeJobHalf;
+    }
 
-	public Integer getPlaceOfTakeCare() {
-		return placeOfTakeCare;
-	}
+    public void setTimeJobHalf(String timeJobHalf) {
+        this.timeJobHalf = timeJobHalf;
+    }
 
-	public void setPlaceOfTakeCare(Integer placeOfTakeCare) {
-		this.placeOfTakeCare = placeOfTakeCare;
-	}
+    public String getTimeJobFull() {
+        return timeJobFull;
+    }
 
-	public boolean isWorkWithHome() {
-		return workWithHome;
-	}
+    public void setTimeJobFull(String timeJobFull) {
+        this.timeJobFull = timeJobFull;
+    }
 
-	public void setWorkWithHome(boolean workWithHome) {
-		this.workWithHome = workWithHome;
-	}
+    public String getTimeJobCasual() {
+        return timeJobCasual;
+    }
 
-	public String getMoneyPerHour() {
-		return moneyPerHour;
-	}
+    public void setTimeJobCasual(String timeJobCasual) {
+        this.timeJobCasual = timeJobCasual;
+    }
 
-	public void setMoneyPerHour(String moneyPerHour) {
-		this.moneyPerHour = moneyPerHour;
-	}
+    public String getPlaceOfTakeCare() {
+        return placeOfTakeCare;
+    }
 
-	public String getEducation() {
-		return education;
-	}
+    public void setPlaceOfTakeCare(String placeOfTakeCare) {
+        this.placeOfTakeCare = placeOfTakeCare;
+    }
 
-	public void setEducation(String education) {
-		this.education = education;
-	}
+    public String getWorkWithHome() {
+        return workWithHome;
+    }
 
-	public String getForeignLanguages() {
-		return foreignLanguages;
-	}
+    public void setWorkWithHome(String workWithHome) {
+        this.workWithHome = workWithHome;
+    }
 
-	public void setForeignLanguages(String foreignLanguages) {
-		this.foreignLanguages = foreignLanguages;
-	}
+    public String getMoneyPerHour() {
+        return moneyPerHour;
+    }
+
+    public void setMoneyPerHour(String moneyPerHour) {
+        this.moneyPerHour = moneyPerHour;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getForeignLanguages() {
+        return foreignLanguages;
+    }
+
+    public void setForeignLanguages(String foreignLanguages) {
+        this.foreignLanguages = foreignLanguages;
+    }
 }

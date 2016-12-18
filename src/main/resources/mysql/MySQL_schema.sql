@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `szukajacy_opieki` (
   `cos_o_sobie` varchar(150) NOT NULL,
   `opieka_niania` int(2) NULL,
   `opieka_starsi` int(2) NULL,
-  `praca_z_domem` int(2) NOT NULL,
-  `wynagrodzenie` varchar(120) NOT NULL,
+  `praca_z_domem` int(2) NULL,
+  `wynagrodzenie` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

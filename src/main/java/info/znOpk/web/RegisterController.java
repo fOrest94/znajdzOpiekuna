@@ -1,11 +1,13 @@
 package info.znOpk.web;
 
+import info.znOpk.DTO.OfferCareDAO;
+import info.znOpk.DTO.SearchCareDAO;
 import info.znOpk.authentication.EmailEncryption;
-import info.znOpk.model.OfferCare;
-import info.znOpk.model.SearchCare;
 import info.znOpk.model.User;
 import info.znOpk.service.UserService;
 import info.znOpk.authentication.EmailAuthentication;
+import info.znOpk.validator.OfferCareValidator;
+import info.znOpk.validator.SearchCareValidator;
 import info.znOpk.validator.RegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,12 @@ public class RegisterController {
 
     @Autowired
     private RegisterValidator registerValidator;
+
+    @Autowired
+    private SearchCareValidator searchCareValidator;
+
+    @Autowired
+    private OfferCareValidator offerCareValidator;
 
     @Autowired
     private UserService userService;
@@ -54,19 +62,32 @@ public class RegisterController {
         return "redirect:/index";
     }
 
-    @RequestMapping(value = "/registrationOffer", method = RequestMethod.GET)
-    public String registerOfferAuthentication(@ModelAttribute("offerForm") OfferCare nanny, Model model) {
+    @RequestMapping(value = "/registrationOffer", method = RequestMethod.POST)
+    public String registerOfferAuthentication(@ModelAttribute("offerCare") OfferCareDAO offerCare, BindingResult result, Model model) {
 
-        userService.save(nanny);
+        System.out.println(offerCare.toString());
+        offerCareValidator.validate(offerCare, result);
+
+        if (result.hasErrors()) {
+            return "registrationOffer";
+        }
+        userService.save(offerCareValidator.getSearchValues(offerCare));
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/registrationSearch", method = RequestMethod.GET)
-    public String registerSearchAuthentication(@ModelAttribute("searchForm") SearchCare searchCare, Model model) {
+    @RequestMapping(value = "/registrationSearch", method = RequestMethod.POST)
+    public String registerSearchAuthentication(@ModelAttribute("searchCare") SearchCareDAO searchCare, BindingResult result, Model model) {
 
-        userService.save(searchCare);
+        searchCareValidator.validate(searchCare, result);
+
+        if (result.hasErrors()) {
+            return "registrationSearch";
+        }
+
+        userService.save(searchCareValidator.getSearchValues(searchCare));
         return "redirect:/";
     }
+
 
     @RequestMapping(value = "/registration/{email}/{id}", method = RequestMethod.GET)
     public String registerAuthentication(@PathVariable String email, @PathVariable String id, Model model) throws Exception {
@@ -82,13 +103,15 @@ public class RegisterController {
 
             if (user.getUserType().equals("simple")) {
 
-                return "redirect:/";
+                model.addAttribute("searchCare", new SearchCareDAO());
+                model.addAttribute("user", user);
+                return "registrationSearch";
             } else {
 
-                model.addAttribute("nannyForm", new OfferCare(user.getId(), user.getUsername(), user.getPasswordConfirm()));
+                model.addAttribute("offerCare", new OfferCareDAO());
                 model.addAttribute("user", user);
-
-                return "redirect:/registrationOffer";
+                System.out.println("sister authentication");
+                return "registrationOffer";
             }
         } else
             return "redirect:/404";
