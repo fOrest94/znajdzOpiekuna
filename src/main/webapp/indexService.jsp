@@ -97,37 +97,83 @@
 
 <div class="search-navbar">
     <div class="container" style="padding-top: 20px; font-size: 15px;">
-            <form:form method="get" modelAttribute="searchForm" action="/indexService">
-                <div class="col-lg-2">
-                    <label>Szukam</label>
-                    <form:select path="typerOfUser" class="selectpicker show-tick" data-width="170px">
-                        <form:hidden path="typeOfSearch" value="extend"/>
-                        <optgroup label="opieka nad dziećmi">
-                            <form:option style="font-size: 18px; color: black !important;" value="12">Niani</form:option>
-                            <form:option style="font-size: 18px;" value="11">Ofert opieki</form:option>
-                        </optgroup>
-                        <optgroup label="opieka nad starszymi">
-                            <form:option style="font-size: 18px;" value="22">Opiekunek</form:option>
-                            <form:option style="font-size: 18px;" value="21">Ofert opieki</option>
-                        </optgroup>
-                        <optgroup label="opieka nad domem">
-                            <form:option style="font-size: 18px;" value="32">Pomocy domowej</form:option>
-                            <form:option style="font-size: 18px;" value="31">Ofert pomocy</form:option>
-                        </optgroup>
-                    </form:select>
-                </div>
-                <div class="col-lg-2">
-                    <label for="ch2">Gdzie</label>
-                    <spring:bind path="address">
-                        <div class="form-group ${status.error ? 'has-error' : ''}">
-                            <form:input path="address" id="ch2" type="text" class="form-control"
-                                        placeholder="Kod lub miasto"/>
-                            <form:errors path="address"/>
-                        </div>
-                    </spring:bind>
-                </div>
-                <input type="submit" class="btn btn-danger" style="margin-top: 24px; font-size: 19px; height: 40px;"/>Szukaj
-            </form:form>
+
+        <c:choose>
+            <c:when test="${pageContext.request.userPrincipal.name != null}">
+
+                <form:form method="get" modelAttribute="searchForm" action="/indexService">
+                    <div class="col-lg-2">
+                        <label>Szukam</label>
+                        <spring:bind path="typeOfUserAll">
+                            <form:select path="typerOfUserAll" class="selectpicker show-tick" data-width="170px">
+                                <form:hidden path="typeOfSearchAll" value="extend"/>
+                                <optgroup label="opieka nad dziećmi">
+                                    <form:option style="font-size: 18px; color: black !important;"
+                                                 value="12">Niani</form:option>
+                                    <form:option style="font-size: 18px;" value="11">Ofert opieki</form:option>
+                                </optgroup>
+                                <optgroup label="opieka nad starszymi">
+                                    <form:option style="font-size: 18px;" value="22">Opiekunek</form:option>
+                                    <form:option style="font-size: 18px;" value="21">Ofert opieki</form:option>
+                                </optgroup>
+                                <optgroup label="opieka nad domem">
+                                    <form:option style="font-size: 18px;" value="32">Pomocy domowej</form:option>
+                                    <form:option style="font-size: 18px;" value="31">Ofert pomocy</form:option>
+                                </optgroup>
+                            </form:select>
+                        </spring:bind>
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="ch2">Gdzie</label>
+                        <spring:bind path="address">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input path="address" id="ch2" type="text" class="form-control"
+                                            placeholder="Kod lub miasto"/>
+                                <form:errors path="address"/>
+                            </div>
+                        </spring:bind>
+                    </div>
+                    <input type="submit" class="btn btn-danger"
+                           style="margin-top: 24px; font-size: 19px; height: 40px;"/>Szukaj
+                </form:form>
+            </c:when>
+            <c:otherwise>
+                <form:form method="get" modelAttribute="searchForm" action="/indexService">
+                    <div class="col-lg-2">
+                        <label>Szukam</label>
+                        <spring:bind path="typeOfUser">
+                            <form:select path="typerOfUserS" class="selectpicker show-tick" data-width="170px">
+                                <optgroup label="opieka nad dziećmi">
+                                    <form:option style="font-size: 18px; color: black !important;"
+                                                 value="12">Niani</form:option>
+                                    <form:option style="font-size: 18px;" value="11">Ofert opieki</form:option>
+                                </optgroup>
+                                <optgroup label="opieka nad starszymi">
+                                    <form:option style="font-size: 18px;" value="22">Opiekunek</form:option>
+                                    <form:option style="font-size: 18px;" value="12">Ofert opieki</form:option>
+                                </optgroup>
+                                <optgroup label="opieka nad domem">
+                                    <form:option style="font-size: 18px;" value="23">Pomocy domowej</form:option>
+                                    <form:option style="font-size: 18px;" value="13">Ofert pomocy</form:option>
+                                </optgroup>
+                            </form:select>
+                        </spring:bind>
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="ch2">Gdzie</label>
+                        <spring:bind path="address">
+                            <div class="form-group ${status.error ? 'has-error' : ''}">
+                                <form:input path="address" id="ch2" type="text" class="form-control"
+                                            placeholder="Kod lub miasto"/>
+                                <form:errors path="address"/>
+                            </div>
+                        </spring:bind>
+                    </div>
+                    <input type="submit" class="btn btn-danger"
+                           style="margin-top: 24px; font-size: 19px; height: 40px;"/>Szukaj
+                </form:form>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 

@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="searchButton" class="col-md-3 control-label"  style="text-align: left">Szukam</label>
+                        <label for="userType" class="col-md-3 control-label"  style="text-align: left">Szukam</label>
                         <div class="col-md-8 ">
                             <div class="col-md-5 ">
                                 <div class="radio">
@@ -130,7 +130,6 @@
                                 </div>
                             </spring:bind>
                         </div>
-
                     </div>
 
                     <div class="form-group">

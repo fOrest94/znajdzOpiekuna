@@ -1,6 +1,6 @@
 package info.znOpk.service;
 
-import info.znOpk.model.Nanny;
+import info.znOpk.model.OfferCare;
 import info.znOpk.model.User;
 
 /**
@@ -8,6 +8,6 @@ import info.znOpk.model.User;
  */
 public interface SessionService {
     User getUser(String userName);
-    Nanny getCareUser(Long id);
+    OfferCare getCareUser(Long id);
     User getUser(Long id);
 }

@@ -1,9 +1,9 @@
 package info.znOpk.web;
 
 import info.znOpk.authentication.EmailEncryption;
-import info.znOpk.model.Nanny;
+import info.znOpk.model.OfferCare;
+import info.znOpk.model.SearchCare;
 import info.znOpk.model.User;
-import info.znOpk.service.SecurityService;
 import info.znOpk.service.UserService;
 import info.znOpk.authentication.EmailAuthentication;
 import info.znOpk.validator.RegisterValidator;
@@ -33,9 +33,6 @@ public class RegisterController {
     @Autowired
     private EmailEncryption emailEncryption;
 
-    @Autowired
-    private SecurityService securityService;
-
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String register(Model model) {
 
@@ -57,10 +54,17 @@ public class RegisterController {
         return "redirect:/index";
     }
 
-    @RequestMapping(value = "/registrationExtends", method = RequestMethod.GET)
-    public String registerAuthentication(@ModelAttribute("nannyForm") Nanny nanny, Model model) {
+    @RequestMapping(value = "/registrationOffer", method = RequestMethod.GET)
+    public String registerOfferAuthentication(@ModelAttribute("offerForm") OfferCare nanny, Model model) {
 
         userService.save(nanny);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/registrationSearch", method = RequestMethod.GET)
+    public String registerSearchAuthentication(@ModelAttribute("searchForm") SearchCare searchCare, Model model) {
+
+        userService.save(searchCare);
         return "redirect:/";
     }
 
@@ -81,10 +85,10 @@ public class RegisterController {
                 return "redirect:/";
             } else {
 
-                model.addAttribute("nannyForm", new Nanny(user.getId(), user.getUsername(), user.getPasswordConfirm()));
+                model.addAttribute("nannyForm", new OfferCare(user.getId(), user.getUsername(), user.getPasswordConfirm()));
                 model.addAttribute("user", user);
 
-                return "redirect:/registrationExtends";
+                return "redirect:/registrationOffer";
             }
         } else
             return "redirect:/404";

@@ -1,8 +1,8 @@
 package info.znOpk.service;
 
-import info.znOpk.model.Nanny;
+import info.znOpk.model.OfferCare;
 import info.znOpk.model.User;
-import info.znOpk.repository.CareRepository;
+import info.znOpk.repository.OfferCareRepository;
 import info.znOpk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class SessionServiceImpl implements SessionService{
     private UserRepository userRepository;
 
     @Autowired
-    private CareRepository careRepository;
+    private OfferCareRepository offerCareRepository;
 
     @Override
     public User getUser(String userName) {
@@ -30,8 +30,8 @@ public class SessionServiceImpl implements SessionService{
     }
 
     @Override
-    public Nanny getCareUser(Long id) {
+    public OfferCare getCareUser(Long id) {
 
-        return careRepository.findByUserId(id);
+        return offerCareRepository.findByUserId(id);
     }
 }

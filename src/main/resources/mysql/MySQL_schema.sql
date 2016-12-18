@@ -10,6 +10,8 @@ DROP TABLE IF EXISTS `opiekun`;
 CREATE TABLE IF NOT EXISTS `opiekun` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_uzytkownika` bigint(20) NOT NULL,
+  `miasto` varchar(25) null ,
+  `kod_pocztowy` varchar(6) null,
   `data_urodzenia` varchar(30) NULL,
   `opieka_niania` int(2) NULL,
   `opieka_starsi` int(2) NULL,
@@ -34,6 +36,17 @@ CREATE TABLE IF NOT EXISTS `opiekun` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE IF EXISTS `szukajacy_opieki`;
+CREATE TABLE IF NOT EXISTS `szukajacy_opieki` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_uzytkownika` bigint(20) NOT NULL,
+  `cos_o_sobie` varchar(150) NOT NULL,
+  `opieka_niania` int(2) NULL,
+  `opieka_starsi` int(2) NULL,
+  `praca_z_domem` int(2) NOT NULL,
+  `wynagrodzenie` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE IF EXISTS `uzytkownik`;
 CREATE TABLE IF NOT EXISTS `uzytkownik` (

@@ -7,8 +7,9 @@ public class SearchForm {
 
     private String address;
     private String typeOfUser;
-    private String TypKutasa;
-    private String typeOfSearch;
+    private String addressType;
+    private String typeOfUserU;
+    private String typeOfUserL;
 
     public String getAddress() {
         return address;
@@ -18,11 +19,35 @@ public class SearchForm {
         this.address = address;
     }
 
-    public String getTypeOfUser() {return typeOfUser;}
+    public String getTypeOfUser() {
+        return typeOfUser;
+    }
 
-    public void setTypeOfUser(String typeOfUser) {this.typeOfUser = typeOfUser;}
+    public void setTypeOfUser(String typeOfUser) {
+        this.typeOfUser = typeOfUser;
+    }
 
-    public String getTypKutasa() {return TypKutasa;}
+    public String getAddressType() {
+        return addressType;
+    }
 
-    public void setTypKutasa(String typKutasa) {this.TypKutasa = typKutasa;}
+    public void setAddressType(String addressType) {
+        this.addressType = addressType;
+    }
+
+    public String getTypeOfUserU() {
+        return typeOfUserU;
+    }
+
+    public void setTypeOfUserU(String typeOfUserU) {
+        this.typeOfUserU = typeOfUserU;
+    }
+
+    public String getTypeOfUserL() {
+        return typeOfUserL;
+    }
+
+    public void setTypeOfUserL(String typeOfUserL) {
+        this.typeOfUserL = typeOfUserL;
+    }
 }

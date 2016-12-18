@@ -64,24 +64,34 @@ public class MainController {
     @RequestMapping(value = "/indexService", method = RequestMethod.GET)
     public String indexService(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult result, Principal principal, Model model) {
 
-        searchValidator.validate(searchForm, result);
-        if (result.hasErrors()) {
-            return "index";
-        } else {
+        if (searchForm.getTypeOfUser().length() > 3) {
 
-            if(principal.getName() != null){
-                User user = sessionService.getUser(principal.getName());
-                model.addAttribute("user", user);
-            }
+            searchValidator.validate(searchForm, result);
+            if (result.hasErrors()) {
+                return "index";
+            } else {
 
-            if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
-                model.addAttribute("browseList", browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()));
-            } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
-                model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
+                if (principal.getName() != null) {
+                    User user = sessionService.getUser(principal.getName());
+                    model.addAttribute("user", user);
+                }
+
+                if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
+                    model.addAttribute("browseList", browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()));
+                } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
+                    model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
+                }
+                return "indexService";
             }
-            return "indexService";
         }
+        else if (searchForm.getTypeOfUser() != null){
+
+
+        }
+    return "";
     }
+
+
 
     @ModelAttribute("searchForm")
     public SearchForm createModel() {

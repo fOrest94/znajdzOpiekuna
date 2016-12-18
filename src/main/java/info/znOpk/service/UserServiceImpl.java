@@ -1,13 +1,14 @@
 package info.znOpk.service;
 
-import info.znOpk.model.Nanny;
+import info.znOpk.model.OfferCare;
+import info.znOpk.model.SearchCare;
 import info.znOpk.model.User;
-import info.znOpk.repository.CareRepository;
+import info.znOpk.repository.OfferCareRepository;
+import info.znOpk.repository.SearchCareRepository;
 import info.znOpk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,7 +17,10 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private CareRepository careRepository;
+    private OfferCareRepository offerCareRepository;
+
+    @Autowired
+    private SearchCareRepository searchCareRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -29,9 +33,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(Nanny nanny) {
+    public void save(OfferCare nanny) {
 
-        careRepository.save(nanny);
+        offerCareRepository.save(nanny);
+    }
+
+    @Override
+    public void save(SearchCare searchCare) {
+
+        searchCareRepository.save(searchCare);
     }
 
     @Override
@@ -40,8 +50,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void setActive(Integer active,Long id){userRepository.updateActive(active,id);
-        userRepository.flush();}
+    public void setActive(Integer active, Long id) {
+        userRepository.updateActive(active, id);
+        userRepository.flush();
+    }
 
 
 }

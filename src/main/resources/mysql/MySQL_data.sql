@@ -27,6 +27,17 @@ VALUES('8','user129','$2a$04$65my72NWs9afeZ88pN95se8w4CpZUcirwQWd5MG5f.vy8leFGRY
 INSERT INTO znajdz_opiekuna.uzytkownik(id, email, haslo, poziom_dostepu, typ_uzytkownika, imie, nazwisko, aktywny, plec, miasto, kod_pocztowy)
 VALUES('9','user120','$2a$04$65my72NWs9afeZ88pN95se8w4CpZUcirwQWd5MG5f.vy8leFGRYWu','USER','sister','Retka','Stretka', 1,1,'Warszawa','38-200');
 
+
+INSERT INTO znajdz_opiekuna.szukajacy_opieki(id, id_uzytkownika, opieka_niania, opieka_starsi, praca_z_domem, cos_o_sobie, wynagrodzenie)
+values(1,2,1,0,1,'jestem sypmatyczny ekstrawertyk z dużym brzuchem','8');
+
+INSERT INTO znajdz_opiekuna.szukajacy_opieki(id, id_uzytkownika, opieka_niania, opieka_starsi, praca_z_domem, cos_o_sobie, wynagrodzenie)
+values(2,6,1,0,1,'parówczak jakich mało chce oddac dzieci','11');
+
+INSERT INTO znajdz_opiekuna.szukajacy_opieki(id, id_uzytkownika, opieka_niania, opieka_starsi, praca_z_domem, cos_o_sobie, wynagrodzenie)
+values(3,4,0,1,1,'szukam frajerów pracujących ze starszymi za grosze','6');
+
+
 INSERT INTO znajdz_opiekuna.opiekun(id, id_uzytkownika, data_urodzenia, opieka_niania, opieka_starsi, umiej_sprzat, umiej_gotowa, umiej_zakup, umiej_prac, inne_umiejetnosci,
 cos_o_sobie, doswiadczenie_dzieci, doswiadczenie_starsi, lat_dosw_dzieci, lat_dosw_starsi, wymiar_pol_etatu, wymiar_pelny_etat, wymiar_dorywczo, miejsce_opieki, praca_z_domem,
 wynagrodzenie, wyksztalcenie, jezyki_obce) values(1,3,'05-03-1994',1,1,1,0,1,0,'strzelanie do dzieci, gonienie szczurów','jestem sypmatyczny ekstrawertyk z dużym brzuchem',1,0,'5 lat','brak',0,0,0,1,1,'8','srednie','rosyjski');

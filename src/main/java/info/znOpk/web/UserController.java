@@ -1,7 +1,7 @@
 package info.znOpk.web;
 
 import info.znOpk.model.FileUpload;
-import info.znOpk.model.Nanny;
+import info.znOpk.model.OfferCare;
 import info.znOpk.model.User;
 import info.znOpk.service.SessionService;
 import info.znOpk.validator.AgeValidator;
@@ -65,7 +65,7 @@ public class UserController {
         FileUpload fileModel = new FileUpload();
 
         if(user.getUserType().equals("sister")){
-            Nanny nanny = sessionService.getCareUser(user.getId());
+            OfferCare nanny = sessionService.getCareUser(user.getId());
             nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
             model.addAttribute("userNanny", nanny);
         }
@@ -89,7 +89,7 @@ public class UserController {
         }
 
         if(user.getUserType().equals("sister")){
-            Nanny nanny = sessionService.getCareUser(user.getId());
+            OfferCare nanny = sessionService.getCareUser(user.getId());
             nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
             model.addAttribute("userNanny", nanny);
         }
@@ -106,7 +106,7 @@ public class UserController {
         User user = sessionService.getUser(request.getUserPrincipal().getName());
         FileUpload fileModel = new FileUpload();
         if(user.getUserType().equals("sister")){
-            Nanny nanny = sessionService.getCareUser(user.getId());
+            OfferCare nanny = sessionService.getCareUser(user.getId());
             nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
             model.addAttribute("userNanny", nanny);
         }
@@ -124,7 +124,7 @@ public class UserController {
         User user = sessionService.getUser(request.getUserPrincipal().getName());
 
         if(user.getUserType().equals("sister")){
-            Nanny nanny = sessionService.getCareUser(user.getId());
+            OfferCare nanny = sessionService.getCareUser(user.getId());
             nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
             model.addAttribute("userNanny", nanny);
         }

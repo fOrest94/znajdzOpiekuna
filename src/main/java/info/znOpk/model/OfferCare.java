@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "opiekun")
-public class Nanny {
+public class OfferCare {
 
 	@Id
 	@GeneratedValue
@@ -93,9 +93,9 @@ public class Nanny {
 	@Column(name = "jezyki_obce")
 	private String foreignLanguages;
 
-	public Nanny(){}
+	public OfferCare(){}
 
-	public Nanny(Long userId, String username, String password) {
+	public OfferCare(Long userId, String username, String password) {
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
