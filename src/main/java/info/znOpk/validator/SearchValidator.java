@@ -1,6 +1,6 @@
 package info.znOpk.validator;
 
-import info.znOpk.DTO.DTOSearch.SearchForm;
+import info.znOpk.DTO.SearchForm;
 import info.znOpk.service.BrowseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ public class SearchValidator implements Validator {
     public void validate(Object o, Errors errors) {
 
         SearchForm searchForm = (SearchForm) o;
-        System.out.println("sssssssssssssssssssssssv           " + searchForm.getTypeOfUser());
+
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty");
         if (searchForm.getAddress().length() < 2 || searchForm.getAddress().length() > 32) {
             System.out.println("1111111");
@@ -35,26 +35,15 @@ public class SearchValidator implements Validator {
         } else if (checkAddress(searchForm.getAddress()).equals("error")) {
             System.out.println("222222");
             errors.rejectValue("address", "Data.searchForm.address");
-        } else {
-
-            if (searchForm.getTypeOfUser() != null) {
-                if (checkAddress(searchForm.getAddress()).equals("zipCode") &&
-                        (browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()).size() < 1)) {
-                    System.out.println("3333333333");
-                    errors.rejectValue("address", "Empty.searchForm.address");
-                } else if (checkAddress(searchForm.getAddress()).equals("town") &&
-                        (browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()).size() < 1)) {
-                    System.out.println("44444444");
-                    errors.rejectValue("address", "Empty.searchForm.address");
-                }
-            } else if (searchForm.getTypeOfUserL() != null) {
-                checkSearchUser(searchForm.getTypeOfUserL());
-            } else if (searchForm.getTypeOfUserU() != null) {
-                checkSearchUser(searchForm.getTypeOfUserU());
-            }
-
-        }
-
+        }/* else if (checkAddress(searchForm.getAddress()).equals("zipCode") &&
+                (browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()).size() < 1)) {
+            System.out.println("3333333333");
+            errors.rejectValue("address", "Empty.searchForm.address");
+        } else if (checkAddress(searchForm.getAddress()).equals("town") &&
+                (browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()).size() < 1)) {
+            System.out.println("44444444");
+            errors.rejectValue("address", "Empty.searchForm.address");
+        }*/
     }
 
     public String[] checkSearchUser(String user) {

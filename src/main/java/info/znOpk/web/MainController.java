@@ -1,6 +1,6 @@
 package info.znOpk.web;
 
-import info.znOpk.DTO.DTOSearch.SearchForm;
+import info.znOpk.DTO.SearchForm;
 import info.znOpk.model.User;
 import info.znOpk.service.BrowseService;
 import info.znOpk.service.SessionService;
@@ -34,45 +34,18 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+    @RequestMapping(value = "/indexService", method = RequestMethod.GET)
+    public String indexService(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult result, Model model) {
 
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "login";
-    }
-
-    @RequestMapping(value = "/indexServiceAll", method = RequestMethod.GET)
-    public String indexServiceAll(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult result, Model model) {
 
         searchValidator.validate(searchForm, result);
-        if (result.hasErrors()) {
-            return "index";
-        } else {
-            if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
-                model.addAttribute("browseList", browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()));
-            } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
-                model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
-            }
-            return "indexService";
-        }
-    }
-
-    @RequestMapping(value = "/indexService", method = RequestMethod.GET)
-    public String indexService(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult result, Principal principal, Model model) {
-
-        if (searchForm.getTypeOfUser().length() > 3) {
-
-            searchValidator.validate(searchForm, result);
+        if (searchForm.getTypeOfUser().length() < 7) {
             if (result.hasErrors()) {
                 return "index";
             } else {
 
-                if (principal.getName() != null) {
-                    User user = sessionService.getUser(principal.getName());
+                if (searchForm.getUsername() != null) {
+                    User user = sessionService.getUser(searchForm.getUsername());
                     model.addAttribute("user", user);
                 }
 
@@ -83,15 +56,14 @@ public class MainController {
                 }
                 return "indexService";
             }
-        }
-        else if (searchForm.getTypeOfUser() != null){
 
+        } else {
+
+            return "index";
 
         }
-    return "";
+
     }
-
-
 
     @ModelAttribute("searchForm")
     public SearchForm createModel() {

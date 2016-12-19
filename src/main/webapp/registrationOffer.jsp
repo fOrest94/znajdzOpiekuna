@@ -218,11 +218,11 @@
                             <spring:bind path="experienceKidsTime">
                                 <path:select path="experienceKidsTime" id="nanny-experience"
                                              style=" margin-left: 20px;  margin-top: 5px; border-radius: 3px; font-size: 18px;">
-                                    <option value="brak">brak</option>
-                                    <option value="pół roku">pół roku</option>
-                                    <option value="rok">rok</option>
-                                    <option value="dwa lata">dwa lata</option>
-                                    <option value="więcej niż 2 lata">więcej niż 2 lata</option>
+                                    <path:option value="brak">brak</path:option>
+                                    <path:option value="pół roku">pół roku</path:option>
+                                    <path:option value="rok">rok</path:option>
+                                    <path:option value="dwa lata">dwa lata</path:option>
+                                    <path:option value="więcej niż 2 lata">więcej niż 2 lata</path:option>
                                 </path:select>
                                 <form:errors path="experienceKidsTime" cssClass="error"/>
                             </spring:bind>
@@ -237,11 +237,11 @@
                             <spring:bind path="experienceOldTime">
                                 <form:select path="experienceOldTime" id="nanny-experience"
                                              style=" margin-left: 20px;  margin-top: 5px; border-radius: 3px; font-size: 18px;">
-                                    <option value="brak">brak</option>
-                                    <option value="pół roku">pół roku</option>
-                                    <option value="rok">rok</option>
-                                    <option value="dwa lata">dwa lata</option>
-                                    <option value="więcej niż 2 lata">więcej niż 2 lata</option>
+                                    <path:option value="brak">brak</path:option>
+                                    <path:option value="pół roku">pół roku</path:option>
+                                    <path:option value="rok">rok</path:option>
+                                    <path:option value="dwa lata">dwa lata</path:option>
+                                    <path:option value="więcej niż 2 lata">więcej niż 2 lata</path:option>
                                 </form:select>
                                 <form:errors path="experienceOldTime" cssClass="error"/>
                             </spring:bind>
@@ -353,11 +353,11 @@
                             <spring:bind path="education">
                                 <form:select path="education" id="nanny-experience"
                                              style=" margin-left: 20px;  margin-top: 5px; border-radius: 3px; font-size: 18px;">
-                                    <option value="brak">brak</option>
-                                    <option value="podstawowe">podstawowe</option>
-                                    <option value="zawodowe">zawodowe</option>
-                                    <option value="średnie">średnie</option>
-                                    <option value="wyższe">wyższe</option>
+                                    <path:option value="brak">brak</path:option>
+                                    <path:option value="podstawowe">podstawowe</path:option>
+                                    <path:option value="zawodowe">zawodowe</path:option>
+                                    <path:option value="średnie">średnie</path:option>
+                                    <path:option value="wyższe">wyższe</path:option>
                                 </form:select>
                                 <form:errors path="education" cssClass="error"/>
                             </spring:bind>

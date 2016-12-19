@@ -24,22 +24,22 @@ public class OfferCare {
     private int age;
 
     @Column(name = "opieka_niania")
-    private String whoWannCareNanny;
+    private String whoWannCareNanny="0";
 
     @Column(name = "opieka_starsi")
-    private String whoWannCareOld;
+    private String whoWannCareOld="0";
 
     @Column(name = "umiej_sprzat")
-    private String otherActClean;
+    private String otherActClean="0";
 
     @Column(name = "umiej_gotowa")
-    private String otherActCook;
+    private String otherActCook="0";
 
     @Column(name = "umiej_zakup")
-    private String otherActShop;
+    private String otherActShop="0";
 
     @Column(name = "umiej_prac")
-    private String otherActVac;
+    private String otherActVac="0";
 
     @Column(name = "inne_umiejetnosci")
     private String otherSkills;
@@ -48,10 +48,10 @@ public class OfferCare {
     private String writeSthAboutYou;
 
     @Column(name = "doswiadczenie_dzieci")
-    private String careExpKids;
+    private String careExpKids="0";
 
     @Column(name = "doswiadczenie_starsi")
-    private String careExpOld;
+    private String careExpOld="0";
 
     @Column(name = "lat_dosw_dzieci")
     private String experienceKidsTime;
@@ -60,16 +60,16 @@ public class OfferCare {
     private String experienceOldTime;
 
     @Column(name = "wymiar_pol_etatu")
-    private String timeJobHalf;
+    private String timeJobHalf="0";
 
     @Column(name = "wymiar_pelny_etat")
-    private String timeJobFull;
+    private String timeJobFull="0";
 
     @Column(name = "wymiar_dorywczo")
-    private String timeJobCasual;
+    private String timeJobCasual="0";
     @NotNull
     @Column(name = "miejsce_opieki")
-    private String placeOfTakeCare;
+    private String placeOfTakeCare="0";
     @NotNull
     @Column(name = "praca_z_domem")
     private String workWithHome;

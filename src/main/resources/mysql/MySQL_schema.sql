@@ -67,3 +67,5 @@ CREATE TABLE IF NOT EXISTS `uzytkownik` (
 
 
 ALTER TABLE `opiekun` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);
+
+ALTER TABLE `szukajacy_opieki` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);

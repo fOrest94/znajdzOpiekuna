@@ -62,7 +62,6 @@
     </div>
 </div>
 
-
 <div id="headerSection" style="padding-top: 115px; ">
     <div class="container">
         <div class="row">
@@ -71,13 +70,13 @@
 
                 <div class="form-group">
                     <h1 class="text-center" style="color: #FF4F4F; font-size: 50px">Znajdź lokalną nianię lub
-                        opiekunkę!</h1>
+                        opiekunkę!</h1>jestem ${pageContext.request.userPrincipal.name}
                     <h3 class="text-center" style="color: #FF4F4F; font-size: 30px">Szybko, prosto i bezpiecznie.</h3>
                 </div>
 
-                <c:choose>
-                    <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <form:form method="get" modelAttribute="searchForm" action="/indexService">
+                                <form:hidden path="username" value="${pageContext.request.userPrincipal.name}"/>
+
                             <div class="form-group">
                                 <div class="col-sm-6 col-md-offset-3">
                                     <spring:bind path="address">
@@ -111,44 +110,6 @@
                                 </div>
                             </div>
                         </form:form>
-                    </c:when>
-                    <c:otherwise>
-                        <form:form method="get" modelAttribute="searchForm" action="/indexServiceAll">
-                            <div class="form-group">
-                                <div class="col-sm-6 col-md-offset-3">
-                                    <spring:bind path="address">
-                                        <div class="form-group ${status.error ? 'has-error' : ''}">
-                                            <form:input path="address" type="text" class="form-control"
-                                                        placeholder="Wpisz kod 00-000 lub miasto"/>
-                                            <form:errors path="address"/>
-                                        </div>
-                                    </spring:bind>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-10 col-md-offset-1">
-                                    <div class="checkbox">
-                                        <spring:bind path="typeOfUser">
-                                            <div class="form-group ${status.error ? 'has-error' : ''}">
-                                                <label class="radio-inline">
-                                                    <form:radiobutton path="typeOfUser" value="sister" checked="checked"/>Znajdź opiekę
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <form:radiobutton path="typeOfUser" value="simple"/>Znajdź pracę
-                                                </label>
-                                            </div>
-                                        </spring:bind>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-10 col-md-offset-1">
-                                    <input type="submit" class="btn btn-danger"/>
-                                </div>
-                            </div>
-                        </form:form>
-                    </c:otherwise>
-                </c:choose>
             </div>
         </div>
     </div>

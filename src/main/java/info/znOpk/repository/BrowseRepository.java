@@ -16,5 +16,5 @@ public interface BrowseRepository extends JpaRepository<User, Long> {
     List<User> findByUserTypeAndTown(@Param("userType") String userType, @Param("town") String town);
 
     @Query("select u from User u where u.userType like :userType and u.zipCode like :zipCode")
-    List<User> findByUserTypeAndZipCode(@Param("userType") String userType,@Param("zipCode") String zipCode);
+    List<User> findByUserTypeAndZipCode(@Param("userType") String userType, @Param("zipCode") String zipCode);
 }
