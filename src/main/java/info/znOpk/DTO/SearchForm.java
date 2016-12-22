@@ -7,7 +7,7 @@ public class SearchForm {
 
     private String username="";
     private String address;
-    private String typeOfUser;
+    private Integer typeOfUser;
     private String addressType;
 
 
@@ -27,11 +27,11 @@ public class SearchForm {
         this.address = address;
     }
 
-    public String getTypeOfUser() {
+    public Integer getTypeOfUser() {
         return typeOfUser;
     }
 
-    public void setTypeOfUser(String typeOfUser) {
+    public void setTypeOfUser(Integer typeOfUser) {
         this.typeOfUser = typeOfUser;
     }
 
@@ -41,5 +41,15 @@ public class SearchForm {
 
     public void setAddressType(String addressType) {
         this.addressType = addressType;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchForm{" +
+                "username='" + username + '\'' +
+                ", address='" + address + '\'' +
+                ", typeOfUser='" + typeOfUser + '\'' +
+                ", addressType='" + addressType + '\'' +
+                '}';
     }
 }

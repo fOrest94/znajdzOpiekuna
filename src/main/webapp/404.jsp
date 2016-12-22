@@ -21,13 +21,9 @@
 
 <div class="container" style="margin-top: 180px;">
     <img src="resources/img/404.jpg" style=" display: block; margin: 0 auto; ">
-    <h2 style="color: black; font-family: 'Russo One', sans-serif; padding-top: 0px; text-align: center;">Wygląda na to,
+    <h2 style="color: black; font-family: 'Itim', cursive, sans-serif; padding-top: 0px; text-align: center;">Wygląda na to,
         że odkryłeś koniec internetów.</br> Gratulujemy!!!</br>Jeśli jednak zechciałbyś wrócić do naszej strony kliknij
-        <a href="/" style="color: #6666FF;">STRONA GŁÓWNA</a></h2>
-    <h3>Error message</h3>
-    <h4 class="error">
-        <%= request.getAttribute("errorMessage")%>
-    </h4>
+        <a href="/" style="color: #CE5B3F;">STRONA GŁÓWNA</a></h2>
 
 </div>
 

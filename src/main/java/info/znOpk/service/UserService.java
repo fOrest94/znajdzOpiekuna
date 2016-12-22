@@ -8,8 +8,7 @@ import info.znOpk.model.User;
 public interface UserService {
 
     void save(User user);
-    void save(OfferCare nanny);
-    void save(SearchCare searchCare);
     User findByUsername(String email);
     void setActive(Integer active,Long id);
+    void updateSalaryAndBirthDate(String moneyPerHour, String birthDate, Long id);
 }

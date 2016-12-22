@@ -13,9 +13,50 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
     <title>Rejestracja</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
-<body>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script src="/resources/js/jquery-birthday-picker.min.js"></script>
+</head>
+
+
+<body>
+<script>
+    $("#default-settings").birthdayPicker();
+    $("#default-birthday").birthdayPicker({"defaultDate":"01-03-1980"});
+    $("#max-year-birthday").birthdayPicker({
+        "defaultDate": "01-03-1980",
+        "maxYear": "2020",
+        "maxAge": 65
+    });
+    $("#short-month-birthday").birthdayPicker({
+        "defaultDate": "01-03-1980",
+        "maxYear": "2020",
+        "maxAge": 65,
+        "monthFormat":"short"
+    });
+    $("#long-month-birthday").birthdayPicker({
+        "defaultDate": "01-03-1980",
+        "maxYear": "2020",
+        "maxAge": 65,
+        "monthFormat":"long",
+        "sizeClass": "span3"
+    });
+</script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
 <div class="container" style="">
     <form:form method="post" action="/registrationSearch" modelAttribute="searchCare" class="form-horizontal">
     <div id="signupbox" style="margin-top:50px" class="col-lg-8 col-lg-offset-2">

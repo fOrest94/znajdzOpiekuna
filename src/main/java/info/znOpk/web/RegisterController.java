@@ -3,7 +3,11 @@ package info.znOpk.web;
 import info.znOpk.DTO.OfferCareDAO;
 import info.znOpk.DTO.SearchCareDAO;
 import info.znOpk.authentication.EmailEncryption;
+import info.znOpk.model.OfferCare;
+import info.znOpk.model.SearchCare;
 import info.znOpk.model.User;
+import info.znOpk.service.OfferCareService;
+import info.znOpk.service.SearchCareService;
 import info.znOpk.service.UserService;
 import info.znOpk.authentication.EmailAuthentication;
 import info.znOpk.validator.OfferCareValidator;
@@ -36,6 +40,12 @@ public class RegisterController {
     private UserService userService;
 
     @Autowired
+    private OfferCareService offerCareService;
+
+    @Autowired
+    private SearchCareService searchCareService;
+
+    @Autowired
     private EmailAuthentication emailAuthentication;
 
     @Autowired
@@ -63,28 +73,31 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/registrationOffer", method = RequestMethod.POST)
-    public String registerOfferAuthentication(@ModelAttribute("offerCare") OfferCareDAO offerCare, BindingResult result, Model model) {
+    public String registerOfferAuthentication(@ModelAttribute("offerCare") OfferCareDAO offerCareDAO, BindingResult result, Model model) {
 
-        System.out.println(offerCare.toString());
-        offerCareValidator.validate(offerCare, result);
+        offerCareValidator.validate(offerCareDAO, result);
 
         if (result.hasErrors()) {
             return "registrationOffer";
         }
-        userService.save(offerCareValidator.getSearchValues(offerCare));
+        OfferCare offerCare = offerCareValidator.getSearchValues(offerCareDAO);
+
+        userService.updateSalaryAndBirthDate(offerCare.getMoneyPerHour(),offerCare.getDataOfBirth(), offerCare.getUserId());
+        offerCareService.save(offerCare);
         return "redirect:/";
     }
 
     @RequestMapping(value = "/registrationSearch", method = RequestMethod.POST)
-    public String registerSearchAuthentication(@ModelAttribute("searchCare") SearchCareDAO searchCare, BindingResult result, Model model) {
+    public String registerSearchAuthentication(@ModelAttribute("searchCare") SearchCareDAO searchCareDAO, BindingResult result, Model model) {
 
-        searchCareValidator.validate(searchCare, result);
+        searchCareValidator.validate(searchCareDAO, result);
 
         if (result.hasErrors()) {
             return "registrationSearch";
         }
-
-        userService.save(searchCareValidator.getSearchValues(searchCare));
+        SearchCare searchCare = searchCareValidator.getSearchValues(searchCareDAO);
+        userService.updateSalaryAndBirthDate(searchCare.getMoneyPerHour(),searchCareDAO.getDateOfBirth(), searchCare.getUserId());
+        searchCareService.save(searchCare);
         return "redirect:/";
     }
 
@@ -101,7 +114,7 @@ public class RegisterController {
             user.setActive(1);
             userService.setActive(user.isActive(), user.getId());
 
-            if (user.getUserType().equals("simple")) {
+            if (user.getUserType() == 1) {
 
                 model.addAttribute("searchCare", new SearchCareDAO());
                 model.addAttribute("user", user);
@@ -110,10 +123,11 @@ public class RegisterController {
 
                 model.addAttribute("offerCare", new OfferCareDAO());
                 model.addAttribute("user", user);
-                System.out.println("sister authentication");
                 return "registrationOffer";
             }
         } else
             return "redirect:/404";
     }
+
+
 }

@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `opiekun` (
   `wymiar_dorywczo` int(2) NULL,
   `miejsce_opieki` int(5) NOT NULL,
   `praca_z_domem` int(2) NOT NULL,
-  `wynagrodzenie` varchar(120) NOT NULL,
+  `wynagrodzenie` varchar(6) NOT NULL,
   `wyksztalcenie` varchar(120) NULL,
   `jezyki_obce` varchar(120) NULL,
   PRIMARY KEY (`id`)
@@ -54,14 +54,15 @@ CREATE TABLE IF NOT EXISTS `uzytkownik` (
   `email` varchar(128) NOT NULL,
   `haslo` varchar(128) NOT NULL,
   `poziom_dostepu` varchar(128) NOT NULL,
-  `typ_uzytkownika` varchar(8) NOT NULL,
-  `data_urodzenia` varchar(20) NOT NULL,
+  `typ_uzytkownika` int(2) NOT NULL,
+  `data_urodzenia` varchar(20) NULL,
   `aktywny` int(2) NOT NULL,
   `miasto` varchar(25) null ,
   `imie` varchar(25) null ,
   `nazwisko` varchar(25) null,
-  `plec` int(2) null,
+  `plec` varchar(25) null,
   `kod_pocztowy` varchar(6) null,
+  `wynagrodzenie` varchar(6) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

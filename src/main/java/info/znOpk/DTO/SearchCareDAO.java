@@ -12,11 +12,14 @@ public class SearchCareDAO {
 
     private String moneyPerHour;
 
+    private String dateOfBirth;
+
     private String writeSthAboutYou;
 
     private Long userId;
 
     public SearchCareDAO() {
+
     }
 
     public SearchCareDAO(String id) {
@@ -53,6 +56,14 @@ public class SearchCareDAO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override

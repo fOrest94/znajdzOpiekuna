@@ -11,13 +11,14 @@
 
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/style.css" rel="stylesheet">
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/resources/js/jquery-birthday-picker.min.js"></script>
     <title>znajdźOpiekuna</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <style>
     body {
-        background: url("/resources/images/main-wallpaper.png") no-repeat center center fixed;
+        background: url("/resources/img/main-wallpaper.png") no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -134,7 +135,7 @@
                     <hr/>
                     <div class="form-group">
                         <div class="col-lg-offset-10 col-lg-1">
-                            <a href="#signupbox2" onclick="slideThird();"><img src="/resources/images/bottom-arrow.png"></a>
+                            <a href="#signupbox2" onclick="slideThird();"><img src="/resources/img/bottom-arrow.png"></a>
                         </div>
                     </div>
                 </div>
@@ -380,7 +381,7 @@
                     <div class="form-group">
                         <div class="col-lg-6" style="padding-left: 50px;">
                             <a href="#signupbox1" onclick="slideSecond();"><img
-                                    src="/resources/images/top-arrow.png"></a>
+                                    src="/resources/img/top-arrow.png"></a>
                         </div>
                         <div class="col-lg-offset-3 col-lg-2">
                             <div style="margin-top: 5px" class="form-group">

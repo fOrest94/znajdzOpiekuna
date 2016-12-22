@@ -20,17 +20,17 @@ public class SearchCare {
     private Long userId;
 
     @Column(name = "opieka_niania")
-    private String whoWannCareNanny;
+    private String whoWannCareNanny = "0";
 
     @Column(name = "opieka_starsi")
-    private String whoWannCareOld;
+    private String whoWannCareOld = "0";
 
     @NotNull
     @Column(name = "cos_o_sobie")
-    private String writeSthAboutYou;
+    private String writeSthAboutYou = "0";
 
     @Column(name = "praca_z_domem")
-    private String workWithHome;
+    private String workWithHome = "0";
 
     @NotNull
     @Column(name = "wynagrodzenie")

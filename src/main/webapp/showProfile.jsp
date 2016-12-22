@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page session="true" %>
 
 <!DOCTYPE HTML>
-<html lang="pl_PL">
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/bookmark.png">
+
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="resources/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Itim" rel="stylesheet">
@@ -35,20 +35,20 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" style="padding-right: 0px;">
                 <c:if test="${pageContext.request.userPrincipal.name != null}">
-                <sec:authorize access="hasRole('ROLE_USER')">
-                    <c:url value="/logout" var="logoutUrl"/>
-                    <form action="${logoutUrl}" method="post" id="logoutForm">
-                        <input type="hidden" name="${_csrf.parameterName}"
-                               value="${_csrf.token}"/>
-                    </form>
-                    <li>
-                        <ol class="breadcrumb" style="float: left;">
-                            <li class="active" style="color: #c09e6b;"><a
-                                    href="indexService">Witaj, ${user.firstName}</a></li>
-                            <li><a href="javascript:formSubmit()"> Wyloguj</a></li>
-                        </ol>
-                    </li>
-                </sec:authorize>
+                    <sec:authorize access="hasRole('ROLE_USER')">
+                        <c:url value="/logout" var="logoutUrl"/>
+                        <form action="${logoutUrl}" method="post" id="logoutForm">
+                            <input type="hidden" name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+                        </form>
+                        <li>
+                            <ol class="breadcrumb" style="float: left;">
+                                <li class="active" style="color: #c09e6b;"><a
+                                        href="indexService">Witaj, ${user.firstName}</a></li>
+                                <li><a href="javascript:formSubmit()"> Wyloguj</a></li>
+                            </ol>
+                        </li>
+                    </sec:authorize>
                 </c:if>
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <li><a href="login">Zaloguj się</a></li>
@@ -63,19 +63,22 @@
 <div class="profile-navbar">
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <div class="col-lg-3 col-lg-offset-9" style="padding-left: 50px; padding-top: 10px;">
+            <div class="col-lg-3" style="padding-left: 50px; padding-top: 22px;">
+                <a href="news" style="color: white; font-size: 20px; padding-right: 20px;">Aktualności</a>
+            </div>
+            <div class="col-lg-3 col-lg-offset-6" style="padding-left: 50px; padding-top: 10px;">
                 <a href="showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
-                <a href="profile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="profile" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
+                <a href="messages" style="color: white; font-size: 13px;">Wiadomości</a>
             </div>
         </c:if>
     </div>
 </div>
-<c:if test="${pageContext.request.userPrincipal.name != null}">
+<c:if test="${pageContext.request.userPrincipal.name != null && whatShow == 1}">
     <div class="container" style="background-color: white;">
         <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
-            <li role="presentation" class="active"><a href="showProfile">Profil</a></li>
-            <li role="presentation"><a href="editProfile">Edycja</a></li>
+            <li role="presentation" class="active"><a href="showMyProfile">Profil</a></li>
+            <li role="presentation"><a href="editMyProfile">Edycja</a></li>
             <li role="presentation"><a href="userSettings">Zaawansowane</a></li>
         </ul>
     </div>
@@ -89,29 +92,6 @@
 
                 <img src="resources/pictures/profileImages/${user.id}.jpg"
                      width="300" height="300">
-                <form:form method="POST" modelAttribute="fileBucket"
-                           enctype="multipart/form-data" class="form-horizontal">
-                    <input type="hidden" name="${_csrf.parameterName}"
-                           value="${_csrf.token}"/>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <div class="col-md-7">
-                                <form:input type="file" path="file" id="file" class="form-control input-sm"/>
-                                <div class="has-error">
-                                    <form:errors path="file" class="help-inline"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-actions floatRight">
-                            <input type="submit" value="Zapisz"
-                                   class="btn btn-danger btn-sm">
-                        </div>
-                    </div>
-                </form:form>
-                File <strong>${fileName}</strong> uploaded successfully.
             </div>
         </div>
     </div>
@@ -142,14 +122,29 @@
     </div>
     <div class="col-lg-7 col-lg-offset-5" style="min-height: 500px; padding-bottom: 100px;">
 
+
+
+        <div class="panel panel-default" style="width: 520px;">
+            <div class="panel-heading">O mnie</div>
+            <div class="panel-body">
+                <c:if test="${user.userType eq 1 }">
+                ${userParent.writeSthAboutYou}
+                </c:if>
+                <c:if test="${user.userType eq 2 }">
+                    ${userNanny.writeSthAboutYou}
+                </c:if>
+            </div>
+        </div>
+
+        <c:if test="${user.userType eq 2 }">
         <p style="font-size: 16px; text-align: left;">
         <div class="panel">
             <h3 style="text-align: left;">Prace których się podejmę:</h3>
         </div>
         <br>
-        <img src="resources/images/${userNanny.whoWannCareNanny}.png"> Opieka nad
+        <img src="/resources/img/${userNanny.whoWannCareNanny}.png"> Opieka nad
         dziećmi<br>
-        <img src="resources/images/${userNanny.whoWannCareOld }.png"> Opieka nad
+        <img src="resources/img/${userNanny.whoWannCareOld }.png"> Opieka nad
         starszymi<br>
         <br>
         <div class="panel">
@@ -158,29 +153,29 @@
         <br>
         <c:choose>
             <c:when test="${userNanny.placeOfTakeCare == 1}">
-                <img src="resources/images/1.png"> Dowolne<br>
-                <img src="resources/images/0.png"> U rodziców<br>
-                <img src="resources/images/0.png"> U niani <br>
+                <img src="resources/img/1.png"> Dowolne<br>
+                <img src="resources/img/0.png"> U rodziców<br>
+                <img src="resources/img/0.png"> U niani <br>
             </c:when>
             <c:when test="${userNanny.placeOfTakeCare == 2}">
-                <img src="resources/images/0.png"> Dowolne<br>
-                <img src="resources/images/1.png"> U rodziców<br>
-                <img src="resources/images/0.png"> U niani <br>
+                <img src="resources/img/0.png"> Dowolne<br>
+                <img src="resources/img/1.png"> U rodziców<br>
+                <img src="resources/img/0.png"> U niani <br>
             </c:when>
             <c:otherwise>
-                <img src="resources/images/0.png"> Dowolne<br>
-                <img src="resources/images/0.png"> U rodziców<br>
-                <img src="resources/images/1.png"> U niani <br>
+                <img src="resources/img/0.png"> Dowolne<br>
+                <img src="resources/img/0.png"> U rodziców<br>
+                <img src="resources/img/1.png"> U niani <br>
             </c:otherwise>
         </c:choose><br>
         <div class="panel">
             <h3 style="text-align: left;">Zajęcia z podopiecznymi:</h3>
         </div>
         <br>
-        <img src="resources/images/${userNanny.otherActClean}.png"> Dowolne<br>
-        <img src="resources/images/${userNanny.otherActCook}.png"> U rodziców<br>
-        <img src="resources/images/${userNanny.otherActShop}.png"> U niani <br>
-        <img src="resources/images/${userNanny.otherActVac}.png"> U niani <br>
+        <img src="resources/img/${userNanny.otherActClean}.png"> Dowolne<br>
+        <img src="resources/img/${userNanny.otherActCook}.png"> U rodziców<br>
+        <img src="resources/img/${userNanny.otherActShop}.png"> U niani <br>
+        <img src="resources/img/${userNanny.otherActVac}.png"> U niani <br>
         <div class="panel">
             <h3 style="text-align: left;">Inne umiejętności:</h3>
         </div>
@@ -188,7 +183,7 @@
         <div class="panel">
             <h3 style="text-align: left;">Doświadczenie w pracy z dziećmi:</h3>
         </div>
-        <img src="resources/images/${userNanny.careExpKids}.png">
+        <img src="resources/img/${userNanny.careExpKids}.png">
         <c:choose>
             <c:when test="${userNanny.careExpKids == true}">
                 Tak<br>Staż: ${userNanny.experienceKidsTime}<br>
@@ -200,7 +195,7 @@
         <div class="panel">
             <h3 style="text-align: left;">Doświadczenie w pracy ze starszymi:</h3>
         </div>
-        <img src="resources/images/${userNanny.careExpOld}.png">
+        <img src="resources/img/${userNanny.careExpOld}.png">
         <c:choose>
             <c:when test="${userNanny.careExpOld == true}">
                 Tak<br>Staż: ${userNanny.experienceOldTime}<br>
@@ -213,15 +208,15 @@
             <h3 style="text-align: left;">Wymiar etatu:</h3>
         </div>
         <br>
-        <img src="resources/images/${userNanny.timeJobHalf}.png"> Pół etatu<br>
-        <img src="resources/images/${userNanny.timeJobFull}.png"> Pełny etat<br>
-        <img src="resources/images/${userNanny.timeJobCasual}.png"> Dorywczo <br>
+        <img src="resources/img/${userNanny.timeJobHalf}.png"> Pół etatu<br>
+        <img src="resources/img/${userNanny.timeJobFull}.png"> Pełny etat<br>
+        <img src="resources/img/${userNanny.timeJobCasual}.png"> Dorywczo <br>
         <br>
         <div class="panel">
             <h3 style="text-align: left;">Praca z domem:</h3>
         </div>
         <br>
-        <img src="${pageContext.request.contextPath}/resources/images/${userNanny.workWithHome}.png">
+        <img src="${pageContext.request.contextPath}/resources/img/${userNanny.workWithHome}.png">
         <c:choose>
             <c:when test="${userNanny.workWithHome == true}">
                 Tak<br>
@@ -238,6 +233,19 @@
             <h3 style="text-align: left;">Języki obce:</h3>
         </div>
         ${userNanny.foreignLanguages}<br>
+    </c:if>
+
+        <p style="font-size: 16px; text-align: left;">
+        <div class="panel">
+            <h3 style="text-align: left;">Poszukuję opieki dla:</h3>
+        </div>
+        <br>
+        <img src="resources/img/${userParent.whoWannCareNanny}.png"> Dziecka<br>
+        <img src="resources/img/${userParent.whoWannCareOld }.png"> Osoby starszej<br>
+        <img src="resources/img/${userParent.workWithHome}.png"> Domu<br>
+        <br>
+
+        <br>
     </div>
 </div>
 

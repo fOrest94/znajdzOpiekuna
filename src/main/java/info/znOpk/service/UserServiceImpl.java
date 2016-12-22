@@ -1,10 +1,6 @@
 package info.znOpk.service;
 
-import info.znOpk.model.OfferCare;
-import info.znOpk.model.SearchCare;
 import info.znOpk.model.User;
-import info.znOpk.repository.OfferCareRepository;
-import info.znOpk.repository.SearchCareRepository;
 import info.znOpk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,12 +13,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private OfferCareRepository offerCareRepository;
-
-    @Autowired
-    private SearchCareRepository searchCareRepository;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -33,15 +23,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(OfferCare nanny) {
+    public void updateSalaryAndBirthDate(String moneyPerHour, String birthDate, Long id) {
 
-        offerCareRepository.save(nanny);
-    }
-
-    @Override
-    public void save(SearchCare searchCare) {
-
-        searchCareRepository.save(searchCare);
+        userRepository.updateSalary(moneyPerHour, birthDate, id);
     }
 
     @Override

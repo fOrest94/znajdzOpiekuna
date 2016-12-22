@@ -7,10 +7,9 @@
 <!DOCTYPE HTML>
 <html lang="pl_PL">
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/bookmark.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/resources/img/zdOpk.ico">
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/style.css" rel="stylesheet"/>
-
     <link href="https://fonts.googleapis.com/css?family=Itim" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Aclonica|Open+Sans" rel="stylesheet">
     <title>znajdźOpiekuna</title>
@@ -70,7 +69,7 @@
 
                 <div class="form-group">
                     <h1 class="text-center" style="color: #FF4F4F; font-size: 50px">Znajdź lokalną nianię lub
-                        opiekunkę!</h1>jestem ${pageContext.request.userPrincipal.name}
+                        opiekunkę!</h1>
                     <h3 class="text-center" style="color: #FF4F4F; font-size: 30px">Szybko, prosto i bezpiecznie.</h3>
                 </div>
 
@@ -94,10 +93,10 @@
                                         <spring:bind path="typeOfUser">
                                             <div class="form-group ${status.error ? 'has-error' : ''}">
                                                 <label class="radio-inline">
-                                                    <form:radiobutton path="typeOfUser" value="sister" checked="checked"/>Znajdź opiekę
+                                                    <form:radiobutton path="typeOfUser" value="2" checked="checked"/>Znajdź opiekę
                                                 </label>
                                                 <label class="radio-inline">
-                                                    <form:radiobutton path="typeOfUser" value="simple"/>Znajdź pracę
+                                                    <form:radiobutton path="typeOfUser" value="1"/>Znajdź pracę
                                                 </label>
                                             </div>
                                         </spring:bind>

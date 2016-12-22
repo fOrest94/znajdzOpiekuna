@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="path" uri="http://www.springframework.org/tags/form" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE HTML>
 <html lang="pl_PL">
@@ -67,6 +68,15 @@
                                 </div>
                             </spring:bind>
                         </div>
+                        <div class="col-md-4">
+                            <spring:bind path="sex">
+                                <path:select path="sex" id="nanny-experience" style=" margin-left: 20px;  margin-top: 5px; border-radius: 3px; font-size: 18px;">
+                                    <path:option value="kobieta" >Kobieta</path:option>
+                                    <path:option value="mężczyzna">Mężczyzna</path:option>
+                                </path:select>
+                                <form:errors path="sex" cssClass="error"/>
+                            </spring:bind>
+                        </div>
                     </div>
 
 
@@ -81,6 +91,8 @@
                                 </div>
                             </spring:bind>
                         </div>
+
+
                     </div>
 
                     <div class="form-group">
@@ -103,7 +115,7 @@
                             <div class="col-md-5" style="margin-right: 20px;  margin-left: 30px;">
                                 <div class="radio">
                                     <label style="font-size: 1.2em">
-                                        <form:radiobutton path="userType" value="sister"/>Pracy
+                                        <form:radiobutton path="userType" value="2"/>Pracy
                                         <span class="cr"><i
                                                 class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
                                     </label>
@@ -112,7 +124,7 @@
                             <div class="col-md-5 ">
                                 <div class="radio">
                                     <label style="font-size: 1.2em">
-                                        <form:radiobutton path="userType" value="simple"/>Opieki
+                                        <form:radiobutton path="userType" value="1"/>Opieki
                                         <span class="cr"><i
                                                 class="cr-icon fa fa-circle glyphicon glyphicon-ok"></i></span>
                                     </label>

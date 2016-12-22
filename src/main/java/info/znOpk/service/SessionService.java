@@ -1,6 +1,7 @@
 package info.znOpk.service;
 
 import info.znOpk.model.OfferCare;
+import info.znOpk.model.SearchCare;
 import info.znOpk.model.User;
 
 /**
@@ -10,4 +11,5 @@ public interface SessionService {
     User getUser(String userName);
     OfferCare getCareUser(Long id);
     User getUser(Long id);
+    SearchCare getSearchUser(Long id);
 }

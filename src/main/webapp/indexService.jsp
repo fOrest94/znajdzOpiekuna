@@ -64,34 +64,15 @@
 <div class="profile-navbar">
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <div class="col-lg-3 col-lg-offset-9" style="padding-left: 50px; padding-top: 10px;">
+            <div class="col-lg-3" style="padding-left: 50px; padding-top: 22px;">
+                <a href="news" style="color: white; font-size: 20px; padding-right: 20px;">Aktualności</a>
+            </div>
+            <div class="col-lg-3 col-lg-offset-6" style="padding-left: 50px; padding-top: 10px;">
                 <a href="showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
-                <a href="profile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="profile" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
+                <a href="messages" style="color: white; font-size: 13px;">Wiadomości</a>
             </div>
         </c:if>
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="col-sm-10 col-md-offset-1">
-        <div class="checkbox">
-            <spring:bind path="typeOfUser">
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <label class="radio-inline">
-                        <form:radiobutton path="typeOfUser" value="sister" checked="checked"/>Znajdź opiekę
-                    </label>
-                    <label class="radio-inline">
-                        <form:radiobutton path="typeOfUser" value="simple"/>Znajdź pracę
-                    </label>
-                </div>
-            </spring:bind>
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="col-sm-10 col-md-offset-1">
-        <input type="submit" class="btn btn-danger"/>
     </div>
 </div>
 
@@ -101,8 +82,8 @@
         <form:form method="get" modelAttribute="searchForm" action="/indexService">
             <div class="col-lg-2">
                 <label>Szukam</label>
-                <spring:bind path="typeOfUserExtendR">
-                    <form:select path="typeOfUserExtendR" class="selectpicker show-tick" data-width="170px">
+                <spring:bind path="typeOfUser">
+                    <form:select path="typeOfUser" class="selectpicker show-tick" data-width="170px">
                         <optgroup label="opieka nad dziećmi">
                             <path:option style="font-size: 18px; color: black !important;"
                                          value="sister1">Niani</path:option>
@@ -123,14 +104,13 @@
                 <label for="ch2">Gdzie</label>
                 <spring:bind path="address">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input path="address" id="ch2" type="text" class="form-control"
+                        <form:input path="address" id="ch2" class="form-control"
                                     placeholder="Kod lub miasto"/>
                         <form:errors path="address"/>
                     </div>
                 </spring:bind>
             </div>
-            <input type="submit" class="btn btn-danger"
-                   style="margin-top: 24px; font-size: 19px; height: 40px;"/>Szukaj
+            <input type="submit" class="btn btn-danger" style="margin-top: 24px; font-size: 19px; height: 40px;"/>
         </form:form>
 
     </div>
@@ -155,21 +135,24 @@
             </table>
         </div>
         <div class="col-lg-9">
-            <h3 style="text-align: left">Lokalizacja: Kraków</h3>
+            <h3 style="text-align: left">Lokalizacja: ${browseList[0].town}</h3>
             <c:if test="${not empty browseList}">
                 <table class="table">
                     <tbody><c:forEach var="listValue" items="${browseList}">
                         <tr>
                             <td style="height: 140px;">
-                                <div class="col-lg-3">
+                                <div class="col-lg-2" style="">
                                     <img src="resources/pictures/profileImages/${listValue.id}.jpg" width="120"
                                          height="120" style="padding-bottom: 0px;">
                                 </div>
                                 <form action="showProfile" method="get" id="showCertainProfile">
+                                    <input type="hidden" name="userLogged" value="${pageContext.request.userPrincipal.name}">
                                     <input type="hidden" name="userId" value="${listValue.id}"/>
-                                    <div class="col-lg-3">
-                                        <h3 style="">${listValue.firstName} ${listValue.lastName}</h3>
-                                        <p>${listValue.town} ${listValue.zipCode}</p>
+                                    <div class="col-lg-4 pull-left" style="padding-left: 0px; text-align: left;">
+                                        <h3 style="padding-left: 25px; text-align: left;">${listValue.firstName} ${listValue.lastName}</h3>
+                                        <p style="padding-left: 25px; text-align: left;">${listValue.sex}, ${listValue.town} ${listValue.zipCode}</p>
+                                        <p style="padding-left: 25px; text-align: left;">Od ${listValue.moneyPerHour} zł/h</p>
+
                                     </div>
                                     <div class="col-lg-3 col-lg-offset-3">
                                         <button type="submit" onclick="showCertainProfile()" class="btn btn-danger"

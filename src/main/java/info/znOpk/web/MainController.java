@@ -35,34 +35,44 @@ public class MainController {
     }
 
     @RequestMapping(value = "/indexService", method = RequestMethod.GET)
-    public String indexService(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult result, Model model) {
+    public String indexService(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult bindingResult, Model model) {
 
+        searchValidator.validate(searchForm, bindingResult);
 
-        searchValidator.validate(searchForm, result);
-        if (searchForm.getTypeOfUser().length() < 7) {
-            if (result.hasErrors()) {
-                return "index";
-            } else {
-
-                if (searchForm.getUsername() != null) {
-                    User user = sessionService.getUser(searchForm.getUsername());
-                    model.addAttribute("user", user);
-                }
-
-                if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
-                    model.addAttribute("browseList", browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()));
-                } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
-                    model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
-                }
-                return "indexService";
-            }
-
-        } else {
-
+        if (bindingResult.hasErrors()) {
             return "index";
-
         }
 
+       // if (searchForm.getTypeOfUser().length() < 7) {
+
+            if (searchForm.getUsername() != null) {
+                User user = sessionService.getUser(searchForm.getUsername());
+                model.addAttribute("user", user);
+            }
+
+            if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
+                model.addAttribute("browseList", browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()));
+            } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
+                model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
+            }
+            return "indexService";
+
+      /* } else {
+
+            if (searchForm.getUsername() != null) {
+                User user = sessionService.getUser(searchForm.getUsername());
+                model.addAttribute("user", user);
+            }
+
+            String[] result = searchValidator.checkDetailsResearchValues(searchForm.getTypeOfUser());
+
+            if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
+                model.addAttribute("browseList", browseService.browseDetailsResultsTown(result[0], result[1], searchForm.getAddress()));
+            } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
+                model.addAttribute("browseList", browseService.browseDetailsResultsZipCode(result[0], result[1], searchForm.getAddress()));
+            }
+            return "indexService";
+        }*/
     }
 
     @ModelAttribute("searchForm")

@@ -23,13 +23,16 @@ public class User {
     @Transient
     private String passwordConfirm;
 
+    @Transient
+    private Integer age;
+
     @NotNull
     @Column(name = "poziom_dostepu")
     private String role;
 
     @NotNull
     @Column(name = "typ_uzytkownika")
-    private String userType;
+    private int userType;
 
     @Column(name = "imie")
     private String firstName;
@@ -44,15 +47,21 @@ public class User {
     private String town;
 
     @Column(name = "plec")
-    private boolean sex;
+    private String sex;
 
     @Column(name = "kod_pocztowy")
     private String zipCode;
 
+    @Column(name = "wynagrodzenie")
+    private String moneyPerHour;
+
+    @Column(name = "data_urodzenia")
+    private String dateOfBirth;
+
     public User(){}
 
-    public User(String username, String password, String passwordConfirm, String role, String userType,
-                String firstName, String lastName, Integer active, String town, boolean sex, String zipCode) {
+    public User(String username, String password, String passwordConfirm, String role, Integer userType,
+                String firstName, String lastName, Integer active, String town, String sex, String zipCode) {
         this.username = username;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
@@ -124,20 +133,32 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUserType() {
+    public Integer getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(Integer userType) {
         this.userType = userType;
     }
 
-    public boolean isSex() {
+    public Integer getActive() {
+        return active;
+    }
+
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getMoneyPerHour() {
+        return moneyPerHour;
+    }
+
+    public void setMoneyPerHour(String moneyPerHour) {
+        this.moneyPerHour = moneyPerHour;
     }
 
     public String getZipCode() {
@@ -151,4 +172,20 @@ public class User {
     public String getTown() {return town;}
 
     public void setTown(String town) {this.town = town;}
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

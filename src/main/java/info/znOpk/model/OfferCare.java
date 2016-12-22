@@ -24,22 +24,22 @@ public class OfferCare {
     private int age;
 
     @Column(name = "opieka_niania")
-    private String whoWannCareNanny="0";
+    private String whoWannCareNanny = "0";
 
     @Column(name = "opieka_starsi")
-    private String whoWannCareOld="0";
+    private String whoWannCareOld = "0";
 
     @Column(name = "umiej_sprzat")
-    private String otherActClean="0";
+    private String otherActClean = "0";
 
     @Column(name = "umiej_gotowa")
-    private String otherActCook="0";
+    private String otherActCook = "0";
 
     @Column(name = "umiej_zakup")
-    private String otherActShop="0";
+    private String otherActShop = "0";
 
     @Column(name = "umiej_prac")
-    private String otherActVac="0";
+    private String otherActVac = "0";
 
     @Column(name = "inne_umiejetnosci")
     private String otherSkills;
@@ -48,10 +48,10 @@ public class OfferCare {
     private String writeSthAboutYou;
 
     @Column(name = "doswiadczenie_dzieci")
-    private String careExpKids="0";
+    private String careExpKids = "0";
 
     @Column(name = "doswiadczenie_starsi")
-    private String careExpOld="0";
+    private String careExpOld = "0";
 
     @Column(name = "lat_dosw_dzieci")
     private String experienceKidsTime;
@@ -60,19 +60,19 @@ public class OfferCare {
     private String experienceOldTime;
 
     @Column(name = "wymiar_pol_etatu")
-    private String timeJobHalf="0";
+    private String timeJobHalf = "0";
 
     @Column(name = "wymiar_pelny_etat")
-    private String timeJobFull="0";
+    private String timeJobFull = "0";
 
     @Column(name = "wymiar_dorywczo")
-    private String timeJobCasual="0";
+    private String timeJobCasual = "0";
     @NotNull
     @Column(name = "miejsce_opieki")
-    private String placeOfTakeCare="0";
+    private String placeOfTakeCare = "0";
     @NotNull
     @Column(name = "praca_z_domem")
-    private String workWithHome;
+    private String workWithHome = "0";
     @NotNull
     @Column(name = "wynagrodzenie")
     private String moneyPerHour;
@@ -94,6 +94,34 @@ public class OfferCare {
         this.writeSthAboutYou = writeSthAboutYou;
         this.experienceKidsTime = experienceKidsTime;
         this.experienceOldTime = experienceOldTime;
+        this.placeOfTakeCare = placeOfTakeCare;
+        this.workWithHome = workWithHome;
+        this.moneyPerHour = moneyPerHour;
+        this.education = education;
+        this.foreignLanguages = foreignLanguages;
+    }
+
+    public OfferCare(String dataOfBirth, int age, String whoWannCareNanny, String whoWannCareOld, String otherActClean, String otherActCook,
+                     String otherActShop, String otherActVac, String otherSkills, String writeSthAboutYou, String careExpKids, String careExpOld,
+                     String experienceKidsTime, String experienceOldTime, String timeJobHalf, String timeJobFull, String timeJobCasual,
+                     String placeOfTakeCare, String workWithHome, String moneyPerHour, String education, String foreignLanguages) {
+        this.dataOfBirth = dataOfBirth;
+        this.age = age;
+        this.whoWannCareNanny = whoWannCareNanny;
+        this.whoWannCareOld = whoWannCareOld;
+        this.otherActClean = otherActClean;
+        this.otherActCook = otherActCook;
+        this.otherActShop = otherActShop;
+        this.otherActVac = otherActVac;
+        this.otherSkills = otherSkills;
+        this.writeSthAboutYou = writeSthAboutYou;
+        this.careExpKids = careExpKids;
+        this.careExpOld = careExpOld;
+        this.experienceKidsTime = experienceKidsTime;
+        this.experienceOldTime = experienceOldTime;
+        this.timeJobHalf = timeJobHalf;
+        this.timeJobFull = timeJobFull;
+        this.timeJobCasual = timeJobCasual;
         this.placeOfTakeCare = placeOfTakeCare;
         this.workWithHome = workWithHome;
         this.moneyPerHour = moneyPerHour;

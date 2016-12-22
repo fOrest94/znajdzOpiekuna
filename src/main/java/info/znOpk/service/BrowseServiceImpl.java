@@ -18,12 +18,24 @@ public class BrowseServiceImpl implements BrowseService {
     private BrowseRepository browseRepository;
 
     @Override
-    public List<User> browseZipCode(String userType, String zipCode) {
+    public List<User> browseZipCode(Integer userType, String zipCode) {
         return browseRepository.findByUserTypeAndZipCode(userType, zipCode);
     }
 
     @Override
-    public List<User> browseTown(String userType, String town) {
+    public List<User> browseTown(Integer userType, String town) {
         return browseRepository.findByUserTypeAndTown(userType, town);
+    }
+
+    @Override
+    public List<User> browseDetailsResultsZipCode(Integer userType, String typeOfWork, String zipCode) {
+        //return browseRepository.findByUserTypeAndTypeOfWorkAndZipCode(userType, typeOfWork, zipCode);
+        return null;
+    }
+
+    @Override
+    public List<User> browseDetailsResultsTown(Integer userType, String typeOfWork, String zipCode) {
+       // return browseRepository.findByUserTypeAndTypeOfWorkAndTown(userType, typeOfWork, zipCode);
+         return null;
     }
 }

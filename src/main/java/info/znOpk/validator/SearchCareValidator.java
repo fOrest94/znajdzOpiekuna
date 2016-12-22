@@ -63,6 +63,7 @@ public class SearchCareValidator implements Validator {
                 searchCare.setWhoWannCareOld("1");
             else if(x.equals("home"))
                 searchCare.setWorkWithHome("1");
+
         }
         return  searchCare;
     }

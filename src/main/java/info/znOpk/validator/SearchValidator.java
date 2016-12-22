@@ -35,37 +35,43 @@ public class SearchValidator implements Validator {
         } else if (checkAddress(searchForm.getAddress()).equals("error")) {
             System.out.println("222222");
             errors.rejectValue("address", "Data.searchForm.address");
-        }/* else if (checkAddress(searchForm.getAddress()).equals("zipCode") &&
-                (browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()).size() < 1)) {
-            System.out.println("3333333333");
-            errors.rejectValue("address", "Empty.searchForm.address");
-        } else if (checkAddress(searchForm.getAddress()).equals("town") &&
-                (browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()).size() < 1)) {
-            System.out.println("44444444");
-            errors.rejectValue("address", "Empty.searchForm.address");
-        }*/
+        }
+       // else if(searchForm.getTypeOfUser().length() < 7){
+            if (checkAddress(searchForm.getAddress()).equals("zipCode") &&
+                    (browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()).size() < 1)) {
+                System.out.println("3333333333");
+                errors.rejectValue("address", "Empty.searchForm.address");
+            } else if (checkAddress(searchForm.getAddress()).equals("town") &&
+                    (browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()).size() < 1)) {
+                System.out.println("44444444");
+                errors.rejectValue("address", "Empty.searchForm.address");
+            }
+       // }
+       // else{
+
+       // }
     }
 
-    public String[] checkSearchUser(String user) {
+    public String[] checkDetailsResearchValues(String user) {
 
         String[] temp = new String[2];
 
-        if (user.substring(0, 1).equals("1")) {
+        if (user.substring(0, 6).equals("sister")) {
 
-            temp[0] = "sister";
+            temp[0] = "OfferCare";
 
         } else
-            temp[0] = "simple";
+            temp[0] = "SearchCare";
 
-        if (user.substring(1, 1).equals("1")) {
+        if (user.substring(6, 7).equals("1")) {
             temp[1] = "whoWannCareNanny";
 
-        } else if (user.substring(1, 1).equals("2")) {
+        } else if (user.substring(6, 7).equals("2")) {
             temp[1] = "whoWannCareOld";
         } else {
             temp[1] = "workWithHome";
         }
-        System.out.println(temp.toString());
+
         return temp;
 
     }
@@ -75,14 +81,11 @@ public class SearchValidator implements Validator {
         if (address.substring(2, 3).equals("-") && address.length() == 6) {
 
             String temp = address.substring(0, 2) + address.substring(3, 6);
-            System.out.println(temp + "    1111111");
             try {
                 Integer.valueOf(temp);
-                System.out.println(temp + "    1111111");
                 return "zipCode";
 
             } catch (NumberFormatException e) {
-                System.out.println(temp + "    1111111fddddddddddddd");
                 return "error";
             }
         } else {
