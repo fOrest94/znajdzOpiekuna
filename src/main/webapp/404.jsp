@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="resources/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Bungee|Russo+One" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="container" style="margin-top: 180px;">
-    <img src="resources/img/404.jpg" style=" display: block; margin: 0 auto; ">
-    <h2 style="color: black; font-family: 'Itim', cursive, sans-serif; padding-top: 0px; text-align: center;">Wygląda na to,
-        że odkryłeś koniec internetów.</br> Gratulujemy!!!</br>Jeśli jednak zechciałbyś wrócić do naszej strony kliknij
+<div class="container" style="margin-top: 80px;">
+    <img src="resources/img/404a.png" style=" display: block; margin: 0 auto; ">
+    <h2 style="color: black; font-family: 'Itim', cursive, sans-serif; padding-top: 0px; text-align: center;">Ooops ... najwyraźniej coś poszło nie tak.</br>Jeśli jednak zechciałbyś wrócić do naszej strony kliknij
         <a href="/" style="color: #CE5B3F;">STRONA GŁÓWNA</a></h2>
 
 </div>

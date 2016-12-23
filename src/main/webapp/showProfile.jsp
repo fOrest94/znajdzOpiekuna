@@ -53,7 +53,6 @@
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <li><a href="login">Zaloguj się</a></li>
                     <li><a href="registration" style="color: #c09e6b;">Zarejestruj się</a></li>
-
                 </c:if>
             </ul>
         </div>
@@ -79,7 +78,8 @@
         <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
             <li role="presentation" class="active"><a href="showMyProfile">Profil</a></li>
             <li role="presentation"><a href="editMyProfile">Edycja</a></li>
-            <li role="presentation"><a href="userSettings">Zaawansowane</a></li>
+            <li role="presentation"><a href="newsManagement">Dodaj aktualność</a></li>
+
         </ul>
     </div>
 </c:if>

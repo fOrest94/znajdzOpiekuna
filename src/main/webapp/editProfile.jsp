@@ -74,12 +74,12 @@
         </c:if>
     </div>
 </div>
-<c:if test="${pageContext.request.userPrincipal.name != null && whatShow == 1}">
+<c:if test="${pageContext.request.userPrincipal.name != null}">
     <div class="container" style="background-color: white;">
         <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
             <li role="presentation"><a href="showMyProfile">Profil</a></li>
             <li role="presentation" class="active"><a href="editMyProfile">Edycja</a></li>
-            <li role="presentation"><a href="userSettings">Zaawansowane</a></li>
+            <c:if test="${user.role eq 'ADMINISTRATOR'}"><li role="presentation"><a href="newsManagement">Zarządzaj aktualnościami</a></li></c:if>
         </ul>
     </div>
 </c:if>

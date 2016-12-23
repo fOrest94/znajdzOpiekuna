@@ -101,15 +101,13 @@ public class RegisterController {
         return "redirect:/";
     }
 
-
     @RequestMapping(value = "/registration/{email}/{id}", method = RequestMethod.GET)
-    public String registerAuthentication(@PathVariable String email, @PathVariable String id, Model model) throws Exception {
+    public String registerAuthentication(@PathVariable String email, @PathVariable Long id, Model model) throws Exception {
 
         String emailDecrypted = emailEncryption.decrypt(email);
-        Long userID = Long.parseLong(id);
         User user = userService.findByUsername(emailDecrypted);
 
-        if (user.getId() == userID) {
+        if (user.getId() == id) {
 
             user.setActive(1);
             userService.setActive(user.isActive(), user.getId());
