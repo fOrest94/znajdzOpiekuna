@@ -65,7 +65,7 @@
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <div class="col-lg-3" style="padding-left: 50px; padding-top: 22px;">
-                <a href="news" style="color: white; font-size: 20px; padding-right: 20px;">Aktualności</a>
+                <a href="news/0" style="color: white; font-size: 20px; padding-right: 20px;">Aktualności</a>
             </div>
             <div class="col-lg-3 col-lg-offset-6" style="padding-left: 50px; padding-top: 10px;">
                 <a href="showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>

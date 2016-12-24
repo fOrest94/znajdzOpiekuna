@@ -29,10 +29,10 @@ public class News {
     private String data;
 
     @Transient
-    private FileUpload file;
+    private File file;
 
     public News() {
-        file = new FileUpload();
+        file = new File();
     }
 
     public Long getId() {
@@ -67,11 +67,11 @@ public class News {
         this.data = data;
     }
 
-    public FileUpload getFile() {
+    public File getFile() {
         return file;
     }
 
-    public void setFile(FileUpload file) {
+    public void setFile(File file) {
         this.file = file;
     }
 

@@ -2,7 +2,7 @@ package info.znOpk.web;
 
 import info.znOpk.DTO.OfferCareDAO;
 import info.znOpk.DTO.SearchCareDAO;
-import info.znOpk.model.FileUpload;
+import info.znOpk.model.File;
 import info.znOpk.model.OfferCare;
 import info.znOpk.model.SearchCare;
 import info.znOpk.model.User;
@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 
@@ -66,7 +65,7 @@ public class UserController {
     public String editProfile(Principal principal, Model model) {
 
         User user = sessionService.getUser(principal.getName());
-        FileUpload fileModel = new FileUpload();
+        File fileModel = new File();
 
         if (user.getUserType() == 2) {
             model.addAttribute("offerCare", new OfferCareDAO());
@@ -83,7 +82,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/editMyProfile", method = RequestMethod.POST)
-    public String editProfileSave(@Valid FileUpload fileBucket, @ModelAttribute("offerCare") OfferCareDAO offerCareDAO,
+    public String editProfileSave(@Valid File fileBucket, @ModelAttribute("offerCare") OfferCareDAO offerCareDAO,
                                   @ModelAttribute("searchCare") SearchCareDAO searchCareDAO,
                                   HttpServletRequest request, BindingResult result, Model model) throws IOException {
 
@@ -120,11 +119,11 @@ public class UserController {
         try{
 
             MultipartFile multipartFile = fileBucket.getFile();
-            multipartFile.transferTo(new File(uploadLocation + fileName));
+            multipartFile.transferTo(new java.io.File(uploadLocation + fileName));
             model.addAttribute("fileName", fileName);
         }catch (Exception e){System.out.println("Brak zdjęcia");};
 
-        FileUpload fileModel = new FileUpload();
+        File fileModel = new File();
 
         model.addAttribute("fileBucket", fileModel);
         model.addAttribute("whatShow", 1);
@@ -137,7 +136,7 @@ public class UserController {
 
         User user = sessionService.getUser(request.getUserPrincipal().getName());
         user.setAge(24);
-        FileUpload fileModel = new FileUpload();
+        File fileModel = new File();
         if (user.getUserType() == 2) {
             OfferCare nanny = sessionService.getCareUser(user.getId());
             nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));

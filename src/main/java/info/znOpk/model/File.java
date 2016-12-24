@@ -2,7 +2,7 @@ package info.znOpk.model;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class FileUpload{
+public class File {
 
 	MultipartFile file;
 

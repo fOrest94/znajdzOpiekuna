@@ -10,6 +10,8 @@ import java.util.List;
 public interface NewsService {
 
     List<News> findAllNews();
+    News findLastNews();
+    News findParticularNews(Long id);
     void saveNews(News news);
     boolean deleteNews(Long id);
     News editNews(Long id);

@@ -19,7 +19,20 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<News> findAllNews() {
+
         return newsRepository.findAll();
+    }
+
+    @Override
+    public News findLastNews() {
+
+        return newsRepository.findByData();
+    }
+
+    @Override
+    public News findParticularNews(Long id) {
+
+        return newsRepository.findById(id);
     }
 
     @Override

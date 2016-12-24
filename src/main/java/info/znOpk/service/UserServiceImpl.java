@@ -34,6 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
     public void setActive(Integer active, Long id) {
         userRepository.updateActive(active, id);
         userRepository.flush();

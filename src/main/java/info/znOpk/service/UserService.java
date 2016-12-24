@@ -9,6 +9,7 @@ public interface UserService {
 
     void save(User user);
     User findByUsername(String email);
+    User findById(Long id);
     void setActive(Integer active,Long id);
     void updateSalaryAndBirthDate(String moneyPerHour, String birthDate, Long id);
 }

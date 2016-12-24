@@ -21,7 +21,7 @@
 <body>
 
 <div class="container" style="margin-top: 80px;">
-    <img src="resources/img/404a.png" style=" display: block; margin: 0 auto; ">
+    <img src="/resources/img/404.png" style=" display: block; margin: 0 auto; ">
     <h2 style="color: black; font-family: 'Itim', cursive, sans-serif; padding-top: 0px; text-align: center;">Ooops ... najwyraźniej coś poszło nie tak.</br>Jeśli jednak zechciałbyś wrócić do naszej strony kliknij
         <a href="/" style="color: #CE5B3F;">STRONA GŁÓWNA</a></h2>
 

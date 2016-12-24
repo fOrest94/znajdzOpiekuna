@@ -1,6 +1,6 @@
 package info.znOpk.validator;
 
-import info.znOpk.model.FileUpload;
+import info.znOpk.model.File;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -10,11 +10,11 @@ import org.springframework.validation.Validator;
 public class FileValidator implements Validator {
      
     public boolean supports(Class<?> clazz) {
-        return FileUpload.class.isAssignableFrom(clazz);
+        return File.class.isAssignableFrom(clazz);
     }
  
     public void validate(Object obj, Errors errors) {
-    	FileUpload file = (FileUpload) obj;
+    	File file = (File) obj;
 
         if(file.getFile()!=null){
             if (file.getFile().getSize() == 0) {

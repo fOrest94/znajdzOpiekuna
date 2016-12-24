@@ -71,17 +71,20 @@ CREATE TABLE IF NOT EXISTS `aktualnosci` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `tytul_wiadomosci` varchar(50),
   `opis_wiadomosci` varchar(2000),
-  `data_utworzenia` DATE NOT NULL,
+  `data_utworzenia` DATETIME NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE IF EXISTS `komentarze`;
 CREATE TABLE IF NOT EXISTS `komentarze` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_wiadomosci` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_uzytkownika` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_wiadomosci` bigint(20) NOT NULL,
+  `id_uzytkownika` bigint(20) NOT NULL,
+  `imie_uzytkownika` varchar(30),
+  `nazwisko_uzytkownika` varchar(30),
   `tresc_komentarza` varchar(250),
-  `data_komentarza` DATE NOT NULL,
+  `data_komentarza` DATETIME NOT NULL,
+  `ocena_komentarza` DOUBLE null,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -89,3 +92,4 @@ CREATE TABLE IF NOT EXISTS `komentarze` (
 ALTER TABLE `opiekun` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);
 
 ALTER TABLE `szukajacy_opieki` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);
+
