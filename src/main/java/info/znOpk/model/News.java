@@ -25,8 +25,15 @@ public class News {
     private String description;
 
     @NotNull
-    @Column(name="data_utworzenia")
+    @Column(name = "data_utworzenia")
     private String data;
+
+    @Transient
+    private FileUpload file;
+
+    public News() {
+        file = new FileUpload();
+    }
 
     public Long getId() {
         return id;
@@ -60,6 +67,14 @@ public class News {
         this.data = data;
     }
 
+    public FileUpload getFile() {
+        return file;
+    }
+
+    public void setFile(FileUpload file) {
+        this.file = file;
+    }
+
     @Override
     public String toString() {
         return "News{" +
@@ -67,6 +82,7 @@ public class News {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", data='" + data + '\'' +
+                ", file=" + file +
                 '}';
     }
 }

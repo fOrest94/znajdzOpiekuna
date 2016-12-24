@@ -116,7 +116,7 @@
                 <div class="panel-heading" style="font-size: 20px;">Zarządzaj</div>
                 <div class="panel-body" style="margin-left: 0px;">
                     <div class="col-lg-12">
-                        <form:form method="POST" modelAttribute="newsForm" class="form-horizontal">
+                        <form:form method="POST" modelAttribute="newsForm" enctype="multipart/form-data" class="form-horizontal">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <fieldset style="padding-right: 0px;">
                             <legend>Dodaj aktualność</legend>
@@ -130,7 +130,7 @@
                                                         class="form-control input-md"
                                                         placeholder="Tu wpisz tytuł aktualności"
                                                         autofocus="true"
-                                                        required="true"></form:input>
+                                                        required="true" value="${newsForm.title}"></form:input>
                                             <form:errors path="title"></form:errors>
                                         </div>
                                     </spring:bind>
@@ -146,18 +146,31 @@
                                                            style="margin-left: 20px; border-radius: 3px;"
                                                            placeholder="Tu wpisz treść aktualności"
                                                            autofocus="true"
-                                                           required="true"/>
+                                                           required="true" value="${newsForm.description}"/>
                                             <form:errors path="description"></form:errors>
                                         </div>
                                     </spring:bind>
-                                    <div class="form-group">
-                                        <div class="col-md-4 col-md-offset-8">
-                                            <button id="singlebutton" name="singlebutton"
-                                                    class="btn btn-danger">Dodaj
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4" >Tło wątku(3:1)</label>
+                                <div class="col-md-7">
+                                    <spring:bind path="file.file">
+                                        <div class="form-group ${status.error ? 'has-error' : ''}">
+                                            <form:input path="file.file" type="file"  class="upload" />
+                                            <form:errors path="file.file" class="help-inline"/>
+                                        </div>
+                                    </spring:bind>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4 col-md-offset-8" style="padding-left: 36px;">
+                                    <button name="singlebutton"
+                                            class="btn btn-danger">Dodaj
+                                    </button>
+                                </div>
+                            </div>
                                 </form:form>
                         </fieldset>
                         <c:if test="${not empty newsList}">
@@ -176,7 +189,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4" style="padding-top: 10px;" for="singlebutton">Wybierz operacje</label>
+                                        <label class="col-md-4" style="padding-top: 10px;">Wybierz operacje</label>
                                         <div class="col-md-6 col-md-offset-2">
                                             <button name="type" value="delete" class="btn btn-danger">Usuń</button>
                                             <button name="type" value="edit" class="btn btn-danger">Edytuj</button>

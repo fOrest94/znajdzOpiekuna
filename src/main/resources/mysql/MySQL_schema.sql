@@ -70,10 +70,21 @@ DROP TABLE IF EXISTS `aktualnosci`;
 CREATE TABLE IF NOT EXISTS `aktualnosci` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `tytul_wiadomosci` varchar(50),
-  `opis_wiadomosci` varchar(250),
+  `opis_wiadomosci` varchar(2000),
   `data_utworzenia` DATE NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `komentarze`;
+CREATE TABLE IF NOT EXISTS `komentarze` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_wiadomosci` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_uzytkownika` bigint(20) NOT NULL AUTO_INCREMENT,
+  `tresc_komentarza` varchar(250),
+  `data_komentarza` DATE NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 ALTER TABLE `opiekun` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);
 

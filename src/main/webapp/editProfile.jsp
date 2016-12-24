@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <div class="col-md-7">
-                                <form:input type="file" path="file" id="file" class="form-control input-sm"/>
+                                <form:input type="file" path="file" class="upload" />
                                 <div class="has-error">
                                     <form:errors path="file" class="help-inline"/>
                                 </div>

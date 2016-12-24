@@ -8,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,8 +30,10 @@ public class NewsController {
     NewsService newsService;
 
     @RequestMapping(value = "/news", method = RequestMethod.GET)
-    public String showNews(Model model){
+    public String showNews(Model model, Principal principal){
 
+        model.addAttribute("user",userService.findByUsername(principal.getName()));
+        model.addAttribute("newsList",newsService.findAllNews());
 
         return "news";
 
@@ -52,7 +57,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/newsManagement", method = RequestMethod.POST)
-    public String showNewsProfile(@ModelAttribute("newsForm") News news, BindingResult bindingResult, Principal principal, Model model){
+    public String showNewsProfile(@ModelAttribute("newsForm") News news, BindingResult bindingResult, HttpServletRequest request, Model model){
 
         System.err.println(news.toString());
         if(bindingResult.hasErrors())
@@ -62,8 +67,17 @@ public class NewsController {
         news.setData(String.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())));
         newsService.saveNews(news);
 
+        String uploadLocation = request.getSession().getServletContext().getRealPath("/") +"resources\\img\\img_news\\";
+        String fileName = news.getId() + ".jpg";
+
+        try{
+
+            MultipartFile multipartFile = news.getFile().getFile();
+            multipartFile.transferTo(new File(uploadLocation + fileName));
+        }catch (Exception e){System.out.println("Brak zdjęcia");};
+
         model.addAttribute("newsForm" , new News());
-        model.addAttribute("user", userService.findByUsername(principal.getName()));
+        model.addAttribute("user", userService.findByUsername(request.getUserPrincipal().getName()));
         model.addAttribute("newsList", newsService.findAllNews());
 
         return "newsManagement";
@@ -75,6 +89,7 @@ public class NewsController {
 
         if(action.equals("edit"))
         {
+            System.out.println("ala "+newsService.editNews(id).toString());
             model.addAttribute("newsForm" , newsService.editNews(id));
             model.addAttribute("user", userService.findByUsername(principal.getName()));
             model.addAttribute("newsList", newsService.findAllNews());
