@@ -114,16 +114,13 @@
                 <h3 style="text-align: left; ">Ocena: 4.5</h3>
             </div>
             <div class="col-lg-6" style="padding-top: 30px;">
-                <a href="writeToMe" class="btn btn-danger" style="width: 180px; font-size: 19px; color: white;">Napisz
+                <a href="/message/${user.id}" class="btn btn-danger" style="width: 180px; font-size: 19px; color: white;">Napisz
                     do mnie!</a>
             </div>
 
         </div>
     </div>
     <div class="col-lg-7 col-lg-offset-5" style="min-height: 500px; padding-bottom: 100px;">
-
-
-
         <div class="panel panel-default" style="width: 520px;">
             <div class="panel-heading">O mnie</div>
             <div class="panel-body">
@@ -234,7 +231,7 @@
         </div>
         ${userNanny.foreignLanguages}<br>
     </c:if>
-
+        <c:if test="${user.userType eq 1 }">
         <p style="font-size: 16px; text-align: left;">
         <div class="panel">
             <h3 style="text-align: left;">Poszukuję opieki dla:</h3>
@@ -244,7 +241,7 @@
         <img src="resources/img/${userParent.whoWannCareOld }.png"> Osoby starszej<br>
         <img src="resources/img/${userParent.workWithHome}.png"> Domu<br>
         <br>
-
+        </c:if>
         <br>
     </div>
 </div>

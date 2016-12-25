@@ -79,40 +79,28 @@
 <div class="search-navbar">
     <div class="container" style="padding-top: 20px; font-size: 15px;">
 
-        <form:form method="get" modelAttribute="searchForm" action="/indexService">
-            <div class="col-lg-2">
-                <label>Szukam</label>
-                <spring:bind path="typeOfUser">
-                    <form:select path="typeOfUser" class="selectpicker show-tick" data-width="170px">
-                        <optgroup label="opieka nad dziećmi">
-                            <path:option style="font-size: 18px; color: black !important;"
-                                         value="sister1">Niani</path:option>
-                            <path:option style="font-size: 18px;" value="simple1">Ofert opieki</path:option>
-                        </optgroup>
-                        <optgroup label="opieka nad starszymi">
-                            <path:option style="font-size: 18px;" value="sister2">Opiekunek</path:option>
-                            <path:option style="font-size: 18px;" value="simple2">Ofert opieki</path:option>
-                        </optgroup>
-                        <optgroup label="opieka nad domem">
-                            <path:option style="font-size: 18px;" value="sister3">Pomocy domowej</path:option>
-                            <path:option style="font-size: 18px;" value="simple3">Ofert pomocy</path:option>
-                        </optgroup>
-                    </form:select>
-                </spring:bind>
-            </div>
-            <div class="col-lg-2">
-                <label for="ch2">Gdzie</label>
-                <spring:bind path="address">
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input path="address" id="ch2" class="form-control"
-                                    placeholder="Kod lub miasto"/>
-                        <form:errors path="address"/>
-                    </div>
-                </spring:bind>
-            </div>
-            <input type="submit" class="btn btn-danger" style="margin-top: 24px; font-size: 19px; height: 40px;"/>
-        </form:form>
-
+        <div class="col-lg-2">
+            <label for="ch1">Szukam</label>
+            <select id="ch1" class="selectpicker show-tick" data-width="170px" >
+                <optgroup label="opieka nad dziećmi">
+                    <option style="font-size: 18px; color: black !important;">Niani</option>
+                    <option style="font-size: 18px;">Ofert opieki</option>
+                </optgroup>
+                <optgroup label="opieka nad starszymi">
+                    <option style="font-size: 18px;">Opiekunek</option>
+                    <option style="font-size: 18px;">Ofert opieki</option>
+                </optgroup>
+                <optgroup label="opieka nad domem">
+                    <option style="font-size: 18px;">Pomocy domowej</option>
+                    <option style="font-size: 18px;">Ofert pomocy</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2" >
+            <label for="ch2">Gdzie</label>
+            <input id="ch2" type="text" class="form-control" placeholder="Miasto">
+        </div>
+        <button type="submit" class="btn btn-danger"  style="margin-top: 26px; font-size: 20px; height: 40px;">Szukaj</button>
     </div>
 </div>
 
@@ -125,10 +113,10 @@
                     <th style="height: 56px; font-size: 20px;">Aktualności</th>
                 </tr>
                 </thead>
-                <tbody><c:forEach var="listValue" items="${browseList}">
+                <tbody><c:forEach var="listValue" items="${newsList}">
                     <tr>
                         <td style="height: 30px; text-align: left;">
-                            gdfgdfgdfgdf
+                            <a href="news/${listValue.id}" style="color: #0f0f0f"> ${listValue.title}</a>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -146,12 +134,14 @@
                                          height="120" style="padding-bottom: 0px;">
                                 </div>
                                 <form action="showProfile" method="get" id="showCertainProfile">
-                                    <input type="hidden" name="userLogged" value="${pageContext.request.userPrincipal.name}">
+                                    <input type="hidden" name="userLogged"
+                                           value="${pageContext.request.userPrincipal.name}">
                                     <input type="hidden" name="userId" value="${listValue.id}"/>
                                     <div class="col-lg-4 pull-left" style="padding-left: 0px; text-align: left;">
                                         <h3 style="padding-left: 25px; text-align: left;">${listValue.firstName} ${listValue.lastName}</h3>
                                         <p style="padding-left: 25px; text-align: left;">${listValue.sex}, ${listValue.town} ${listValue.zipCode}</p>
-                                        <p style="padding-left: 25px; text-align: left;">Od ${listValue.moneyPerHour} zł/h</p>
+                                        <p style="padding-left: 25px; text-align: left;">Od ${listValue.moneyPerHour}
+                                            zł/h</p>
 
                                     </div>
                                     <div class="col-lg-3 col-lg-offset-3">
@@ -178,5 +168,6 @@
 <script src="resources/js/custom.js"></script>
 <script src="resources/js/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+
 </body>
 </html>

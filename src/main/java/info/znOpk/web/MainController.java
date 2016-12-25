@@ -3,6 +3,7 @@ package info.znOpk.web;
 import info.znOpk.DTO.SearchForm;
 import info.znOpk.model.User;
 import info.znOpk.service.BrowseService;
+import info.znOpk.service.NewsService;
 import info.znOpk.service.SessionService;
 import info.znOpk.validator.SearchValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class MainController {
 
     @Autowired
     private SearchValidator searchValidator;
+
+    @Autowired
+    private NewsService newsService;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String welcome(Model model) {
@@ -55,6 +59,8 @@ public class MainController {
             } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
                 model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
             }
+            model.addAttribute("newsList", newsService.findAllNews());
+
             return "indexService";
 
       /* } else {

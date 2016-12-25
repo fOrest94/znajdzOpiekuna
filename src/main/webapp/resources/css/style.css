@@ -66,12 +66,12 @@ a:active {
 
 #headerSection{
 	height: auto;
+	margin-top: 80px;
 	background-image: url("../img/main-wallpaper0.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 	text-align:center;
-	background-position: center center;
 	min-height: 853px;
 	width: 100%;	
 }
@@ -79,11 +79,7 @@ a:active {
 #mainSectionService{
 	height: auto;
 	background-color: white;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
 	text-align:center;
-	background-position: center center;
 	min-height: 853px;
 	width: 100%;	
 }

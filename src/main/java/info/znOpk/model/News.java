@@ -17,11 +17,11 @@ public class News {
     private Long id;
 
     @NotNull
-    @Column(name = "tytul_wiadomosci")
+    @Column(name = "tytul_aktualnosci")
     private String title;
 
     @NotNull
-    @Column(name = "opis_wiadomosci")
+    @Column(name = "opis_aktualnosci")
     private String description;
 
     @NotNull
