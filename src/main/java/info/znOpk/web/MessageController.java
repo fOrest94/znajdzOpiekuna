@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by DuduŚ on 2016-12-25.
@@ -32,13 +33,21 @@ public class MessageController {
     @RequestMapping(value = "/message/{id}", method = RequestMethod.GET)
     public String sendMessage(@PathVariable("id") Long id, Model model, Principal principal) {
 
-        User user_recipient = userService.findById(id);
         User user = userService.findByUsername(principal.getName());
-        System.out.println("*********   "+id+" "+user.getId());
         model.addAttribute("user", user);
-        model.addAttribute("recipient_data", user_recipient.getFirstName()+" "+user_recipient.getLastName());
-        model.addAttribute("messageForm", new Message(user.getId(), id));
 
+        if(id > 0){
+            User user_recipient = userService.findById(id);
+            model.addAttribute("recipient_data", user_recipient.getFirstName()+" "+user_recipient.getLastName());
+            model.addAttribute("messageForm", new Message(user.getId(), id));
+        }
+        else {
+            model.addAttribute("recipient_data", "0");
+            model.addAttribute("messageForm", new Message(user.getId()));
+        }
+        List<Message> messages = messageService.getMessagesById(user.getId());
+        System.out.println("pierdolone studaia w chuj "+messages.size()+ " haha");
+        model.addAttribute("massagesList", messages);
         return "/message";
     }
 
@@ -49,16 +58,7 @@ public class MessageController {
         messageService.save(message);
 
         model.addAttribute("user", userService.findByUsername(principal.getName()));
-        return "redirect:/indexService";
+        return "/";
     }
 
-    @RequestMapping(value = "/messageList", method = RequestMethod.POST)
-    public String sendMessages(@ModelAttribute("messageForm") Message message, Principal principal, BindingResult bindingResult, Model model){
-
-        message.setData(String.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())));
-        messageService.save(message);
-
-        model.addAttribute("user", userService.findByUsername(principal.getName()));
-        return "redirect:/indexService";
-    }
 }

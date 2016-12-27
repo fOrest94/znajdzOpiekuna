@@ -62,13 +62,15 @@
 <div class="profile-navbar">
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <div class="col-lg-3" style="padding-left: 50px; padding-top: 22px;">
-                <a href="news/0" style="color: white; font-size: 20px; padding-right: 20px;">Aktualności</a>
+            <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
+                <a href="/indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
+                <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
+                <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
             </div>
-            <div class="col-lg-3 col-lg-offset-6" style="padding-left: 50px; padding-top: 10px;">
-                <a href="showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
-                <a href="editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="messages" style="color: white; font-size: 13px;">Wiadomości</a>
+            <div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
+                <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
+                <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
+                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości</a>
             </div>
         </c:if>
     </div>
@@ -78,7 +80,11 @@
         <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
             <li role="presentation" class="active"><a href="showMyProfile">Profil</a></li>
             <li role="presentation"><a href="editMyProfile">Edycja</a></li>
-            <c:if test="${user.role eq 'ADMINISTRATOR'}"><li role="presentation"><a href="newsManagement">Zarządzaj aktualnościami</a></li></c:if>
+            <c:if test="${userToShow.role eq 'ADMINISTRATOR'}">
+                <li role="presentation"><a href="newsManagement">Zarządzaj aktualnościami</a></li>
+                <li role="presentation"><a href="/usersManagement">Zarządzaj użytkownikami</a></li>
+            </c:if>
+
         </ul>
     </div>
 </c:if>

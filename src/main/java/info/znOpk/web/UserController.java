@@ -131,7 +131,7 @@ public class UserController {
     public String showMyProfile(HttpServletRequest request, Model model) {
 
         User user = sessionService.getUser(request.getUserPrincipal().getName());
-        user.setAge(24);
+        user.setAge(ageValidator.getAgeOfUser(user.getDateOfBirth()));
 
         if (user.getUserType() == 1) {
 
@@ -156,7 +156,7 @@ public class UserController {
     public String showProfile(@RequestParam("userId") Long userId, @RequestParam("userLogged") String userLog, Model model) {
 
         User userToShow = sessionService.getUser(userId);
-
+        userToShow.setAge(ageValidator.getAgeOfUser(userToShow.getDateOfBirth()));
         if (userLog != null) {
 
             User userLogged = sessionService.getUser(userLog);

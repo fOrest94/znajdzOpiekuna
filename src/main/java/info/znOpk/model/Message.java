@@ -18,11 +18,11 @@ public class Message {
 
     @NotNull
     @Column(name = "id_nadawcy")
-    private Long id_sender;
+    private Long idSender;
 
     @NotNull
     @Column(name = "id_odbiorcy")
-    private Long id_recipient;
+    private Long idRecipient;
 
     @NotNull
     @Column(name = "tytul_wiadomosci")
@@ -38,14 +38,27 @@ public class Message {
 
     @NotNull
     @Column(name = "odebrana")
-    private int received=0;
+    private int received = 0;
+
+    @Transient
+    private String firstName;
+
+    @Transient
+    private String lastName;
+
+    @Transient
+    private String email;
 
     public Message() {
     }
 
-    public Message(Long id_sender, Long id_recipient) {
-        this.id_sender = id_sender;
-        this.id_recipient = id_recipient;
+    public Message(Long idSender) {
+        this.idSender = idSender;
+    }
+
+    public Message(Long idSender, Long idRecipient) {
+        this.idSender = idSender;
+        this.idRecipient = idRecipient;
     }
 
     public Long getId() {
@@ -56,20 +69,20 @@ public class Message {
         this.id = id;
     }
 
-    public Long getId_sender() {
-        return id_sender;
+    public Long getIdSender() {
+        return idSender;
     }
 
-    public void setId_sender(Long id_sender) {
-        this.id_sender = id_sender;
+    public void setIdSender(Long idSender) {
+        this.idSender = idSender;
     }
 
-    public Long getId_recipient() {
-        return id_recipient;
+    public Long getIdRecipient() {
+        return idRecipient;
     }
 
-    public void setId_recipient(Long id_recipient) {
-        this.id_recipient = id_recipient;
+    public void setIdRecipient(Long idRecipient) {
+        this.idRecipient = idRecipient;
     }
 
     public String getMessage_title() {
@@ -104,16 +117,29 @@ public class Message {
         this.received = received;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", id_sender=" + id_sender +
-                ", id_recipient=" + id_recipient +
-                ", message_title='" + message_title + '\'' +
-                ", message_description='" + message_description + '\'' +
-                ", data='" + data + '\'' +
-                ", received=" + received +
-                '}';
+    public String getFirstName() {
+        return firstName;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
 }

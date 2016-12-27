@@ -1,3 +1,15 @@
+document.getElementById("showMessageBookmark").style.display = "none";
+
+function sendMessage() {
+    $("#sendMessageBookmark").show();
+    $("#showMessageBookmark").hide();
+}
+
+function showMessage() {
+    $("#showMessageBookmark").show();
+    $("#sendMessageBookmark").hide();
+}
+
 function formSubmit() {
 	document.getElementById("logoutForm").submit();
 }
@@ -5,7 +17,6 @@ function formSubmit() {
 function showCertainProfile() {
     document.getElementById("showCertainProfile").submit();
 }
-
 
 $("button").click(function(){
 	

@@ -10,6 +10,6 @@ import java.util.List;
 public interface MessageService {
 
     void save(Message message);
-    List<Message> getAll();
+    List<Message> getMessagesById(Long id);
     List<Message> getUnreceived();
 }

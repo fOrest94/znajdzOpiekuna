@@ -5,6 +5,7 @@ import info.znOpk.model.User;
 import info.znOpk.service.BrowseService;
 import info.znOpk.service.NewsService;
 import info.znOpk.service.SessionService;
+import info.znOpk.validator.AgeValidator;
 import info.znOpk.validator.SearchValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -28,6 +30,9 @@ public class MainController {
 
     @Autowired
     private SearchValidator searchValidator;
+
+    @Autowired
+    private AgeValidator ageValidator;
 
     @Autowired
     private NewsService newsService;
@@ -55,10 +60,23 @@ public class MainController {
             }
 
             if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
-                model.addAttribute("browseList", browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress()));
+
+                List<User> userList = browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress());
+                for (User usr: userList) {
+                    usr.setAge(ageValidator.getAgeOfUser(usr.getDateOfBirth()));
+                }
+                model.addAttribute("browseList", userList);
+
             } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
-                model.addAttribute("browseList", browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress()));
+
+                List<User> userList = browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress());
+                for (User usr: userList) {
+                    usr.setAge(ageValidator.getAgeOfUser(usr.getDateOfBirth()));
+                }
+                model.addAttribute("browseList", userList);
+
             }
+
             model.addAttribute("newsList", newsService.findAllNews());
 
             return "indexService";

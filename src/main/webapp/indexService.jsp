@@ -65,14 +65,14 @@
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
-                <a href="indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
-                <a href="news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
+                <a href="/indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
+                <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
                 <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
             </div>
             <div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
-                <a href="showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
-                <a href="editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="messages" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
+                <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
+                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości</a>
             </div>
         </c:if>
     </div>
@@ -141,7 +141,7 @@
                                     <input type="hidden" name="userId" value="${listValue.id}"/>
                                     <div class="col-lg-4 pull-left" style="padding-left: 0px; text-align: left;">
                                         <h3 style="padding-left: 25px; text-align: left;">${listValue.firstName} ${listValue.lastName}</h3>
-                                        <p style="padding-left: 25px; text-align: left;">${listValue.sex}, ${listValue.town} ${listValue.zipCode}</p>
+                                        <p style="padding-left: 25px; text-align: left;">${listValue.sex}, ${listValue.age} lat, ${listValue.town} ${listValue.zipCode}</p>
                                         <p style="padding-left: 25px; text-align: left;">Od ${listValue.moneyPerHour}
                                             zł/h</p>
 

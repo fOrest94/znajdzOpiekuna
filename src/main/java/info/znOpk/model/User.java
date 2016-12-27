@@ -24,6 +24,15 @@ public class User {
     private String passwordConfirm;
 
     @Transient
+    private String dobDay;
+
+    @Transient
+    private String dobMonth;
+
+    @Transient
+    private String dobYear;
+
+    @Transient
     private Integer age;
 
     @NotNull
@@ -57,6 +66,9 @@ public class User {
 
     @Column(name = "data_urodzenia")
     private String dateOfBirth;
+
+    @Column(name = "tozsamosc")
+    private int entity = 0;
 
     public User(){}
 
@@ -187,5 +199,45 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
+    public String getDobDay() {
+        return dobDay;
+    }
+
+    public void setDobDay(String dobDay) {
+        this.dobDay = dobDay;
+    }
+
+    public String getDobMonth() {
+        return dobMonth;
+    }
+
+    public void setDobMonth(String dobMonth) {
+        this.dobMonth = dobMonth;
+    }
+
+    public String getDobYear() {
+        return dobYear;
+    }
+
+    public void setDobYear(String dobYear) {
+        this.dobYear = dobYear;
+    }
+
+    public int getEntity() {
+        return entity;
+    }
+
+    public void setEntity(int entity) {
+        this.entity = entity;
     }
 }

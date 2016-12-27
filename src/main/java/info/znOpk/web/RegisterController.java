@@ -10,6 +10,7 @@ import info.znOpk.service.OfferCareService;
 import info.znOpk.service.SearchCareService;
 import info.znOpk.service.UserService;
 import info.znOpk.authentication.EmailAuthentication;
+import info.znOpk.validator.AgeValidator;
 import info.znOpk.validator.OfferCareValidator;
 import info.znOpk.validator.SearchCareValidator;
 import info.znOpk.validator.RegisterValidator;
@@ -62,7 +63,9 @@ public class RegisterController {
     public String register(@ModelAttribute("userForm") User user, BindingResult bindingResult, Model model) throws MessagingException {
 
         registerValidator.validate(user, bindingResult);
+        user.setDateOfBirth(user.getDobDay()+"-"+user.getDobMonth()+"-"+user.getDobYear());
 
+        System.out.println(user.getDateOfBirth()+" hahahahahahha");
         if (bindingResult.hasErrors()) {
             return "registration";
         }
@@ -126,6 +129,4 @@ public class RegisterController {
         } else
             return "redirect:/404";
     }
-
-
 }

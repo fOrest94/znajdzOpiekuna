@@ -77,14 +77,17 @@
 		</div>
 	</div>
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<div class="container" style="background-color: white;">
-		<ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
-	        <li role="presentation"><a href="showProfile">Profil</a></li>
-	        <li role="presentation"><a href="editProfile">Edycja</a></li>
-	        <li role="presentation"  class="active"><a href="userSettings">Zaawansowane</a></li>
-	    </ul>
-	    </div>
-    </c:if>
+		<div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
+			<a href="/indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
+			<a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
+			<a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
+		</div>
+		<div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
+			<a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
+			<a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
+			<a href="/message/0" style="color: white; font-size: 13px;">Wiadomości</a>
+		</div>
+	</c:if>
 	<div class="container" style="min-height: 800px; background-color: white; padding-top: 70px;">
 	  <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 toppad" >

@@ -79,11 +79,11 @@
 <c:if test="${pageContext.request.userPrincipal.name != null}">
     <div class="container" style="background-color: white;">
         <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
-            <li role="presentation"><a href="showMyProfile">Profil</a></li>
-            <li role="presentation"><a href="editMyProfile">Edycja</a></li>
+            <li role="presentation"><a href="/showMyProfile">Profil</a></li>
+            <li role="presentation"><a href="/editMyProfile">Edycja</a></li>
             <c:if test="${user.role eq 'ADMINISTRATOR'}">
-                <li role="presentation" class="active"><a href="addNewsProfile">Zarządzaj aktualnościami</a></li>
-                <li role="presentation"><a href="/usersManagement">Zarządzaj użytkownikami</a></li>
+                <li role="presentation"><a href="/addNewsProfile">Zarządzaj aktualnościami</a></li>
+                <li role="presentation" class="active"><a href="/usersManagement">Zarządzaj użytkownikami</a></li>
             </c:if>
         </ul>
     </div>
@@ -91,7 +91,6 @@
 <div class="container" style="min-height: 800px; background-color: white; padding-top: 70px;">
     <div class="row">
         <div class="col-md-5 " style="min-height: 800px;">
-
             <div class="panel panel-default">
                 <div class="panel-heading" style="font-size: 20px;">Lista aktualności</div>
                 <table class="table table-striped">
@@ -103,10 +102,10 @@
                     </thead>
                     <tbody>
                     <c:forEach var="listView" items="${newsList}">
-                    <tr>
-                        <td class="col-md-3">${listView.data}</td>
-                        <td  class="col-md-9">${listView.title}</td>
-                    </tr>
+                        <tr>
+                            <td class="col-md-3">${listView.data}</td>
+                            <td  class="col-md-9">${listView.title}</td>
+                        </tr>
                     </c:forEach>
                     </tbody>
 
@@ -120,7 +119,7 @@
                 <div class="panel-body" style="margin-left: 0px;">
                     <div class="col-lg-12">
                         <form:form method="POST" modelAttribute="newsForm" enctype="multipart/form-data" class="form-horizontal">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <fieldset style="padding-right: 0px;">
                             <legend>Dodaj aktualność</legend>
                             <div class="form-group">
@@ -174,7 +173,7 @@
                                     </button>
                                 </div>
                             </div>
-                                </form:form>
+                            </form:form>
                         </fieldset>
                         <c:if test="${not empty newsList}">
                             <form method="POST"  action="/newsManagement/edit"  class="form-horizontal" var="selected">
