@@ -64,7 +64,8 @@
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
-                <a href="/indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
+                <a href="/indexService?username=user123&address=38-200&typeOfUser=2"
+                   style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
                 <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
                 <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
             </div>
@@ -78,136 +79,74 @@
 </div>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
     <div class="container" style="background-color: white;">
-        <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
-            <li role="presentation"><a href="/showMyProfile">Profil</a></li>
-            <li role="presentation"><a href="/editMyProfile">Edycja</a></li>
+        <ul class="nav nav-tabs"  role="tablist" >
+            <li role="presentation" ><a style="font-size: 18px; " href="/showMyProfile">Profil</a></li>
+            <li role="presentation"><a style="font-size: 18px; " href="/editMyProfile">Edycja</a></li>
             <c:if test="${user.role eq 'ADMINISTRATOR'}">
-                <li role="presentation"><a href="/addNewsProfile">Zarządzaj aktualnościami</a></li>
-                <li role="presentation" class="active"><a href="/usersManagement">Zarządzaj użytkownikami</a></li>
+                <li role="presentation"><a href="/newsManagement" style="font-size: 18px; " >Zarządzaj aktualnościami</a></li>
+                <li role="presentation" class="active"><a href="/usersManagement" style="font-size: 18px; ">Zarządzaj użytkownikami</a></li>
             </c:if>
         </ul>
     </div>
 </c:if>
-<div class="container" style="min-height: 800px; background-color: white; padding-top: 70px;">
-    <div class="row">
-        <div class="col-md-5 " style="min-height: 800px;">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="font-size: 20px;">Lista aktualności</div>
-                <table class="table table-striped">
-                    <thead>
+
+<div class="container" style="min-height: 500px; background-color: white">
+    <div class="col-lg-12" style="padding-top: 50px;">
+        <form method="post" action="/usersManagement">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <table class="table table-fixed">
+                <thead>
+                <tr>
+                    <th class="col-xs-3" style="text-align: center">ID</th>
+                    <th class="col-xs-2" style="text-align: center">Potwierdzony</th>
+                    <th class="col-xs-2" style="text-align: center">Dane</th>
+                    <th class="col-xs-2" style="text-align: center">Email</th>
+                    <th class="col-xs-2" style="text-align: center">Lokalizacja</th>
+                    <th class="col-xs-1" style="text-align: center">Aktywny</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="listValue" items="${userList}">
                     <tr>
-                        <th class="col-md-3">Data</th>
-                        <th class="col-md-9">Tytuł</th>
+                        <td class="col-xs-3" style="text-align: center">
+                                ${listValue.id} <input type="checkbox" style=" margin: 0px;" name="id" value="${listValue.id}">
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="listView" items="${newsList}">
-                        <tr>
-                            <td class="col-md-3">${listView.data}</td>
-                            <td  class="col-md-9">${listView.title}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-
-                </table>
+                    <tr>
+                        <td class="col-xs-2" style="text-align: center">
+                                ${listValue.identity}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align: center">
+                                ${listValue.firstName} ${listValue.lastName}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align: center">
+                                ${listValue.username}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-2" style="text-align: center">
+                                ${listValue.zipCode} ${listValue.town}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-1" style="text-align: center">
+                                ${listValue.active}
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <div class="col-lg-4 col-lg-offset-8">
+                <button name="operation" value="identity" style="width: 200px;" class="btn btn-primary">Potwierdź tożsamość</button>
+                <button name="operation" value="delete" class="btn btn-danger">Usuń</button>
             </div>
-
-        </div>
-        <div class="col-md-7 " style="min-height: 800px;">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="font-size: 20px;">Zarządzaj</div>
-                <div class="panel-body" style="margin-left: 0px;">
-                    <div class="col-lg-12">
-                        <form:form method="POST" modelAttribute="newsForm" enctype="multipart/form-data" class="form-horizontal">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <fieldset style="padding-right: 0px;">
-                            <legend>Dodaj aktualność</legend>
-                            <div class="form-group">
-                                <label class="col-md-3" style="padding-top: 10px; margin-right: 20px;" for="title">Tytuł
-                                    aktualności</label>
-                                <div class="col-md-5">
-                                    <spring:bind path="title">
-                                        <div class="form-group ${status.error ? 'has-error' : ''}">
-                                            <form:input type="text" name="title" path="title"
-                                                        class="form-control input-md"
-                                                        placeholder="Tu wpisz tytuł aktualności"
-                                                        autofocus="true"
-                                                        required="true" value="${newsForm.title}"></form:input>
-                                            <form:errors path="title"></form:errors>
-                                        </div>
-                                    </spring:bind>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3" style="padding-top: 10px;">Opis</label>
-                                <div class="col-md-8">
-                                    <spring:bind path="description">
-                                        <div class="form-group ${status.error ? 'has-error' : ''}">
-                                            <form:textarea path="description" rows="18" cols="62"
-                                                           class="form-control"
-                                                           style="margin-left: 20px; border-radius: 3px;"
-                                                           placeholder="Tu wpisz treść aktualności"
-                                                           autofocus="true"
-                                                           required="true" value="${newsForm.description}"/>
-                                            <form:errors path="description"></form:errors>
-                                        </div>
-                                    </spring:bind>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-4" >Tło wątku(3:1)</label>
-                                <div class="col-md-7">
-                                    <spring:bind path="file.file">
-                                        <div class="form-group ${status.error ? 'has-error' : ''}">
-                                            <form:input path="file.file" type="file"  class="upload" />
-                                            <form:errors path="file.file" class="help-inline"/>
-                                        </div>
-                                    </spring:bind>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4 col-md-offset-8" style="padding-left: 36px;">
-                                    <button name="singlebutton"
-                                            class="btn btn-danger">Dodaj
-                                    </button>
-                                </div>
-                            </div>
-                            </form:form>
-                        </fieldset>
-                        <c:if test="${not empty newsList}">
-                            <form method="POST"  action="/newsManagement/edit"  class="form-horizontal" var="selected">
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                <fieldset>
-                                    <legend>Usuń/Edytuj</legend>
-                                    <div class="form-group">
-                                        <label class="col-md-4" for="title" style="margin-right: 20px; padding-top: 10px;">Wybierz aktualność</label>
-                                        <div class="col-md-5">
-                                            <select id="selectbasic" name="selectId" class="form-control">
-                                                <c:forEach var="listView" items="${newsList}">
-                                                    <option path="Id" value="${selected = listView.id}">${listView.title}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4" style="padding-top: 10px;">Wybierz operacje</label>
-                                        <div class="col-md-6 col-md-offset-2">
-                                            <button name="type" value="delete" class="btn btn-danger">Usuń</button>
-                                            <button name="type" value="edit" class="btn btn-danger">Edytuj</button>
-                                        </div>
-                                    </div>
-
-                                </fieldset>
-                            </form>
-                        </c:if>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
-
 
 <script src="resources/js/jquery.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>

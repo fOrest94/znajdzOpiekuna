@@ -68,7 +68,7 @@ public class User {
     private String dateOfBirth;
 
     @Column(name = "tozsamosc")
-    private int entity = 0;
+    private int identity = 0;
 
     public User(){}
 
@@ -233,11 +233,11 @@ public class User {
         this.dobYear = dobYear;
     }
 
-    public int getEntity() {
-        return entity;
+    public int getIdentity() {
+        return identity;
     }
 
-    public void setEntity(int entity) {
-        this.entity = entity;
+    public void setIdentity(int identity) {
+        this.identity = identity;
     }
 }

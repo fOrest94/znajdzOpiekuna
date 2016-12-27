@@ -78,12 +78,12 @@
 </div>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
     <div class="container" style="background-color: white;">
-        <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
-            <li role="presentation"><a href="showMyProfile">Profil</a></li>
-            <li role="presentation"><a href="editMyProfile">Edycja</a></li>
+        <ul class="nav nav-tabs"  role="tablist" >
+            <li role="presentation" ><a style="font-size: 18px; " href="/showMyProfile">Profil</a></li>
+            <li role="presentation"><a style="font-size: 18px; " href="/editMyProfile">Edycja</a></li>
             <c:if test="${user.role eq 'ADMINISTRATOR'}">
-                <li role="presentation" class="active"><a href="addNewsProfile">Zarządzaj aktualnościami</a></li>
-                <li role="presentation"><a href="/usersManagement">Zarządzaj użytkownikami</a></li>
+                <li role="presentation" class="active"><a href="/newsManagement" style="font-size: 18px; " >Zarządzaj aktualnościami</a></li>
+                <li role="presentation" ><a href="/usersManagement" style="font-size: 18px; ">Zarządzaj użytkownikami</a></li>
             </c:if>
         </ul>
     </div>
