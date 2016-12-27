@@ -37,34 +37,33 @@
 <body>
 
 <div class="container" style="">
-    <form:form  method="post" action="/registrationOffer" modelAttribute="offerCare" class="form-horizontal">
-        <div id="signupbox1" style="margin-top:50px" class="col-lg-8 col-lg-offset-2">
-            <div class="panel panel-danger" style="border-color: #fcb2ab;  margin-top: 200px;">
-                <div class="panel-heading">
-                    <div class="panel-title"><p>${user.firstName}, uzupełnij swój profil</p></div>
+    <form:form method="post" action="/registrationOffer" modelAttribute="offerCare" class="form-horizontal">
+    <div id="signupbox1" style="margin-top:50px" class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-danger" style="border-color: #fcb2ab;  margin-top: 200px;">
+            <div class="panel-heading">
+                <div class="panel-title"><p>${user.firstName}, uzupełnij swój profil</p></div>
 
+            </div>
+            <div class="panel-body">
+
+                <div id="signupalert" style="display:none" class="alert alert-danger">
+                    <p>Error:</p>
+                    <span></span>
                 </div>
-                <div class="panel-body">
 
-                    <div id="signupalert" style="display:none" class="alert alert-danger">
-                        <p>Error:</p>
-                        <span></span>
-                    </div>
-
-                    <div class="form-group" style="border-bottom: 12px; ">
-                        <label class="col-md-3 control-label" style="text-align: left">Kim chcesz się
-                            opiekować</label>
-                        <div class="col-md-4">
-                            <div class="col-md-4" style="padding-left: 10px;">
-                                <spring:bind path="whatWannaCare">
-                                    <form:checkbox path="whatWannaCare" id="checkbox1" value="nanny"/>
-                                    <form:errors path="whatWannaCare" cssClass="error"/>
-                                    <label for="checkbox1">Dzieci</label>
-                                </spring:bind>
-                                <form:hidden path="userId" value="${user.id}"/>
-                            </div>
+                <div class="form-group" style="border-bottom: 12px; ">
+                    <label class="col-md-3 control-label" style="text-align: left">Kim chcesz się
+                        opiekować</label>
+                    <div class="col-md-8" style="padding-left: 40px; padding-top: 10px;">
+                        <div class="col-md-6">
+                            <spring:bind path="whatWannaCare">
+                                <form:checkbox path="whatWannaCare" id="checkbox1" value="nanny"/>
+                                <form:errors path="whatWannaCare" cssClass="error"/>
+                                <label for="checkbox1">Dzieci</label>
+                            </spring:bind>
+                            <form:hidden path="userId" value="${user.id}"/>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <spring:bind path="whatWannaCare">
                                 <form:checkbox path="whatWannaCare" id="checkbox2" value="old"/>
                                 <form:errors path="whatWannaCare" cssClass="error"/>
@@ -72,37 +71,40 @@
                             </spring:bind>
                         </div>
                     </div>
-                    <hr/>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" style="text-align: left">Jakie inne zajęcia jesteś w
-                            stanie wykonywać</label>
-                        <div class="col-md-4">
-                            <spring:bind path="otherActivities">
-                                <form:checkbox path="otherActivities" id="checkbox1" value="shop"/>
-                                <form:errors path="otherActivities" cssClass="error"/>
-                                <label for="checkbox1">Zakupy</label>
-                            </spring:bind>
-                        </div>
-                        <div class="col-md-4">
-                            <spring:bind path="otherActivities">
-                                <form:checkbox path="otherActivities" id="checkbox3" value="clean"/>
-                                <form:errors path="otherActivities" cssClass="error"/>
-                                <label for="checkbox3">Sprzątanie</label>
-                            </spring:bind>
-                        </div>
-                        <div class="col-md-4">
-                            <spring:bind path="otherActivities">
-                                <form:checkbox path="otherActivities" id="checkbox4" value="vacum"/>
-                                <form:errors path="otherActivities" cssClass="error"/>
-                                <label for="checkbox4">Pranie</label>
-                            </spring:bind>
-                        </div>
-                        <div class="col-md-4">
-                            <spring:bind path="otherActivities">
-                                <form:checkbox path="otherActivities" id="checkbox2" value="cook"/>
-                                <form:errors path="otherActivities" cssClass="error"/>
-                                <label for="checkbox2">Gotowanie</label>
-                            </spring:bind>
+                </div>
+                <hr/>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" style="text-align: left">Jakie inne zajęcia jesteś w
+                        stanie wykonywać</label>
+                    <div class="col-md-8" style="padding-left: 40px; padding-top: 10px;">
+                            <div class="col-md-6">
+                                <spring:bind path="otherActivities">
+                                    <form:checkbox path="otherActivities" id="checkbox1" value="shop"/>
+                                    <form:errors path="otherActivities" cssClass="error"/>
+                                    <label for="checkbox1">Zakupy</label>
+                                </spring:bind>
+                            </div>
+                            <div class="col-md-6">
+                                <spring:bind path="otherActivities">
+                                    <form:checkbox path="otherActivities" id="checkbox3" value="clean"/>
+                                    <form:errors path="otherActivities" cssClass="error"/>
+                                    <label for="checkbox3">Sprzątanie</label>
+                                </spring:bind>
+                            </div>
+                            <div class="col-md-6">
+                                <spring:bind path="otherActivities">
+                                    <form:checkbox path="otherActivities" id="checkbox4" value="vacum"/>
+                                    <form:errors path="otherActivities" cssClass="error"/>
+                                    <label for="checkbox4">Pranie</label>
+                                </spring:bind>
+                            </div>
+                            <div class="col-md-6">
+                                <spring:bind path="otherActivities">
+                                    <form:checkbox path="otherActivities" id="checkbox2" value="cook"/>
+                                    <form:errors path="otherActivities" cssClass="error"/>
+                                    <label for="checkbox2">Gotowanie</label>
+                                </spring:bind>
+                            </div>
                         </div>
                     </div>
                     <hr/>
@@ -111,7 +113,7 @@
                         <spring:bind path="otherSkills">
                             <label for="otherSkills" class="text-left col-md-3 control-label " style="text-align: left">Inne
                                 umiejętności</label>
-                            <div class="col-md-8">
+                            <div class="col-md-8" style="padding-right: 30px;">
                                 <form:input path="otherSkills" class="form-control"
                                             style="margin-left: 20px; border-radius: 3px;" placeholder=""/>
                                 <form:errors path="otherSkills" cssClass="error"/>
@@ -135,7 +137,8 @@
                     <hr/>
                     <div class="form-group">
                         <div class="col-lg-offset-10 col-lg-1">
-                            <a href="#signupbox2" onclick="slideThird();"><img src="/resources/img/bottom-arrow.png"></a>
+                            <a href="#signupbox2" onclick="slideThird();"><img
+                                    src="/resources/img/bottom-arrow.png"></a>
                         </div>
                     </div>
                 </div>
@@ -158,22 +161,23 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left">Posiadam doświadczenie w opiece
                             nad</label>
-                        <div class="col-md-4">
-                            <div class="col-md-4" style="padding-left: 10px;">
+                        <div class="col-md-8" style="padding-left: 40px; padding-top: 10px;">
+                            <div class="col-md-6">
+
                                 <spring:bind path="careExperience">
                                     <form:checkbox path="careExperience" id="checkbox5" value="kids"/>
                                     <form:errors path="careExperience" cssClass="error"/>
                                     <label for="checkbox5">Dziećmi</label>
                                 </spring:bind>
                             </div>
-                        </div>
-                        <div class="col-md-4">
+
+                        <div class="col-md-6">
                             <spring:bind path="careExperience">
                                 <form:checkbox path="careExperience" id="checkbox6" value="old"/>
                                 <form:errors path="careExperience" cssClass="error"/>
                                 <label for="checkbox6">Osobami starszymi</label>
                             </spring:bind>
-                        </div>
+                        </div></div>
                     </div>
                     <hr/>
 
@@ -393,14 +397,14 @@
                 </div>
             </div>
         </div>
-    </form:form>
-</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/resources/js/jquery.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/scrollReveal.js"></script>
-<script src="/resources/js/custom.js"></script>
-<script src="/resources/js/script.js"></script>
+        </form:form>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/resources/js/jquery.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/scrollReveal.js"></script>
+    <script src="/resources/js/custom.js"></script>
+    <script src="/resources/js/script.js"></script>
 
 </body>
 </html>

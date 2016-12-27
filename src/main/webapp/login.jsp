@@ -18,8 +18,24 @@
     <script src="resources/js/scrollReveal.js"></script>
     <script src="resources/js/custom.js"></script>
 </head>
+<style>
+    body {
+        background: url("/resources/img/main-wallpaper.png") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 
-<body style="background-color: #F9F9F9;">
+    p {
+        text-align: left;
+        font-family: 'Itim', cursive;
+        font-size: 21px;
+        color: #52452e;
+        margin-bottom: 0px;
+    }
+</style>
+<body>
 <div class="container" style="margin-top: 300px;">
     <div class=" col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3"
          data-scrollreveal="enter bottom and move 300px, wait 0.2s">

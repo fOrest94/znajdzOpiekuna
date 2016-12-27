@@ -8,8 +8,8 @@
 <!DOCTYPE HTML>
 <head>
 
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/style.css" rel="stylesheet"/>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Itim" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Aclonica|Open+Sans" rel="stylesheet">
     <title>znajdźOpiekuna</title>
@@ -96,10 +96,12 @@
     <div class="panel panel-default" style="margin-top: 120px; border-radius: 16px;">
         <div class="panel-body" style="width: 90%; padding-top: 30px;">
             <form:form method="post" modelAttribute="messageForm" class="form-horizontal" action="/message">
+                <form:hidden path="id_sender"/>
+                <form:hidden path="id_recipient"/>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Do:</label>
                     <div class="col-sm-10" style="padding-top: 5px;">
-                       Natalia Siwiec
+                        <strong>${recipient_data}</strong>
                     </div>
                 </div>
                 <div class="form-group">
@@ -131,11 +133,11 @@
 </div>
 
 
-<script src="resources/js/jquery.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/scrollReveal.js"></script>
-<script src="resources/js/custom.js"></script>
-<script src="resources/js/script.js"></script>
+<script src="/resources/js/jquery.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/scrollReveal.js"></script>
+<script src="/resources/js/custom.js"></script>
+<script src="/resources/js/script.js"></script>
 
 </body>
 </html>

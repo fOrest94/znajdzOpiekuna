@@ -2,7 +2,6 @@ package info.znOpk.web;
 
 import info.znOpk.model.Comment;
 import info.znOpk.model.News;
-import info.znOpk.model.User;
 import info.znOpk.service.CommentService;
 import info.znOpk.service.NewsService;
 import info.znOpk.service.UserService;
@@ -17,9 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by DuduŚ on 2016-12-22.
@@ -118,7 +115,6 @@ public class NewsController {
         } catch (Exception e) {
             System.out.println("Brak zdjęcia");
         }
-        ;
 
         model.addAttribute("newsForm", new News());
         model.addAttribute("user", userService.findByUsername(request.getUserPrincipal().getName()));

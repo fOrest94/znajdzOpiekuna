@@ -67,9 +67,9 @@
                 <a href="#" style="color: white; font-size: 20px; padding-right: 20px;">Aktualności</a>
             </div>
             <div class="col-lg-3 col-lg-offset-6" style="padding-left: 50px; padding-top: 10px;">
-                <a href="showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
-                <a href="editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="messages" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
+                <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
+                <a href="/messages" style="color: white; font-size: 13px;">Wiadomości</a>
             </div>
         </c:if>
     </div>
@@ -124,7 +124,7 @@
         </div>
         <div class="col-md-4">
             <div class="well">
-                <h4>Blog Search</h4>
+                <h4>Szukaj</h4>
                 <div class="input-group">
                     <input type="text" class="form-control">
                     <span class="input-group-btn">
@@ -142,7 +142,7 @@
                         <ul class="list-unstyled">
                             <c:if test="${not empty newsList}">
                                 <c:forEach var="listView" items="${newsList}">
-                                    <li><a href="/news/${listView.id}">${listView.title}</a></li>
+                                    <li><a href="/news/${listView.id}" style="font-size: 18px; color: #101010">${listView.title}</a></li>
                                 </c:forEach>
                             </c:if>
                         </ul>
@@ -151,9 +151,9 @@
             </div>
 
             <div class="well">
-                <h4>Side Widget Well</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus
-                    laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                <h4>Reklama</h4>
+                <img class="img-responsive" src="/resources/img/ads.jpg" width="300" height="200">
+
             </div>
         </div>
     </div>

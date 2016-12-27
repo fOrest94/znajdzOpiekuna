@@ -15,9 +15,24 @@
     <title>Rejestracja</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
+<style>
+    body {
+        background: url("/resources/img/main-wallpaper.png") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 
+    p {
+        text-align: left;
+        font-family: 'Itim', cursive;
+        font-size: 21px;
+        color: #52452e;
+        margin-bottom: 0px;
+    }
+</style>
 <body>
-
 <div class="container" style=" margin-top: 300px;">
     <div id="signupbox" style="margin-top:50px" class="col-md-8 col-md-offset-2"
          data-scrollreveal="enter bottom and move 300px, wait 0.2s">
@@ -165,7 +180,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-9">
                             <input type="submit" value="Zarejestruj się" class="btn btn-danger"
-                                   style="font-size: 14px;">
+                                   style="font-size: 16px; width: 130px;">
                         </div>
                     </div>
                 </form:form>

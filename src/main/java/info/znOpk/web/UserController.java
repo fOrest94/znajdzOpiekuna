@@ -69,8 +69,7 @@ public class UserController {
 
         if (user.getUserType() == 2) {
             model.addAttribute("offerCare", new OfferCareDAO());
-        }
-        else if (user.getUserType() == 1) {
+        } else if (user.getUserType() == 1) {
             model.addAttribute("searchCare", new SearchCareDAO());
         }
 
@@ -88,7 +87,7 @@ public class UserController {
 
         User user = sessionService.getUser(request.getUserPrincipal().getName());
 
-        if (user.getUserType() == 2) {
+        if (user.getUserType() == 2 && offerCareDAO.getUserId() != null) {
             offerCareValidator.validate(offerCareDAO, result);
 
             if (result.hasErrors()) {
@@ -97,7 +96,7 @@ public class UserController {
             OfferCare offerCare = offerCareValidator.getSearchValues(offerCareDAO);
             offerCareService.update(offerCare);
             model.addAttribute("offerCare", new OfferCareDAO());
-        } else if (user.getUserType() == 1) {
+        } else if (user.getUserType() == 1 && searchCareDAO.getUserId() != null) {
 
             searchCareValidator.validate(searchCareDAO, result);
 
@@ -112,19 +111,16 @@ public class UserController {
         String uploadLocation = request.getSession().getServletContext().getRealPath("/") + "resources\\pictures\\profileImages\\";
         String fileName = user.getId() + ".jpg";
 
-        if (result.hasErrors()) {
-            return "singleFileUploader";
-        }
-
-        try{
+        try {
 
             MultipartFile multipartFile = fileBucket.getFile();
             multipartFile.transferTo(new java.io.File(uploadLocation + fileName));
-            model.addAttribute("fileName", fileName);
-        }catch (Exception e){System.out.println("Brak zdjęcia");};
+
+        } catch (Exception e) {
+            System.out.println("Brak zdjęcia");
+        }
 
         File fileModel = new File();
-
         model.addAttribute("fileBucket", fileModel);
         model.addAttribute("whatShow", 1);
         model.addAttribute("user", user);
@@ -136,47 +132,50 @@ public class UserController {
 
         User user = sessionService.getUser(request.getUserPrincipal().getName());
         user.setAge(24);
-        File fileModel = new File();
-        if (user.getUserType() == 2) {
+
+        if (user.getUserType() == 1) {
+
+            SearchCare searchCare = sessionService.getSearchUser(user.getId());
+            model.addAttribute("userParent", searchCare);
+
+        } else if (user.getUserType() == 2) {
+
             OfferCare nanny = sessionService.getCareUser(user.getId());
             nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
             model.addAttribute("userNanny", nanny);
-        } else {
-            SearchCare searchCare = sessionService.getSearchUser(user.getId());
-
-            model.addAttribute("userParent", searchCare);
         }
 
-        model.addAttribute("fileBucket", fileModel);
-        model.addAttribute("user", user);
+        model.addAttribute("userName", user.getFirstName());
+        model.addAttribute("userToShow", user);
         model.addAttribute("whatShow", 1);
 
         return "showProfile";
     }
 
     @RequestMapping(value = "/showProfile", method = RequestMethod.GET)
-    public String showProfile(@RequestParam("userId") String userId, @RequestParam("userLogged") String userLog, Model model) {
+    public String showProfile(@RequestParam("userId") Long userId, @RequestParam("userLogged") String userLog, Model model) {
 
-        Long lookId = Long.valueOf(userId).longValue();
-        User user = sessionService.getUser(lookId);
+        User userToShow = sessionService.getUser(userId);
+
         if (userLog != null) {
 
             User userLogged = sessionService.getUser(userLog);
-            model.addAttribute("user", userLogged);
+            model.addAttribute("userName", userLogged.getFirstName());
         }
 
-        if (user.getUserType() == 2) {
-            OfferCare nanny = sessionService.getCareUser(user.getId());
-            nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
+        if (userToShow.getUserType() == 1) {
+            SearchCare searchCare = sessionService.getSearchUser(userToShow.getId());
+            model.addAttribute("userParent", searchCare);
+        }else if (userToShow.getUserType() == 2) {
+            OfferCare nanny = sessionService.getCareUser(userToShow.getId());
             model.addAttribute("userNanny", nanny);
         }
 
-        model.addAttribute("userToShow", user);
+        model.addAttribute("userToShow", userToShow);
         model.addAttribute("whatShow", 0);
 
         return "showProfile";
     }
-
 
     @InitBinder("fileBucket")
     protected void initBinderFileBucket(WebDataBinder binder) {
