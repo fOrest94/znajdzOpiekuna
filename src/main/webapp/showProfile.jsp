@@ -80,6 +80,7 @@
         <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
             <li role="presentation" class="active"><a style="font-size: 18px; "href="/showMyProfile">Profil</a></li>
             <li role="presentation"><a style="font-size: 18px; "href="/editMyProfile">Edycja</a></li>
+            <li role="presentation"><a style="font-size: 18px; " href="/advancedSettings">Zaawansowane</a></li>
             <c:if test="${userToShow.role eq 'ADMINISTRATOR'}">
                 <li role="presentation"><a style="font-size: 18px; "href="/newsManagement">Zarządzaj aktualnościami</a></li>
                 <li role="presentation" ><a style="font-size: 18px; "href="/usersManagement">Zarządzaj użytkownikami</a></li>
@@ -117,6 +118,12 @@
             <div class="col-lg-6" style="padding-top: 30px;">
                 <a href="/message/${userToShow.id}" class="btn btn-danger" style="width: 180px; font-size: 19px; color: white;">Napisz
                     do mnie!</a>
+                <div class="col-lg-12" style="padding-top: 60px; padding-right: 0px; ">
+                    <c:if test="${userToShow.identity eq 1}">
+                        <img  style="padding: 0px;" src="/resources/img/smilee.png"> <strong>Tożsamość  potwierdzona</strong>
+                    </c:if>
+                </div>
+
             </div>
 
         </div>

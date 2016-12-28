@@ -177,6 +177,21 @@ public class UserController {
         return "showProfile";
     }
 
+    @RequestMapping(value = "/advancedSettings", method = RequestMethod.GET)
+    public String advancedSettings(Principal principal, Model model) {
+
+        model.addAttribute("user", sessionService.getUser(principal.getName()));
+        return "userSettings";
+    }
+
+    @RequestMapping(value = "/advancedSettings", method = RequestMethod.POST)
+    public String advancedSettings(){
+
+        return "userSettings";
+    }
+
+
+
     @InitBinder("fileBucket")
     protected void initBinderFileBucket(WebDataBinder binder) {
         binder.setValidator(fileValidator);

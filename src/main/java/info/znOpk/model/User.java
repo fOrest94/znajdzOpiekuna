@@ -70,6 +70,9 @@ public class User {
     @Column(name = "tozsamosc")
     private int identity = 0;
 
+    @Column(name = "ocena")
+    private String mark;
+
     public User(){}
 
     public User(String username, String password, String passwordConfirm, String role, Integer userType,
@@ -239,5 +242,13 @@ public class User {
 
     public void setIdentity(int identity) {
         this.identity = identity;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 }

@@ -81,6 +81,8 @@
         <ul class="nav nav-tabs" style="font-size: 10px;" role="tablist">
             <li role="presentation" ><a style="font-size: 18px; "href="/showMyProfile">Profil</a></li>
             <li role="presentation" class="active"><a style="font-size: 18px; "href="/editMyProfile">Edycja</a></li>
+            <li role="presentation"><a style="font-size: 18px; " href="/advancedSettings">Zaawansowane</a></li>
+
             <c:if test="${user.role eq 'ADMINISTRATOR'}">
                 <li role="presentation"><a style="font-size: 18px; "href="/newsManagement">Zarządzaj aktualnościami</a></li>
                 <li role="presentation" ><a style="font-size: 18px; "href="/usersManagement">Zarządzaj użytkownikami</a></li>

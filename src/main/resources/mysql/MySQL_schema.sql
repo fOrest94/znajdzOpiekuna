@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `uzytkownik` (
   `kod_pocztowy` varchar(6) null,
   `tozsamosc` varchar(6) not NULL,
   `wynagrodzenie` varchar(6) NULL,
+  `ocena` varchar(6) NULL ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
