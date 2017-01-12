@@ -50,42 +50,40 @@ public class MainController {
     @RequestMapping(value = "/indexService", method = RequestMethod.GET)
     public String indexService(@ModelAttribute("searchForm") @Valid SearchForm searchForm, BindingResult bindingResult, Model model) {
 
+        System.out.println(searchForm.toString());
         searchValidator.validate(searchForm, bindingResult);
-
+// <form:hidden path="username" value="${pageContext.request.userPrincipal.name}"/>
         if (bindingResult.hasErrors()) {
             return "index";
         }
-
+        System.out.println(searchForm.toString());
        // if (searchForm.getTypeOfUser().length() < 7) {
 
-            if (searchForm.getUsername() != null) {
+            if (searchForm.getUsername().length() >0) {
                 User user = sessionService.getUser(searchForm.getUsername());
                 List<Message> messageList = messageService.getUnreadMessById(user.getId());
                 model.addAttribute("unreadMess",messageList.size());
                 model.addAttribute("user", user);
             }
 
-            if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {
-
-                List<User> userList = browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress());
-                for (User usr: userList) {
+            if (searchValidator.checkAddress(searchForm.getAddress()).equals("town")) {System.out.println(searchForm.toString());
+                List<User> userList = browseService.browseTown(searchForm.getTypeOfUser(), searchForm.getAddress());System.out.println(searchForm.toString());
+                for (User usr: userList) {System.out.println(searchForm.toString());
                     usr.setAge(ageValidator.getAgeOfUser(usr.getDateOfBirth()));
-                }
+                }System.out.println(searchForm.toString());
                 model.addAttribute("browseList", userList);
 
             } else if (searchValidator.checkAddress(searchForm.getAddress()).equals("zipCode")) {
-
                 List<User> userList = browseService.browseZipCode(searchForm.getTypeOfUser(), searchForm.getAddress());
                 for (User usr: userList) {
+                    System.out.println(usr.toString());
                     usr.setAge(ageValidator.getAgeOfUser(usr.getDateOfBirth()));
                 }
                 model.addAttribute("browseList", userList);
 
             }
-
             model.addAttribute("newsList", newsService.findAllNews());
-
-            return "indexService";
+            return "/indexService";
 
       /* } else {
 

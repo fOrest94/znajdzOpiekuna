@@ -44,7 +44,7 @@
                         <li>
                             <ol class="breadcrumb" style="float: left;">
                                 <li class="active" style="color: #c09e6b;"><a
-                                        href="indexService">Witaj, ${user.firstName}</a></li>
+                                        href="indexService">Witaj, ${pageContext.request.userPrincipal.name}</a></li>
                                 <li><a href="javascript:formSubmit()"> Wyloguj</a></li>
                             </ol>
                         </li>
@@ -64,7 +64,7 @@
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
-                <a href="/indexService?username=user123&address=38-200&typeOfUser=2"
+                <a href="/indexService?address=Jas%C5%82o&typeOfUser=2"
                    style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
                 <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
                 <a href="/ranking" style="color: white; font-size: 16px; padding-right: 20px;">Ranking</a>

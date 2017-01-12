@@ -74,7 +74,7 @@
                 </div>
 
                         <form:form method="get" modelAttribute="searchForm" action="/indexService">
-                                <form:hidden path="username" value="${pageContext.request.userPrincipal.name}"/>
+
 
                             <div class="form-group">
                                 <div class="col-sm-6 col-md-offset-3">
