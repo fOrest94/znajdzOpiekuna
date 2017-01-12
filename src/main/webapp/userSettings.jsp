@@ -60,7 +60,6 @@
         </div>
     </div>
 </div>
-
 <div class="profile-navbar">
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -68,12 +67,15 @@
                 <a href="/indexService?username=user123&address=38-200&typeOfUser=2"
                    style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
                 <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
-                <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
+                <a href="/ranking" style="color: white; font-size: 16px; padding-right: 20px;">Ranking</a>
             </div>
-            <div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
+            <div class="col-lg-4 col-lg-offset-4" style="padding-left: 120px; padding-top: 10px;">
                 <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
                 <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości
+                    <c:if test="${unreadMess != 0}">
+                        (${unreadMess})
+                    </c:if></a>
             </div>
         </c:if>
     </div>
@@ -104,7 +106,7 @@
                 <div class="col-lg-12">
                     <label class="col-md-3 control-label"
                            style="text-align: left; padding-top: 5px;">Zmień
-                        email</label>
+                        email<div id="ss" style="color: red; font-size: 22px; display: inline"> * </div> </label>
                     <div class="col-md-4">
                         <div class="form-group ${status.error ? 'has-error' : ''}">
                             <input type="text" name="userName"

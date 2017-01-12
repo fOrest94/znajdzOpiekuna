@@ -73,7 +73,19 @@ public class User {
     @Column(name = "ocena")
     private String mark;
 
-    public User(){}
+    @Column(name = "ocena_ilosc")
+    private int mark_quantity;
+
+    public User() {
+    }
+
+    public User(Long id, String username, String firstName, String lastName) {
+        this.username = username;
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+    }
 
     public User(String username, String password, String passwordConfirm, String role, Integer userType,
                 String firstName, String lastName, Integer active, String town, String sex, String zipCode) {
@@ -98,9 +110,13 @@ public class User {
         this.id = id;
     }
 
-    public Integer isActive() {return active;}
+    public Integer isActive() {
+        return active;
+    }
 
-    public void setActive(Integer active) {this.active = active;}
+    public void setActive(Integer active) {
+        this.active = active;
+    }
 
     public String getUsername() {
         return username;
@@ -122,7 +138,9 @@ public class User {
         return passwordConfirm;
     }
 
-    public void setPasswordConfirm(String passwordConfirm) {this.passwordConfirm = passwordConfirm;}
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
 
     public String getRole() {
         return role;
@@ -184,9 +202,13 @@ public class User {
         this.zipCode = zipCode;
     }
 
-    public String getTown() {return town;}
+    public String getTown() {
+        return town;
+    }
 
-    public void setTown(String town) {this.town = town;}
+    public void setTown(String town) {
+        this.town = town;
+    }
 
     public String getDateOfBirth() {
         return dateOfBirth;
@@ -250,5 +272,39 @@ public class User {
 
     public void setMark(String mark) {
         this.mark = mark;
+    }
+
+    public int getMark_quantity() {
+        return mark_quantity;
+    }
+
+    public void setMark_quantity(int mark_quantity) {
+        this.mark_quantity = mark_quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", passwordConfirm='" + passwordConfirm + '\'' +
+                ", dobDay='" + dobDay + '\'' +
+                ", dobMonth='" + dobMonth + '\'' +
+                ", dobYear='" + dobYear + '\'' +
+                ", age=" + age +
+                ", role='" + role + '\'' +
+                ", userType=" + userType +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", active=" + active +
+                ", town='" + town + '\'' +
+                ", sex='" + sex + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", moneyPerHour='" + moneyPerHour + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", identity=" + identity +
+                ", mark='" + mark + '\'' +
+                '}';
     }
 }

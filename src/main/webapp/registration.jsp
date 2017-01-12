@@ -33,7 +33,7 @@
     }
 </style>
 <body>
-<div class="container" style=" margin-top: 300px;">
+<div class="container" style=" margin-top: 200px;">
     <div id="signupbox" style="margin-top:50px" class="col-md-8 col-md-offset-2"
          data-scrollreveal="enter bottom and move 300px, wait 0.2s">
         <div class="panel panel-danger" style="border-color: #fcb2ab;">

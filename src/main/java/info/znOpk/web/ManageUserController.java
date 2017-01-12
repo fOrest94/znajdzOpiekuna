@@ -1,6 +1,8 @@
 package info.znOpk.web;
 
+import info.znOpk.model.Message;
 import info.znOpk.model.User;
+import info.znOpk.service.MessageService;
 import info.znOpk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +23,17 @@ public class ManageUserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MessageService messageService;
+
     @RequestMapping(value = "/usersManagement", method = RequestMethod.GET)
     public String confirmIdentity(Principal principal, Model model) {
 
         User user = userService.findByUsername(principal.getName());
         List<User> userList = userService.findAll();
 
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
         model.addAttribute("user", user);
         model.addAttribute("userList", userList);
         return "usersManagement";
@@ -44,6 +51,8 @@ public class ManageUserController {
         User user = userService.findByUsername(principal.getName());
         List<User> userList = userService.findAll();
 
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
         model.addAttribute("user", user);
         model.addAttribute("userList", userList);
 

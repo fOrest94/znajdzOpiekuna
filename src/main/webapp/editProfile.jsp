@@ -64,14 +64,18 @@
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
-                <a href="/indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
+                <a href="/indexService?username=user123&address=38-200&typeOfUser=2"
+                   style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
                 <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
-                <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
+                <a href="/ranking" style="color: white; font-size: 16px; padding-right: 20px;">Ranking</a>
             </div>
-            <div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
+            <div class="col-lg-4 col-lg-offset-4" style="padding-left: 120px; padding-top: 10px;">
                 <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
                 <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości
+                    <c:if test="${unreadMess != 0}">
+                        (${unreadMess})
+                    </c:if></a>
             </div>
         </c:if>
     </div>
@@ -131,14 +135,9 @@
             <h1 style="text-align: left; font-size: 35px; color: #FF4F4F;">${user.firstName} ${user.lastName}</h1>
             <hr>
             <div class="col-lg-6">
-                <h3 style="text-align: left; "><c:choose>
-                    <c:when test="${user.sex == false}">
-                        Kobieta
-                    </c:when>
-                    <c:otherwise>
-                        Mężczyzna
-                    </c:otherwise>
-                </c:choose>lat</h3>
+                <h3 style="text-align: left; ">
+                    ${user.sex}, ${user.age} lat
+
                 <h3 style="text-align: left; ">Lokalizacja: ${user.zipCode}</h3>
                 <h3 style="text-align: left; ">Ocena: 4.5</h3>
             </div>
@@ -146,7 +145,7 @@
 
         </div>
     </div>
-    <div class="col-lg-7 col-lg-offset-4" style="min-height: 500px; padding-bottom: 100px;">
+    <div class="col-lg-7 col-lg-offset-4" style="min-height: 500px; padding-bottom: 0px;">
 
         <c:if test="${user.userType eq 1 }">
             <form:form method="post" action="/editMyProfile" modelAttribute="searchCare" class="form-horizontal">

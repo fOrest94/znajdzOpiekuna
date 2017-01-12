@@ -3,11 +3,15 @@ document.getElementById("showMessageBookmark").style.display = "none";
 function sendMessage() {
     $("#sendMessageBookmark").show();
     $("#showMessageBookmark").hide();
+    document.getElementById("haha").style.color = "red";
+    document.getElementById("hahaha").style.color = "black";
 }
 
 function showMessage() {
     $("#showMessageBookmark").show();
     $("#sendMessageBookmark").hide();
+    document.getElementById("hahaha").style.color = "red";
+    document.getElementById("haha").style.color = "black";
 }
 
 function formSubmit() {
@@ -33,3 +37,9 @@ function regulaminRequired() {
     var x = document.getElementById("rulesRequired").required;
     document.getElementById("demo").innerHTML = x;
 }
+
+function rateSubmit(point) {
+    var x = document.getElementById(point).value;
+    document.getElementById("resultRadio").innerHTML = x;
+}
+

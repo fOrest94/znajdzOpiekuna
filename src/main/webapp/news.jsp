@@ -19,22 +19,23 @@
 </head>
 
 <body>
-<div class="navbar navbar-default " style="margin-bottom: 0px;">
+<div class="navbar navbar-default" style="margin-bottom: 0px;">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
             </button>
             <div class="navbar-brand navbar-nav">
-                <a href="#">
+                <a href="/index">
                     <div class="logo">znajdźOpiekuna</div>
                 </a>
             </div>
+
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="padding-right: 0px;">
                 <c:if test="${pageContext.request.userPrincipal.name != null}">
                     <sec:authorize access="hasRole('ROLE_USER')">
                         <c:url value="/logout" var="logoutUrl"/>
@@ -45,8 +46,8 @@
                         <li>
                             <ol class="breadcrumb" style="float: left;">
                                 <li class="active" style="color: #c09e6b;"><a
-                                        href="indexService">Witaj, ${user.firstName}</a></li>
-                                <li><a href="javascript:formSubmit();"> Wyloguj</a></li>
+                                        href="indexService">Witaj, ${userName}</a></li>
+                                <li><a href="javascript:formSubmit()"> Wyloguj</a></li>
                             </ol>
                         </li>
                     </sec:authorize>
@@ -54,7 +55,6 @@
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <li><a href="login">Zaloguj się</a></li>
                     <li><a href="registration" style="color: #c09e6b;">Zarejestruj się</a></li>
-
                 </c:if>
             </ul>
         </div>
@@ -64,14 +64,18 @@
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
-                <a href="/indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
+                <a href="/indexService?username=user123&address=38-200&typeOfUser=2"
+                   style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
                 <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
-                <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
+                <a href="/ranking" style="color: white; font-size: 16px; padding-right: 20px;">Ranking</a>
             </div>
-            <div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
+            <div class="col-lg-4 col-lg-offset-4" style="padding-left: 120px; padding-top: 10px;">
                 <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
                 <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości
+                    <c:if test="${unreadMess != 0}">
+                        (${unreadMess})
+                    </c:if></a>
             </div>
         </c:if>
     </div>

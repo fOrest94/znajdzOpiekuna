@@ -14,6 +14,7 @@ public class AgeValidator {
 
     public int getAgeOfUser(String birthDate){
 
+
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         String currentDate = dateFormatter.format(new Date());
         int ages = Integer.parseInt(currentDate.substring(6,10)) - Integer.parseInt(birthDate.substring(6,10));

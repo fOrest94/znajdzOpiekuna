@@ -2,13 +2,8 @@ package info.znOpk.web;
 
 import info.znOpk.DTO.OfferCareDAO;
 import info.znOpk.DTO.SearchCareDAO;
-import info.znOpk.model.File;
-import info.znOpk.model.OfferCare;
-import info.znOpk.model.SearchCare;
-import info.znOpk.model.User;
-import info.znOpk.service.OfferCareService;
-import info.znOpk.service.SearchCareService;
-import info.znOpk.service.SessionService;
+import info.znOpk.model.*;
+import info.znOpk.service.*;
 import info.znOpk.validator.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -39,6 +37,12 @@ public class UserController {
     private AgeValidator ageValidator;
 
     @Autowired
+    private MarkValidator markValidator;
+
+    @Autowired
+    private MessageService messageService;
+
+    @Autowired
     private SessionService sessionService;
 
     @Autowired
@@ -46,6 +50,9 @@ public class UserController {
 
     @Autowired
     private OfferCareService offerCareService;
+
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value = "/writeToMe", method = RequestMethod.GET)
     public String writeToMe(HttpServletRequest request, Model model) {
@@ -65,6 +72,7 @@ public class UserController {
     public String editProfile(Principal principal, Model model) {
 
         User user = sessionService.getUser(principal.getName());
+        user.setAge(ageValidator.getAgeOfUser(user.getDateOfBirth()));
         File fileModel = new File();
 
         if (user.getUserType() == 2) {
@@ -72,7 +80,9 @@ public class UserController {
         } else if (user.getUserType() == 1) {
             model.addAttribute("searchCare", new SearchCareDAO());
         }
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
 
+        model.addAttribute("unreadMess",messageList.size());
         model.addAttribute("fileBucket", fileModel);
         model.addAttribute("whatShow", 1);
         model.addAttribute("user", user);
@@ -86,7 +96,7 @@ public class UserController {
                                   HttpServletRequest request, BindingResult result, Model model) throws IOException {
 
         User user = sessionService.getUser(request.getUserPrincipal().getName());
-
+        user.setAge(ageValidator.getAgeOfUser(user.getDateOfBirth()));
         if (user.getUserType() == 2 && offerCareDAO.getUserId() != null) {
             offerCareValidator.validate(offerCareDAO, result);
 
@@ -121,6 +131,8 @@ public class UserController {
         }
 
         File fileModel = new File();
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
         model.addAttribute("fileBucket", fileModel);
         model.addAttribute("whatShow", 1);
         model.addAttribute("user", user);
@@ -141,10 +153,11 @@ public class UserController {
         } else if (user.getUserType() == 2) {
 
             OfferCare nanny = sessionService.getCareUser(user.getId());
-            nanny.setAge(ageValidator.getAgeOfUser(nanny.getDataOfBirth()));
             model.addAttribute("userNanny", nanny);
         }
 
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
         model.addAttribute("userName", user.getFirstName());
         model.addAttribute("userToShow", user);
         model.addAttribute("whatShow", 1);
@@ -152,7 +165,7 @@ public class UserController {
         return "showProfile";
     }
 
-    @RequestMapping(value = "/showProfile", method = RequestMethod.GET)
+    @RequestMapping(value = "/showProfile", method = RequestMethod.POST)
     public String showProfile(@RequestParam("userId") Long userId, @RequestParam("userLogged") String userLog, Model model) {
 
         User userToShow = sessionService.getUser(userId);
@@ -160,27 +173,79 @@ public class UserController {
         if (userLog != null) {
 
             User userLogged = sessionService.getUser(userLog);
+            List<Message> messageList = messageService.getUnreadMessById(userLogged.getId());
+            model.addAttribute("unreadMess",messageList.size());
             model.addAttribute("userName", userLogged.getFirstName());
+            model.addAttribute("commentForm", new Comment());
+            model.addAttribute("commentsList", commentService.getComments1(userToShow.getId()));
         }
 
         if (userToShow.getUserType() == 1) {
-            SearchCare searchCare = sessionService.getSearchUser(userToShow.getId());
+            SearchCare searchCare;
+            searchCare = sessionService.getSearchUser(userToShow.getId());
+            model.addAttribute("userParent", searchCare);
+        }else if (userToShow.getUserType() == 2) {
+            OfferCare nanny;
+            nanny = sessionService.getCareUser(userToShow.getId());
+            model.addAttribute("userNanny", nanny);
+        }
+
+
+        model.addAttribute("userToShow", userToShow);
+        model.addAttribute("whatShow", 0);
+
+        return "/showProfile";
+    }
+
+    @RequestMapping(value = "/showProfile/{id}", method = RequestMethod.POST)
+    public String showNews(@PathVariable("id") Long id, @ModelAttribute("commentForm") Comment comment, @RequestParam("radio") String radio,
+                           BindingResult bindingResult, Model model, Principal principal) {
+
+        User userToShow = sessionService.getUser(id);
+        User user = sessionService.getUser(principal.getName());
+
+        if (bindingResult.hasErrors()) {
+            return "/";
+        }
+
+        if (userToShow.getUserType() == 1) {
+            SearchCare searchCare;
+            searchCare = sessionService.getSearchUser(userToShow.getId());
             model.addAttribute("userParent", searchCare);
         }else if (userToShow.getUserType() == 2) {
             OfferCare nanny = sessionService.getCareUser(userToShow.getId());
             model.addAttribute("userNanny", nanny);
         }
 
+        if(comment.getComment_description() != null){
+            comment.setLastName(user.getLastName());
+            comment.setUserId(user.getId());
+            comment.setData(String.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())));
+            commentService.saveComment(comment);
+        }
+        else if(!radio.equals("0")){
+            markValidator.addMark(radio, userToShow.getId());
+        }
+
+        userToShow.setAge(ageValidator.getAgeOfUser(userToShow.getDateOfBirth()));
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
         model.addAttribute("userToShow", userToShow);
         model.addAttribute("whatShow", 0);
+        model.addAttribute("userName", sessionService.getUser(principal.getName()).getFirstName());
+        model.addAttribute("commentForm", new Comment());
+        model.addAttribute("commentsList", commentService.getComments1(userToShow.getId()));
 
-        return "showProfile";
+        return "/showProfile";
     }
 
     @RequestMapping(value = "/advancedSettings", method = RequestMethod.GET)
     public String advancedSettings(Principal principal, Model model) {
 
-        model.addAttribute("user", sessionService.getUser(principal.getName()));
+        User user = sessionService.getUser(principal.getName());
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
+        model.addAttribute("user", user);
         return "userSettings";
     }
 
@@ -189,8 +254,6 @@ public class UserController {
 
         return "userSettings";
     }
-
-
 
     @InitBinder("fileBucket")
     protected void initBinderFileBucket(WebDataBinder binder) {

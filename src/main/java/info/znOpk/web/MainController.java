@@ -1,8 +1,10 @@
 package info.znOpk.web;
 
 import info.znOpk.DTO.SearchForm;
+import info.znOpk.model.Message;
 import info.znOpk.model.User;
 import info.znOpk.service.BrowseService;
+import info.znOpk.service.MessageService;
 import info.znOpk.service.NewsService;
 import info.znOpk.service.SessionService;
 import info.znOpk.validator.AgeValidator;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -33,6 +34,9 @@ public class MainController {
 
     @Autowired
     private AgeValidator ageValidator;
+
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private NewsService newsService;
@@ -56,6 +60,8 @@ public class MainController {
 
             if (searchForm.getUsername() != null) {
                 User user = sessionService.getUser(searchForm.getUsername());
+                List<Message> messageList = messageService.getUnreadMessById(user.getId());
+                model.addAttribute("unreadMess",messageList.size());
                 model.addAttribute("user", user);
             }
 

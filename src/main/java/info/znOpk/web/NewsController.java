@@ -1,8 +1,11 @@
 package info.znOpk.web;
 
 import info.znOpk.model.Comment;
+import info.znOpk.model.Message;
 import info.znOpk.model.News;
+import info.znOpk.model.User;
 import info.znOpk.service.CommentService;
+import info.znOpk.service.MessageService;
 import info.znOpk.service.NewsService;
 import info.znOpk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import java.io.File;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by DuduŚ on 2016-12-22.
@@ -26,23 +30,28 @@ import java.util.Date;
 public class NewsController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    NewsService newsService;
+    private NewsService newsService;
 
     @Autowired
-    CommentService commentService;
+    private MessageService messageService;
+
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(value = "/news/0", method = RequestMethod.GET)
     public String showNews(Model model, Principal principal) {
 
-
+        User user = userService.findByUsername(principal.getName());
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
         model.addAttribute("commentForm", new Comment());
-        model.addAttribute("user", userService.findByUsername(principal.getName()));
+        model.addAttribute("user", user);
 
-        if (newsService.findAllNews() != null)
-            model.addAttribute("newsList", newsService.findAllNews());
+        if (newsService.findAllNews() != null){
+            model.addAttribute("newsList", newsService.findAllNews());}
         if (newsService.findLastNews() != null) {
             News mainNews = newsService.findLastNews();
             model.addAttribute("mainNews", mainNews);

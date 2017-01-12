@@ -32,6 +32,9 @@ public class SearchCare {
     @Column(name = "praca_z_domem")
     private String workWithHome = "0";
 
+    @Column(name = "telefon")
+    private String phoneNumber;
+
     @NotNull
     @Column(name = "wynagrodzenie")
     private String moneyPerHour;
@@ -106,4 +109,11 @@ public class SearchCare {
         this.moneyPerHour = moneyPerHour;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

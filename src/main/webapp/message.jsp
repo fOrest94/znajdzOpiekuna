@@ -70,17 +70,21 @@
 <div class="profile-navbar">
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
-            <a href="/indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
-            <a href="news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
-            <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
-        </div>
-        <div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
-            <a href="showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
-            <a href="editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-            <a href="message/0" style="color: white; font-size: 13px;">Wiadomości</a>
-        </div>
-    </c:if>
+            <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
+                <a href="/indexService?username=user123&address=38-200&typeOfUser=2"
+                   style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
+                <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
+                <a href="/ranking" style="color: white; font-size: 16px; padding-right: 20px;">Ranking</a>
+            </div>
+            <div class="col-lg-4 col-lg-offset-4" style="padding-left: 120px; padding-top: 10px;">
+                <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
+                <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
+                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości
+                    <c:if test="${unreadMess != 0}">
+                        (${unreadMess})
+                    </c:if></a>
+            </div>
+        </c:if>
     </div>
 </div>
 
@@ -112,7 +116,14 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Do:</label>
                             <div class="col-sm-10" style="padding-top: 5px;">
-                                <strong>${recipient_data}</strong>
+                                <c:if test="${recipient_data eq '0'}">
+                                    <form:input path="idRecipient" type="text" class="form-control" id="name" name="name"
+                                                placeholder="Do kogo?"
+                                                value=""/>
+                                </c:if>
+                                <c:if test="${recipient_data ne '0'}">
+                                    <strong>${recipient_data}</strong>
+                                </c:if>
                             </div>
                         </div>
                         <div class="form-group">
@@ -149,6 +160,7 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th class="col-md-4">Data</th>
                                 <th class="col-md-4">Nadawca</th>
                                 <th class="col-md-8">Temat</th>
                             </tr>
@@ -156,9 +168,10 @@
                             <tbody>
                             <c:forEach var="listView" items="${massagesList}">
                                 <tr>
-                                    <td class="col-md-4">${listView.idSender}</td>
+                                    <th class="col-md-4"><a href="">${listView.data}</a></th>
+                                    <td class="col-md-4">${listView.firstName} ${listView.lastName}</td>
                                     <td class="col-md-4">${listView.message_title}</td>
-                                </tr>
+                                </tr
                             </c:forEach>
                             </tbody>
 

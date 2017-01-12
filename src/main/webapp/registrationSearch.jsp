@@ -115,6 +115,19 @@
                 </div>
                 <hr/>
 
+                <div class="form-group" style="margin-top: 20px;">
+                    <spring:bind path="writeSthAboutYou">
+                        <label class="col-md-3 control-label" style="text-align: left">Telefon komórkowy</label>
+                        <div class="col-md-4 ">
+                            <form:input style=" margin-left: 20px;" type="text" path="writeSthAboutYou" class="form-control"   placeholder="Telefon"
+                                        autofocus="true"></form:input>
+                            <form:errors path="writeSthAboutYou"></form:errors>
+                        </div>
+                    </spring:bind>
+
+                </div>
+                <hr/>
+
                 <div class="form-group" style="margin-top: 20px; ">
                     <label class="col-md-3 control-label" style="text-align: left">Cena za godzinę
                         opieki</label>

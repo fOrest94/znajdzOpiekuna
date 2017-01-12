@@ -60,9 +60,11 @@ public class SearchValidator implements Validator {
 
             temp[0] = "OfferCare";
 
-        } else
+        } else if (user.substring(0, 6).equals("simple")) {
             temp[0] = "SearchCare";
-
+        }
+        else
+            return null;
         if (user.substring(6, 7).equals("1")) {
             temp[1] = "whoWannCareNanny";
 

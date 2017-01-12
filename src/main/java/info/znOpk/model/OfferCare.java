@@ -16,13 +16,6 @@ public class OfferCare {
     @Column(name = "id_uzytkownika")
     private Long userId;
 
-    @NotNull
-    @Column(name = "data_urodzenia")
-    private String dataOfBirth;
-
-    @Transient
-    private int age;
-
     @Column(name = "opieka_niania")
     private String whoWannCareNanny = "0";
 
@@ -83,13 +76,15 @@ public class OfferCare {
     @Column(name = "jezyki_obce")
     private String foreignLanguages;
 
+    @Column(name = "telefon")
+    private String phoneNumber;
+
     public OfferCare() {
     }
 
-    public OfferCare(Long userId, String dataOfBirth, String otherSkills, String writeSthAboutYou, String experienceKidsTime, String experienceOldTime,
+    public OfferCare(Long userId, String otherSkills, String writeSthAboutYou, String experienceKidsTime, String experienceOldTime,
                      String placeOfTakeCare, String workWithHome, String moneyPerHour, String education, String foreignLanguages) {
         this.userId = userId;
-        this.dataOfBirth = dataOfBirth;
         this.otherSkills = otherSkills;
         this.writeSthAboutYou = writeSthAboutYou;
         this.experienceKidsTime = experienceKidsTime;
@@ -101,12 +96,11 @@ public class OfferCare {
         this.foreignLanguages = foreignLanguages;
     }
 
-    public OfferCare(String dataOfBirth, int age, String whoWannCareNanny, String whoWannCareOld, String otherActClean, String otherActCook,
+    public OfferCare(String whoWannCareNanny, String whoWannCareOld, String otherActClean, String otherActCook,
                      String otherActShop, String otherActVac, String otherSkills, String writeSthAboutYou, String careExpKids, String careExpOld,
                      String experienceKidsTime, String experienceOldTime, String timeJobHalf, String timeJobFull, String timeJobCasual,
                      String placeOfTakeCare, String workWithHome, String moneyPerHour, String education, String foreignLanguages) {
-        this.dataOfBirth = dataOfBirth;
-        this.age = age;
+
         this.whoWannCareNanny = whoWannCareNanny;
         this.whoWannCareOld = whoWannCareOld;
         this.otherActClean = otherActClean;
@@ -143,22 +137,6 @@ public class OfferCare {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public String getDataOfBirth() {
-        return dataOfBirth;
-    }
-
-    public void setDataOfBirth(String dataOfBirth) {
-        this.dataOfBirth = dataOfBirth;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public String getWhoWannCareNanny() {
@@ -319,5 +297,13 @@ public class OfferCare {
 
     public void setForeignLanguages(String foreignLanguages) {
         this.foreignLanguages = foreignLanguages;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

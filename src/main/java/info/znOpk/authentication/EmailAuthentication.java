@@ -15,7 +15,7 @@ public class EmailAuthentication {
     @Autowired
     EmailEncryption emailEncryption;
 
-    public void generateAndSendEmail(User user) throws AddressException, MessagingException {
+    public boolean generateAndSendEmail(User user) throws AddressException, MessagingException {
 
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         Properties props = System.getProperties();
@@ -41,15 +41,15 @@ public class EmailAuthentication {
                     });
 
             Message msg = new MimeMessage(session);
-            System.out.println(user.getUsername()+"  **********************************************************************");
-            System.out.println(user.getPassword()+"  **********************************************************************");
+
+            if(user.getUsername().length() < 6){
+                return false;
+            }
+
             String encryptedData = emailEncryption.encrypt(user.getUsername());
-            System.out.println(encryptedData+"  **********************************************************************");
-            System.out.println(user.getPassword()+"  **********************************************************************");
             String link = "http://localhost:8080/registration/"+encryptedData+"/"+user.getId();
-            System.out.println(link);
             msg.setContent("<h3>Witaj, " + user.getFirstName() + " " + user.getLastName() + "<h3>" +
-                    "<a href=\""+link+"\">Kliknij tutaj aby aktywować swoje konto</a><br><br>Pozdrawiamy,<br>Zespół, <p style=\"color:#FF4F4F;\">znajdźOpiekuna</p>", "text/html; charset=utf-8");
+                    "<a href=\""+link+"\">Kliknij tutaj aby aktywować swoje konto</a><br>Jeżeli nie wyrażasz zgody lub email został wysłany do Ciebie omyłkowo - prosimy zignoruj tę wiadomość.<br><br>Pozdrawiamy,<br>Zespół, <p style=\"color:#FF4F4F;\">znajdźOpiekuna</p>", "text/html; charset=utf-8");
             msg.setFrom(new InternetAddress("aboutabreast@gmail.com"));
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(user.getUsername(), false));
@@ -57,10 +57,13 @@ public class EmailAuthentication {
             msg.setSentDate(new Date());
             Transport.send(msg);
             System.out.println("Message sent.");
+            return true;
         } catch (MessagingException e) {
             System.out.println("Wystąpił błąd: " + e);
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

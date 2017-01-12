@@ -57,7 +57,7 @@ public class OfferCareValidator implements Validator {
 
     public OfferCare getSearchValues(OfferCareDAO searchCareDAO) {
 
-        OfferCare offerCare = new OfferCare(searchCareDAO.getUserId(), "05-04-1994", searchCareDAO.getOtherSkills(), searchCareDAO.getWriteSthAboutYou(), searchCareDAO.getExperienceKidsTime(), searchCareDAO.getExperienceOldTime(),
+        OfferCare offerCare = new OfferCare(searchCareDAO.getUserId(), searchCareDAO.getOtherSkills(), searchCareDAO.getWriteSthAboutYou(), searchCareDAO.getExperienceKidsTime(), searchCareDAO.getExperienceOldTime(),
                 searchCareDAO.getPlaceOfTakeCare(), searchCareDAO.getWorkWithHome(), searchCareDAO.getMoneyPerHour(), searchCareDAO.getEducation(), searchCareDAO.getForeignLanguages());
 
         for (String x : searchCareDAO.getWhatWannaCare()) {

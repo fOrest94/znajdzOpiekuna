@@ -11,5 +11,7 @@ public interface MessageService {
 
     void save(Message message);
     List<Message> getMessagesById(Long id);
+    List<Message> getUnreadMessById(Long id);
+    Message getMessage(Long id);
     List<Message> getUnreceived();
 }

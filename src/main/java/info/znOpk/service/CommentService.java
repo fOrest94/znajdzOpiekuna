@@ -10,6 +10,7 @@ import java.util.List;
 public interface CommentService {
 
     List<Comment> getComments(Long newsId);
+    List<Comment> getComments1(Long commentedId);
     void saveComment(Comment comment);
 
 }

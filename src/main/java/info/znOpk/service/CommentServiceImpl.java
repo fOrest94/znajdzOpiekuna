@@ -22,6 +22,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<Comment> getComments1(Long commentedId) {
+        return commentRepository.getCommentByCommentedId(commentedId);
+    }
+
+    @Override
     public void saveComment(Comment comment) {
         commentRepository.save(comment);
     }

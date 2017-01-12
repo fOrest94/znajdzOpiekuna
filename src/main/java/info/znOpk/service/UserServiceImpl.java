@@ -18,16 +18,26 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void save(User user) {
+    public boolean save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole("USER");
-        userRepository.save(user);
+        if(userRepository.save(user).getId() != null){
+            return true;
+        }
+        else
+            return false;
     }
 
     @Override
-    public void updateSalaryAndBirthDate(String moneyPerHour, String birthDate, Long id) {
+    public void updateSalaryAndBirthDate(String moneyPerHour, Long id) {
 
-        userRepository.updateSalary(moneyPerHour, birthDate, id);
+        userRepository.updateSalary(moneyPerHour, id);
+    }
+
+    @Override
+    public void updateZipAndTown(String moneyPerHour, Long id) {
+
+        userRepository.updateSalary(moneyPerHour, id);
     }
 
     @Override

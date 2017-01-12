@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS `opiekun` (
   `id_uzytkownika` bigint(20) NOT NULL,
   `miasto` varchar(25) null ,
   `kod_pocztowy` varchar(6) null,
-  `data_urodzenia` varchar(30) NULL,
   `opieka_niania` int(2) NULL,
   `opieka_starsi` int(2) NULL,
   `umiej_sprzat` int(2) NULL,
@@ -20,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `opiekun` (
   `umiej_zakup` int(2) NULL,
   `umiej_prac` int(2) NULL,
   `inne_umiejetnosci` varchar(100) NULL,
-  `cos_o_sobie` varchar(150) NOT NULL,
+  `cos_o_sobie` varchar(350) NOT NULL,
   `doswiadczenie_dzieci` int(2) NULL,
   `doswiadczenie_starsi` int(2) NULL,
   `lat_dosw_dzieci` varchar(30) NULL,
@@ -33,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `opiekun` (
   `wynagrodzenie` varchar(6) NOT NULL,
   `wyksztalcenie` varchar(120) NULL,
   `jezyki_obce` varchar(120) NULL,
+  `telefon` VARCHAR(20) null,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `szukajacy_opieki` (
   `opieka_niania` int(2) NULL,
   `opieka_starsi` int(2) NULL,
   `praca_z_domem` int(2) NULL,
+  `telefon` VARCHAR(20) null,
   `wynagrodzenie` varchar(5) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -51,7 +52,8 @@ CREATE TABLE IF NOT EXISTS `szukajacy_opieki` (
 DROP TABLE IF EXISTS `komentarze`;
 CREATE TABLE IF NOT EXISTS `komentarze` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_wiadomosci` bigint(20) NOT NULL,
+  `id_aktualnosci` bigint(20),
+  `id_komentowanego` bigint(20),
   `id_uzytkownika` bigint(20) NOT NULL,
   `imie_uzytkownika` varchar(30),
   `nazwisko_uzytkownika` varchar(30),
@@ -90,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `uzytkownik` (
   `tozsamosc` varchar(6) not NULL,
   `wynagrodzenie` varchar(6) NULL,
   `ocena` varchar(6) NULL ,
+  `ocena_ilosc` int(6) NULL ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -108,4 +111,6 @@ ALTER TABLE `opiekun` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik`
 ALTER TABLE `szukajacy_opieki` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);
 ALTER TABLE `wiadomosci` ADD FOREIGN KEY (`id_nadawcy`) REFERENCES `uzytkownik` (`id`);
 ALTER TABLE `wiadomosci` ADD FOREIGN KEY (`id_odbiorcy`) REFERENCES `uzytkownik` (`id`);
+ALTER TABLE `komentarze` ADD FOREIGN KEY (`id_aktualnosci`) REFERENCES `aktualnosci` (`id`);
+ALTER TABLE `komentarze` ADD FOREIGN KEY (`id_uzytkownika`) REFERENCES `uzytkownik` (`id`);
 

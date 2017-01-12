@@ -16,9 +16,12 @@ public class Comment {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
-    @Column(name = "id_wiadomosci")
+    @Column(name = "id_aktualnosci")
     private Long newsId;
+
+
+    @Column(name = "id_komentowanego")
+    private Long commentedId;
 
     @NotNull
     @Column(name = "id_uzytkownika")
@@ -57,6 +60,14 @@ public class Comment {
 
     public void setNewsId(Long newsId) {
         this.newsId = newsId;
+    }
+
+    public Long getCommentedId() {
+        return commentedId;
+    }
+
+    public void setCommentedId(Long commentedId) {
+        this.commentedId = commentedId;
     }
 
     public Long getUserId() {
@@ -111,10 +122,13 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "id=" + id +
-                ", newsId='" + newsId + '\'' +
-                ", userId='" + userId + '\'' +
+                ", newsId=" + newsId +
+                ", commentedId=" + commentedId +
+                ", userId=" + userId +
                 ", comment_description='" + comment_description + '\'' +
                 ", data='" + data + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", mark=" + mark +
                 '}';
     }

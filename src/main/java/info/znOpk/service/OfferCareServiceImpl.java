@@ -24,7 +24,7 @@ public class OfferCareServiceImpl implements OfferCareService {
     @Override
     public void update(OfferCare nanny) {
 
-        offerCareRepository.setOfferCareById(nanny.getDataOfBirth(), nanny.getWhoWannCareNanny(), nanny.getWhoWannCareOld(), nanny.getOtherActClean()
+        offerCareRepository.setOfferCareById(" ",nanny.getWhoWannCareNanny(), nanny.getWhoWannCareOld(), nanny.getOtherActClean()
                 , nanny.getOtherActCook(), nanny.getOtherActShop(), nanny.getOtherActVac(), nanny.getOtherSkills(), nanny.getWriteSthAboutYou(), nanny.getCareExpKids(),
                 nanny.getCareExpOld(), nanny.getExperienceKidsTime(), nanny.getExperienceOldTime(), nanny.getTimeJobHalf(), nanny.getTimeJobFull(),
                 nanny.getTimeJobCasual(), nanny.getPlaceOfTakeCare(), nanny.getWorkWithHome(), nanny.getMoneyPerHour(), nanny.getEducation(),

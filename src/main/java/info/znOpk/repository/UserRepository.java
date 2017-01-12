@@ -17,8 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Modifying()
-    @Query("UPDATE User c SET c.moneyPerHour = :moneyPerHour, c.dateOfBirth = :dateOfBirth WHERE c.id = :id")
-    int updateSalary(@Param("moneyPerHour") String moneyPerHour, @Param("dateOfBirth") String dateOfBirth, @Param("id") Long id);
+    @Query("UPDATE User c SET c.moneyPerHour = :moneyPerHour WHERE c.id = :id")
+    int updateSalary(@Param("moneyPerHour") String moneyPerHour, @Param("id") Long id);
 
     @Transactional
     @Modifying()

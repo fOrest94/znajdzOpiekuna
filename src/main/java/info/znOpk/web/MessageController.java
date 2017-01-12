@@ -33,6 +33,7 @@ public class MessageController {
     @RequestMapping(value = "/message/{id}", method = RequestMethod.GET)
     public String sendMessage(@PathVariable("id") Long id, Model model, Principal principal) {
 
+        System.out.print("co jest");
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
 
@@ -46,7 +47,13 @@ public class MessageController {
             model.addAttribute("messageForm", new Message(user.getId()));
         }
         List<Message> messages = messageService.getMessagesById(user.getId());
-        System.out.println("pierdolone studaia w chuj "+messages.size()+ " haha");
+        for (Message message: messages) {
+            User user1 = userService.findById(message.getIdSender());
+            message.setFirstName(user1.getFirstName());
+            message.setLastName(user1.getLastName());
+        }
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
         model.addAttribute("massagesList", messages);
         return "/message";
     }
@@ -54,10 +61,26 @@ public class MessageController {
     @RequestMapping(value = "/message", method = RequestMethod.POST)
     public String sendMessage(@ModelAttribute("messageForm") Message message, Principal principal, BindingResult bindingResult, Model model){
 
-        message.setData(String.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date())));
+        message.setData(String.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())).substring(0,19));
         messageService.save(message);
 
         model.addAttribute("user", userService.findByUsername(principal.getName()));
+        return "/";
+    }
+
+    @RequestMapping(value = "/message/show/{id}", method = RequestMethod.GET)
+    public String showMessage(@PathVariable("id") Long id, Model model, Principal principal){
+
+        Message message = messageService.getMessage(id);
+        User userMessage = userService.findById(message.getIdSender());
+        message.setFirstName(userMessage.getFirstName());
+        message.setLastName(userMessage.getLastName());
+        message.setEmail(userMessage.getUsername());
+        User user = userService.findByUsername(principal.getName());
+        List<Message> messageList = messageService.getUnreadMessById(user.getId());
+        model.addAttribute("unreadMess",messageList.size());
+        model.addAttribute("user", user);
+        model.addAttribute("readMessage", message);
         return "/";
     }
 

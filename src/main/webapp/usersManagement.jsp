@@ -67,12 +67,15 @@
                 <a href="/indexService?username=user123&address=38-200&typeOfUser=2"
                    style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
                 <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
-                <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
+                <a href="/ranking" style="color: white; font-size: 16px; padding-right: 20px;">Ranking</a>
             </div>
-            <div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
+            <div class="col-lg-4 col-lg-offset-4" style="padding-left: 120px; padding-top: 10px;">
                 <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
                 <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości
+                    <c:if test="${unreadMess != 0}">
+                        (${unreadMess})
+                    </c:if></a>
             </div>
         </c:if>
     </div>
@@ -108,6 +111,7 @@
                 </thead>
                 <tbody>
                 <c:forEach var="listValue" items="${userList}">
+                    <c:if test="${listValue.role ne 'ADMINISTRATOR'}">
                     <tr>
                         <td class="col-xs-3" style="text-align: center">
                                 ${listValue.id} <input type="checkbox" style=" margin: 0px;" name="id" value="${listValue.id}">
@@ -137,7 +141,7 @@
                         <td class="col-xs-1" style="text-align: center">
                                 ${listValue.active}
                         </td>
-                    </tr>
+                    </tr></c:if>
                 </c:forEach>
                 </tbody>
             </table>

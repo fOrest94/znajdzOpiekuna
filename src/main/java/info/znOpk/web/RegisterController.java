@@ -10,7 +10,6 @@ import info.znOpk.service.OfferCareService;
 import info.znOpk.service.SearchCareService;
 import info.znOpk.service.UserService;
 import info.znOpk.authentication.EmailAuthentication;
-import info.znOpk.validator.AgeValidator;
 import info.znOpk.validator.OfferCareValidator;
 import info.znOpk.validator.SearchCareValidator;
 import info.znOpk.validator.RegisterValidator;
@@ -85,7 +84,7 @@ public class RegisterController {
         }
         OfferCare offerCare = offerCareValidator.getSearchValues(offerCareDAO);
 
-        userService.updateSalaryAndBirthDate(offerCare.getMoneyPerHour(),offerCare.getDataOfBirth(), offerCare.getUserId());
+        userService.updateSalaryAndBirthDate(offerCare.getMoneyPerHour(), offerCare.getUserId());
         offerCareService.save(offerCare);
         return "redirect:/";
     }
@@ -99,7 +98,7 @@ public class RegisterController {
             return "registrationSearch";
         }
         SearchCare searchCare = searchCareValidator.getSearchValues(searchCareDAO);
-        userService.updateSalaryAndBirthDate(searchCare.getMoneyPerHour(),searchCareDAO.getDateOfBirth(), searchCare.getUserId());
+        userService.updateSalaryAndBirthDate(searchCare.getMoneyPerHour(),searchCare.getUserId());
         searchCareService.save(searchCare);
         return "redirect:/";
     }

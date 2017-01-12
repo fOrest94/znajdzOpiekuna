@@ -29,6 +29,19 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
+    public List<Message> getUnreadMessById(Long id) {
+
+        return messageRepository.getMessageByIdRecipient(id);
+    }
+
+    @Override
+    public Message getMessage(Long id) {
+
+        messageRepository.getMessageById(id);
+        return null;
+    }
+
+    @Override
     public List<Message> getUnreceived() {
         return null;
     }

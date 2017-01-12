@@ -3,8 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE HTML>
 <html lang="pl_PL">
 <head>
@@ -65,14 +65,18 @@
     <div class="container">
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <div class="col-lg-4" style="padding-left: 40px; padding-top: 22px;">
-                <a href="/indexService?username=user123&address=38-200&typeOfUser=2" style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
+                <a href="/indexService?username=user123&address=38-200&typeOfUser=2"
+                   style="color: white; font-size: 20px; padding-right: 20px;">Znajdź</a>
                 <a href="/news/0" style="color: white; font-size: 16px; padding-right: 20px;">Aktualności</a>
-                <a href="#" style="color: white; font-size: 16px; padding-right: 20px;">Forum</a>
+                <a href="/ranking" style="color: white; font-size: 16px; padding-right: 20px;">Ranking</a>
             </div>
-            <div class="col-lg-3 col-lg-offset-5" style="padding-left: 50px; padding-top: 10px;">
+            <div class="col-lg-4 col-lg-offset-4" style="padding-left: 120px; padding-top: 10px;">
                 <a href="/showMyProfile" style="color: white; font-size: 13px; padding-right: 20px;">Profil</a>
                 <a href="/editMyProfile" style="color: white; font-size: 13px;  padding-right: 20px;">Ustawienia</a>
-                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości</a>
+                <a href="/message/0" style="color: white; font-size: 13px;">Wiadomości
+                    <c:if test="${unreadMess != 0}">
+                        (${unreadMess})
+                    </c:if></a>
             </div>
         </c:if>
     </div>
@@ -135,7 +139,8 @@
                                     <img src="resources/pictures/profileImages/${listValue.id}.jpg" width="120"
                                          height="120" style="padding-bottom: 0px;">
                                 </div>
-                                <form action="showProfile" method="get" id="showCertainProfile">
+                                <form action="showProfile" method="post" id="showCertainProfile">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <input type="hidden" name="userLogged"
                                            value="${pageContext.request.userPrincipal.name}">
                                     <input type="hidden" name="userId" value="${listValue.id}"/>
