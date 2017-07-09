@@ -34,3 +34,5 @@ Opis dla programu Intellij IDEA
 * w zakładce edit configuration uwórz nową konfirurację. Dodaj serwer Tomcata i jako artefakt dodaj "warke" z projektem
 * uruchom powyższą konfigurację
 
+### Licencja
+Politechnika Krakowska im. Tadeusza Kościuszki w Krakowie
